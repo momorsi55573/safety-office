@@ -1,0 +1,82 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+  role Role
+  company String?
+  userName String @unique
+  password String
+  Permits  Permit[]
+}
+
+model Permit {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+  createdAt DateTime @default(now())
+  ids String[]
+  imagpath String[]
+  permitType String
+  status String?
+  notes String?
+  issuedTo String
+  area String
+  location String
+  equipments String
+  description String
+  workInExcavation String
+  workInConfinedSpace String
+  fallFromHight String
+  fumes String
+  healthHazards String
+  electricalHazards String
+  fireHazards String
+  protrudingParts String
+  fallingObjects String
+  noise String
+  heat String
+  vibration String
+  adversWeather String
+  flyingParticles String
+  tripping String
+  movingVehicle String
+  documents String[]
+  mandatoryPPE String[]
+  additionalPPE String[]
+  siteCondition String[]
+  additionalSafty String?
+  workPlaceInspected String
+  equipmentsInspected String
+  riskAssessmentDiscussed String
+  PPEGood String
+  workSteps String
+  hardBreakat String
+  laborsGood String
+  dangerMeeting String
+  fireFightersExist String
+  noConflict String
+  isolated String
+  dealtWithPoisioned String
+  markers String
+   user User @relation(fields: [issuedBy], references: [id])
+  issuedBy String @db.ObjectId
+}
+
+
+enum Role {
+    Officer
+    Admin 
+    Moderator
+    ENG
+  }
+
+
+
