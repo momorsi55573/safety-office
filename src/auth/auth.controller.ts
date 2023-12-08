@@ -12,7 +12,6 @@ import {
   UseGuards,
 } from '@nestjs/common';
 import { JwtGuard } from '../utils/guards/jwt.guard';
-import { Role } from '@prisma/client';
 import { RolesGuard } from 'src/utils/guards';
 import { Response } from 'express';
 
@@ -33,7 +32,7 @@ export class AuthController {
   }
 
   @UseGuards(JwtGuard, RolesGuard)
-  @Roles(Role.Admin)
+  @Roles('Admin')
   @Post('creatUser')
   signup(@Body() dto: CreateUserDto) {
     return this.authService.creatuser(dto);
