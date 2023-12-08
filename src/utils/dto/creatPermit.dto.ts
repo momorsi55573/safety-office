@@ -4,6 +4,14 @@ import { IsNotEmpty, IsString } from 'class-validator';
 export class CreatePermitDto {
   @IsNotEmpty()
   permitType: string;
+  @IsNotEmpty()
+  startDate: string;
+  @IsNotEmpty()
+  endDate: string;
+  @IsNotEmpty()
+  startAt: string;
+  @IsNotEmpty()
+  expiredAt: string;
   @IsString()
   @IsNotEmpty()
   issuedTo: string;
@@ -78,13 +86,14 @@ export class CreatePermitDto {
   @IsNotEmpty()
   markers: string;
   @IsNotEmpty()
-  mandatoryPPE: string;
+  mandatoryPPE: string[];
   @IsNotEmpty()
-  additionalPPE: string;
+  additionalPPE: string[];
   @IsNotEmpty()
-  siteCondition: string;
+  siteCondition: string[];
+  @IsString()
   additionalSafty: string;
   @IsNotEmpty()
-  documents: string;
+  documents: string[];
   
 }

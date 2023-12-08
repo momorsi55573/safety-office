@@ -9,7 +9,7 @@ import { JwtStrategy } from './strategy';
     JwtModule.register({
       secret: process.env.JWT_SECRET,
       global: true,
-      signOptions: { expiresIn: '7d' },
+      signOptions: { expiresIn: '99d' },
     }),
   ],
   controllers: [AuthController],

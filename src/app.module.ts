@@ -7,7 +7,12 @@ import { AuthModule } from './auth/auth.module';
 import { PermitModule } from './permit/permit.module';
 
 @Module({
-  imports: [DbModule, ConfigModule.forRoot({ isGlobal: true }), AuthModule, PermitModule],
+  imports: [
+    DbModule,
+    ConfigModule.forRoot({ isGlobal: true }),
+    AuthModule,
+    PermitModule,
+  ],
   controllers: [AppController],
   providers: [AppService],
 })

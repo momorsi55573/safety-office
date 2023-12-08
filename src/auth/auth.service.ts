@@ -33,7 +33,7 @@ export class AuthService {
         throw new ForbiddenException('password incorrect');
       }
 
-      return this.signUser(user.id, user.role);
+      return this.signUser(user.id, user.role, user.company, user.userName);
     } catch (e) {
       throw e;
     }
@@ -59,11 +59,18 @@ export class AuthService {
     }
   }
 
-  async signUser(sub: string, role: Role): Promise<{ access_token: string }> {
+  async signUser(
+    sub: string,
+    role: Role,
+    company: string,
+    userName: string,
+  ): Promise<{ access_token: string }> {
     try {
       const payload = {
         id: sub,
         role,
+        company,
+        userName,
       };
       const token = await this.jwt.signAsync({ payload });
 

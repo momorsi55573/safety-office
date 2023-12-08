@@ -28,9 +28,7 @@ export class AuthController {
   ) {
     const { access_token } = await this.authService.signin(dto);
     res
-      .cookie('access_token', access_token, {
-        httpOnly: true,
-      })
+      .cookie('access_token', access_token)
       .redirect('http://localhost:3000/home');
   }
 
@@ -41,19 +39,11 @@ export class AuthController {
     return this.authService.creatuser(dto);
   }
 
-  @UseGuards(JwtGuard)
-  @Get('profile')
-  getProfile(@GetUser() user: { userId: string; role: Role }) {
-    return user;
-  }
-
   @Get('logout')
-  async logout(req: Request, res: Response) {
+  async logout(@Res({ passthrough: true }) res: Response) {
     res
       .cookie('access_token', 'loggedout', {
         expires: new Date(Date.now() + 10 * 1000),
-        httpOnly: true,
-        secure: req.secure || req.headers['x-forwarded-proto'] === 'https',
       })
       .redirect('/');
   }
