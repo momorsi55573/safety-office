@@ -1,4 +1,5 @@
 /* eslint-disable prettier/prettier */
+import { Role } from '@prisma/client';
 import { IsNotEmpty, IsString } from 'class-validator';
 
 export class CreateUserDto {
@@ -15,5 +16,5 @@ export class CreateUserDto {
 
   @IsString()
   @IsNotEmpty()
-  role;
+  role: Role;
 }

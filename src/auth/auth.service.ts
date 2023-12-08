@@ -7,6 +7,7 @@ import { DbService } from 'src/db/db.service';
 import { AuthDto, CreateUserDto } from '../utils/dto';
 import { PrismaClientKnownRequestError } from '@prisma/client/runtime/library';
 import { JwtService } from '@nestjs/jwt';
+import { Role } from '@prisma/client';
 
 @Injectable()
 export class AuthService {
@@ -60,7 +61,7 @@ export class AuthService {
 
   async signUser(
     sub: string,
-    role,
+    role: Role,
     company: string,
     userName: string,
   ): Promise<{ access_token: string }> {
