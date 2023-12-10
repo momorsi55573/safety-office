@@ -289,16 +289,20 @@ export class PermitService {
   }
 
   async expire() {
+    const now = new Date();
+    const dd = String(now.getDate()).padStart(2, '0');
+    const mm = String(now.getMonth() + 1).padStart(2, '0'); //January is 0!
+    const yyyy = now.getFullYear();
+
+    const today = dd + '/' + mm + '/' + yyyy;
     const permits = await this.db.permit.findMany();
 
     permits.forEach(async (permit) => {
-      console.log(
-        permit.expiredAt < String(Date.now()) &&
-          permit.endDate >= permit.startDate,
-      );
       if (
-        permit.expiredAt > String(Date.now()) &&
-        permit.endDate >= permit.startDate
+        (permit.status !== 'expired' && permit.endDate <= today) ||
+        (permit.status !== 'expired' &&
+          permit.expiredAt > String(Date.now()) &&
+          permit.endDate <= today)
       ) {
         return await this.db.permit.update({
           where: {
