@@ -26,9 +26,7 @@ export class AuthController {
     @Res({ passthrough: true }) res: Response,
   ) {
     const { access_token } = await this.authService.signin(dto);
-    res
-      .cookie('access_token', access_token)
-      .redirect('http://localhost:3000/home');
+    res.cookie('access_token', access_token).redirect('/home');
   }
 
   @UseGuards(JwtGuard, RolesGuard)
