@@ -1,5 +1,4 @@
 {
-  "engines": {"node": "20.7.0","npm": "10.2.5"},
   "name": "safety",
   "version": "0.0.1",
   "description": "",
