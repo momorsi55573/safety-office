@@ -36,6 +36,7 @@ export class PermitController {
   async myPermits(
     @GetUser() user: { userId: string; role: Role; company: string },
   ) {
+    await this.PermitService.expire();
     const allPermits = (await this.PermitService.getAllPermits()).reverse();
     const myPermits = (
       await this.PermitService.getMyPermits(user.userId)
@@ -124,6 +125,7 @@ export class PermitController {
     user: { userId: string; role: Role; company: string },
   ) {
     const permit = await this.PermitService.getPermit(id);
+
     return { user, permit };
   }
 

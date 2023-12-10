@@ -288,6 +288,30 @@ export class PermitService {
     });
   }
 
+  async expire() {
+    const permits = await this.db.permit.findMany();
+
+    permits.forEach(async (permit) => {
+      console.log(
+        permit.expiredAt < String(Date.now()) &&
+          permit.endDate >= permit.startDate,
+      );
+      if (
+        permit.expiredAt > String(Date.now()) &&
+        permit.endDate >= permit.startDate
+      ) {
+        return await this.db.permit.update({
+          where: {
+            id: permit.id,
+          },
+          data: {
+            status: 'expired',
+          },
+        });
+      }
+    });
+  }
+
   async approve(id, user) {
     if (user.company === 'ZTPC' && user.role === 'Officer') {
       return await this.db.permit.update({
