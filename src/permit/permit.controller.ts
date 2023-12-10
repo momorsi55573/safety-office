@@ -18,7 +18,6 @@ import { GetUser } from 'src/utils/decorators';
 import { CreatePermitDto } from 'src/utils/dto';
 import { JwtGuard } from 'src/utils/guards';
 import { Response } from 'express';
-import { Role } from '@prisma/client';
 
 @Controller('permit')
 export class PermitController {
@@ -33,9 +32,7 @@ export class PermitController {
   @UseGuards(JwtGuard)
   @Get('myPermits')
   @Render('myPermits')
-  async myPermits(
-    @GetUser() user: { userId: string; role: Role; company: string },
-  ) {
+  async myPermits(@GetUser() user: { userId: string; role; company: string }) {
     await this.PermitService.expire();
     const allPermits = (await this.PermitService.getAllPermits()).reverse();
     const myPermits = (
@@ -52,7 +49,7 @@ export class PermitController {
   @Render('searchPermits')
   async searchPermits(
     @Query('term') date: string,
-    @GetUser() user: { userId: string; role: Role; company: string },
+    @GetUser() user: { userId: string; role; company: string },
   ) {
     const allPermits = (
       await this.PermitService.searchAllhPermits(date)
@@ -70,7 +67,7 @@ export class PermitController {
   @Get('pendingPermits')
   @Render('pendingPermits')
   async pendingPermits(
-    @GetUser() user: { userId: string; role: Role; company: string },
+    @GetUser() user: { userId: string; role; company: string },
   ) {
     const allPermits = (
       await this.PermitService.pendingAllhPermits()
@@ -88,7 +85,7 @@ export class PermitController {
   @Get('activePermits')
   @Render('activePermits')
   async activePermits(
-    @GetUser() user: { userId: string; role: Role; company: string },
+    @GetUser() user: { userId: string; role; company: string },
   ) {
     const allPermits = (await this.PermitService.activeAllhPermits()).reverse();
     const myPermits = (
@@ -104,7 +101,7 @@ export class PermitController {
   @Get('stoppedPermits')
   @Render('stoppedPermits')
   async stoppedPermits(
-    @GetUser() user: { userId: string; role: Role; company: string },
+    @GetUser() user: { userId: string; role; company: string },
   ) {
     const allPermits = (await this.PermitService.stoppedAllPermits()).reverse();
     const myPermits = (
@@ -122,7 +119,7 @@ export class PermitController {
   async thisPermit(
     @Param('id') id: string,
     @GetUser()
-    user: { userId: string; role: Role; company: string },
+    user: { userId: string; role; company: string },
   ) {
     const permit = await this.PermitService.getPermit(id);
 
@@ -134,7 +131,7 @@ export class PermitController {
   async approve(
     @Param('id') id: string,
     @GetUser()
-    user: { userId: string; role: Role; company: string; userName: string },
+    user: { userId: string; role; company: string; userName: string },
     @Res({ passthrough: true }) res: Response,
   ) {
     await this.PermitService.approve(id, user);
@@ -146,7 +143,7 @@ export class PermitController {
   async reject(
     @Param('id') id: string,
     @GetUser()
-    user: { userId: string; role: Role; company: string; userName: string },
+    user: { userId: string; role; company: string; userName: string },
     @Res({ passthrough: true }) res: Response,
   ) {
     await this.PermitService.reject(id, user);
@@ -158,7 +155,7 @@ export class PermitController {
   async stop(
     @Param('id') id: string,
     @GetUser()
-    user: { userId: string; role: Role; company: string; userName: string },
+    user: { userId: string; role; company: string; userName: string },
     @Res({ passthrough: true }) res: Response,
   ) {
     await this.PermitService.stop(id, user);
