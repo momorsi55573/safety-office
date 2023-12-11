@@ -13,11 +13,11 @@
                              
 </head>
 <body>
-    <div class="container pt-4">        <!--<%-allPermits%> -->
-        <form action="/permit/searchPermits" class="form-inline my-2 my-lg-0 pb-3">
-            <button class="btn btn-outline-success my-2 my-sm-0 mr-2" value="request" type="submit">Search</button>
+    <div class="container pt-4">       
+        <form action="/permit/searchPermits" class="form-inline">
+          <button class="btn btn-outline-success my-2 my-sm-0 mr-2" value="request" type="submit">Search</button>
             <input class="form-control"  type="search" id="datepicker" aria-describedby="emailHelp" placeholder="Date" name="term" required>
-    </form>
+          </form>
 
     <%if (user.company === 'ZTPC') { %>
         <table class="table">
