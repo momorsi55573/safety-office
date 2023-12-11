@@ -29,8 +29,7 @@ model Permit {
   ids String[]
   imagpath String[]
   permitType String
-  status String?
-  notes String?
+  status String
   issuedTo String
   area String
   location String
