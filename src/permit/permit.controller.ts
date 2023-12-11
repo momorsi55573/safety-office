@@ -52,7 +52,7 @@ export class PermitController {
     @GetUser() user: { userId: string; role; company: string },
   ) {
     const allPermits = (
-      await this.PermitService.searchAllhPermits(date)
+      await this.PermitService.searchAllPermits(date)
     ).reverse();
     const myPermits = (
       await this.PermitService.searchMyPermits(user.userId, date)
@@ -69,9 +69,7 @@ export class PermitController {
   async pendingPermits(
     @GetUser() user: { userId: string; role; company: string },
   ) {
-    const allPermits = (
-      await this.PermitService.pendingAllhPermits()
-    ).reverse();
+    const allPermits = (await this.PermitService.pendingAllPermits()).reverse();
     const myPermits = (
       await this.PermitService.pendingMyPermits(user.userId)
     ).reverse();
@@ -82,12 +80,28 @@ export class PermitController {
   }
 
   @UseGuards(JwtGuard)
+  @Get('expiredPermits')
+  @Render('expiredPermits')
+  async expiredPermits(
+    @GetUser() user: { userId: string; role; company: string },
+  ) {
+    const allPermits = (await this.PermitService.expiredAllPermits()).reverse();
+    const myPermits = (
+      await this.PermitService.expiredMyPermits(user.userId)
+    ).reverse();
+    const companyPermits = (
+      await this.PermitService.expiredCompanyPermits(user.userId)
+    ).reverse();
+    return { user, allPermits, myPermits, companyPermits };
+  }
+
+  @UseGuards(JwtGuard)
   @Get('activePermits')
   @Render('activePermits')
   async activePermits(
     @GetUser() user: { userId: string; role; company: string },
   ) {
-    const allPermits = (await this.PermitService.activeAllhPermits()).reverse();
+    const allPermits = (await this.PermitService.activeAllPermits()).reverse();
     const myPermits = (
       await this.PermitService.activeMyPermits(user.userId)
     ).reverse();
@@ -135,7 +149,7 @@ export class PermitController {
     @Res({ passthrough: true }) res: Response,
   ) {
     await this.PermitService.approve(id, user);
-    res.redirect('http://localhost:3000/home');
+    res.redirect('/home');
   }
 
   @UseGuards(JwtGuard)
@@ -147,7 +161,7 @@ export class PermitController {
     @Res({ passthrough: true }) res: Response,
   ) {
     await this.PermitService.reject(id, user);
-    res.redirect('http://localhost:3000/home');
+    res.redirect('/home');
   }
 
   @UseGuards(JwtGuard)
@@ -159,7 +173,7 @@ export class PermitController {
     @Res({ passthrough: true }) res: Response,
   ) {
     await this.PermitService.stop(id, user);
-    res.redirect('http://localhost:3000/home');
+    res.redirect('/home');
   }
 
   @UseGuards(JwtGuard)
@@ -172,6 +186,6 @@ export class PermitController {
     @Res({ passthrough: true }) res: Response,
   ) {
     await this.PermitService.addPermit(dto, user, file);
-    res.redirect('http://localhost:3000/home');
+    res.redirect('/home');
   }
 }

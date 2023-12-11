@@ -168,7 +168,7 @@ export class PermitService {
       },
     });
   }
-  async searchAllhPermits(startDate) {
+  async searchAllPermits(startDate) {
     return await this.db.permit.findMany({
       where: {
         startDate,
@@ -193,7 +193,7 @@ export class PermitService {
     });
   }
 
-  async pendingAllhPermits() {
+  async pendingAllPermits() {
     return await this.db.permit.findMany({
       where: {
         status: 'pending',
@@ -218,7 +218,7 @@ export class PermitService {
     });
   }
 
-  async activeAllhPermits() {
+  async activeAllPermits() {
     return await this.db.permit.findMany({
       where: {
         status: 'approved',
@@ -263,6 +263,31 @@ export class PermitService {
     return await this.db.permit.findMany({
       where: {
         status: 'stopped',
+        issuedTo,
+      },
+    });
+  }
+
+  async expiredAllPermits() {
+    return await this.db.permit.findMany({
+      where: {
+        status: 'expired',
+      },
+    });
+  }
+  async expiredMyPermits(issuedBy) {
+    return await this.db.permit.findMany({
+      where: {
+        status: 'expired',
+        issuedBy,
+      },
+    });
+  }
+
+  async expiredCompanyPermits(issuedTo) {
+    return await this.db.permit.findMany({
+      where: {
+        status: 'expired',
         issuedTo,
       },
     });
