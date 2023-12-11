@@ -293,15 +293,17 @@ export class PermitService {
     const dd = String(now.getDate()).padStart(2, '0');
     const mm = String(now.getMonth() + 1).padStart(2, '0'); //January is 0!
     const yyyy = now.getFullYear();
+    const hh = now.getHours();
+    const min = now.getMinutes();
+    const time = hh + ':' + min;
 
-    const today = dd + '/' + mm + '/' + yyyy;
+    const today = dd + '-' + mm + '-' + yyyy;
     const permits = await this.db.permit.findMany();
-
     permits.forEach(async (permit) => {
       if (
-        (permit.status !== 'expired' && permit.endDate <= today) ||
+        (permit.status !== 'expired' && permit.endDate < today) ||
         (permit.status !== 'expired' &&
-          permit.expiredAt > String(Date.now()) &&
+          permit.expiredAt < time &&
           permit.endDate <= today)
       ) {
         return await this.db.permit.update({
