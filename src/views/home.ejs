@@ -19,8 +19,9 @@
             <a href="/permit/createPermit" type="button" class="btn btn-primary btn-lg btn-block">create permit</a>
             <a href="/permit/myPermits" type="button" class="btn btn-primary btn-lg btn-block">permits</a>
             <a href="/permit/pendingPermits" type="button" class="btn btn-primary btn-lg btn-block">pending permits</a>
-            <a href="/permit/activePermits" type="button" class="btn btn-primary btn-lg btn-block">approved permits</a>
+            <a href="/permit/activePermits" type="button" class="btn btn-primary btn-lg btn-block">active permits</a>
             <a href="/permit/stoppedPermits" type="button" class="btn btn-primary btn-lg btn-block">stopped permits</a>
+            <a href="/permit/expiredPermits" type="button" class="btn btn-primary btn-lg btn-block">expired permits</a>
             <a href="/auth/logout" type="button" class="btn btn-primary btn-lg btn-block">logout</a> 
                        <% } %>
 
@@ -28,8 +29,9 @@
                         <a href="/permit/createPermit" type="button" class="btn btn-primary btn-lg btn-block">create permit</a>
                         <a href="/permit/myPermits" type="button" class="btn btn-primary btn-lg btn-block">permits</a>
                         <a href="/permit/pendingPermits" type="button" class="btn btn-primary btn-lg btn-block">pending permits</a>
-            <a href="/permit/activePermits" type="button" class="btn btn-primary btn-lg btn-block">approved permits</a>
+            <a href="/permit/activePermits" type="button" class="btn btn-primary btn-lg btn-block">active permits</a>
                                     <a href="/permit/stoppedPermits" type="button" class="btn btn-primary btn-lg btn-block">stopped permits</a>
+            <a href="/permit/expiredPermits" type="button" class="btn btn-primary btn-lg btn-block">expired permits</a>
                                     <a href="/auth/logout" type="button" class="btn btn-primary btn-lg btn-block">logout</a> 
                         <% } %>
 
@@ -37,16 +39,18 @@
                                     <a href="/permit/createPermit" type="button" class="btn btn-primary btn-lg btn-block">create permit</a>
                                     <a href="/permit/myPermits" type="button" class="btn btn-primary btn-lg btn-block"> permits</a>
                                     <a href="/permit/pendingPermits" type="button" class="btn btn-primary btn-lg btn-block">pending permits</a>
-                        <a href="/permit/activePermits" type="button" class="btn btn-primary btn-lg btn-block">approved permits</a>
+                        <a href="/permit/activePermits" type="button" class="btn btn-primary btn-lg btn-block">active permits</a>
                                                             <a href="/permit/stoppedPermits" type="button" class="btn btn-primary btn-lg btn-block">stopped permits</a>
+            <a href="/permit/expiredPermits" type="button" class="btn btn-primary btn-lg btn-block">expired permits</a>
                                                             <a href="/auth/logout" type="button" class="btn btn-primary btn-lg btn-block">logout</a> 
                                     <% } %>
 
                                                <%if (user.role === 'Officer') { %>
                                                 <a href="/permit/myPermits" type="button" class="btn btn-primary btn-lg btn-block">permits</a>
                                                 <a href="/permit/pendingPermits" type="button" class="btn btn-primary btn-lg btn-block">pending permits</a>
-                                    <a href="/permit/activePermits" type="button" class="btn btn-primary btn-lg btn-block">approved permits</a>
+                                    <a href="/permit/activePermits" type="button" class="btn btn-primary btn-lg btn-block">active permits</a>
                                                                                     <a href="/permit/stoppedPermits" type="button" class="btn btn-primary btn-lg btn-block">stopped permits</a>
+            <a href="/permit/expiredPermits" type="button" class="btn btn-primary btn-lg btn-block">expired permits</a>
                                                                                     <a href="/auth/logout" type="button" class="btn btn-primary btn-lg btn-block">logout</a> 
                                                 <% } %>
                                             </div>
