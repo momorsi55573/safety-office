@@ -15,7 +15,6 @@ import {
 } from '@nestjs/common';
 import { FilesInterceptor } from '@nestjs/platform-express';
 import { GetUser } from 'src/utils/decorators';
-import { CreatePermitDto } from 'src/utils/dto';
 import { JwtGuard } from 'src/utils/guards';
 import { Response } from 'express';
 
@@ -27,6 +26,46 @@ export class PermitController {
   @Render('createPermit')
   createPermit() {
     return;
+  }
+
+  @UseGuards(JwtGuard)
+  @Get('coldWorkPermit')
+  @Render('coldWorkPermit')
+  coldWorkPermit() {
+    return;
+  }
+
+  @UseGuards(JwtGuard)
+  @Post('creatColdWorkPermit')
+  @UseInterceptors(FilesInterceptor('file'))
+  async creatColdWorkPermit(
+    @Body() dto,
+    @GetUser() user,
+    @UploadedFiles() file,
+    @Res({ passthrough: true }) res: Response,
+  ) {
+    await this.PermitService.creatColdWorkPermit(dto, user, file);
+    res.redirect('/home');
+  }
+
+  @UseGuards(JwtGuard)
+  @Get('confinedSpaceEntryPermit')
+  @Render('confinedSpaceEntryPermit')
+  confinedSpaceEntryPermit() {
+    return;
+  }
+
+  @UseGuards(JwtGuard)
+  @Post('creatConfinedSpaceEntryPermit')
+  @UseInterceptors(FilesInterceptor('file'))
+  async creatConfinedSpaceEntryPermit(
+    @Body() dto,
+    @GetUser() user,
+    @UploadedFiles() file,
+    @Res({ passthrough: true }) res: Response,
+  ) {
+    await this.PermitService.creatConfinedSpaceEntryPermit(dto, user, file);
+    res.redirect('/home');
   }
 
   @UseGuards(JwtGuard)
@@ -173,19 +212,6 @@ export class PermitController {
     @Res({ passthrough: true }) res: Response,
   ) {
     await this.PermitService.stop(id, user);
-    res.redirect('/home');
-  }
-
-  @UseGuards(JwtGuard)
-  @Post('creatPermit')
-  @UseInterceptors(FilesInterceptor('file'))
-  async addPermit(
-    @Body() dto: CreatePermitDto,
-    @GetUser() user,
-    @UploadedFiles() file,
-    @Res({ passthrough: true }) res: Response,
-  ) {
-    await this.PermitService.addPermit(dto, user, file);
     res.redirect('/home');
   }
 }

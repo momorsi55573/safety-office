@@ -33,42 +33,52 @@ model Permit {
   issuedTo String
   area String
   location String
-  equipments String
-  description String
-  workInExcavation String
-  workInConfinedSpace String
-  fallFromHight String
-  fumes String
-  healthHazards String
-  electricalHazards String
-  fireHazards String
-  protrudingParts String
-  fallingObjects String
-  noise String
-  heat String
-  vibration String
-  adversWeather String
-  flyingParticles String
-  tripping String
-  movingVehicle String
+  equipments String?
+  description String?
   documents String[] 
   mandatoryPPE String[]
   additionalPPE String[] 
   siteCondition String[] 
   additionalSafty String?
-  workPlaceInspected String
-  equipmentsInspected String
-  riskAssessmentDiscussed String
-  PPEGood String
-  workSteps String
-  hardBreakat String
-  laborsGood String
-  dangerMeeting String
-  fireFightersExist String
-  noConflict String
-  isolated String
-  dealtWithPoisioned String
-  markers String
+  workPlaceInspected String?
+  equipmentsInspected String?
+  riskAssessmentDiscussed String?
+  PPEGood String?
+  workSteps String?
+  hardBreakat String?
+  laborsGood String?
+  dangerMeeting String?
+  fireFightersExist String?
+  noConflict String?
+  isolated String?
+  dealtWithPoisioned String?
+  markers String?
+  watcherName String?
+  numOfWorkers Int?
+  desOfConfinedSpace String?
+  voltage String?
+  hazardsOfWork String[]
+  measuresTaken String[]
+  confinedSpacePartOfSystem String?
+  connectedElectrical String?
+  gasTest String?
+  forcedVentilation String?
+  confinedTraning String?
+  confinedAccess String?
+  confinedBurning String?
+  electricitySupply String?
+  adequateLighting String?
+  watchman String?
+  namesOfEnteringEmp String?
+  confinedAdditionalPPE String?
+  testDate String[]
+  testTime String[]
+  testDetectorName String[]
+  testLEL String[]
+  testO2 String[]
+  testCO String[]
+  testH2S String[]
+  confinedEntryPremited String[]
   constructionRep String?
   subConstructionRep String?
   HSERep String?

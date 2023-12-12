@@ -1,19 +1,25 @@
 import { Injectable } from '@nestjs/common';
 import { UploadApiResponse, UploadApiErrorResponse, v2 } from 'cloudinary';
 import { DbService } from 'src/db/db.service';
-import { CreatePermitDto } from 'src/utils/dto';
 import toStream = require('buffer-to-stream');
 
 @Injectable()
 export class PermitService {
   constructor(private db: DbService) {}
 
-  async addPermit(dto: CreatePermitDto, user, file) {
+  async creatColdWorkPermit(dto, user, file) {
     let additionalPPE = dto.additionalPPE;
     let siteCondition = dto.siteCondition;
     let mandatoryPPE = dto.mandatoryPPE;
     let documents = dto.documents;
-
+    let hazardsOfWork = dto.hazardsOfWork;
+    let measuresTaken = dto.measuresTaken;
+    if (typeof hazardsOfWork === 'string') {
+      hazardsOfWork = [hazardsOfWork];
+    }
+    if (typeof measuresTaken === 'string') {
+      measuresTaken = [measuresTaken];
+    }
     if (typeof additionalPPE === 'string') {
       additionalPPE = [additionalPPE];
     }
@@ -42,6 +48,7 @@ export class PermitService {
             endDate: dto.endDate,
             startAt: dto.startAt,
             expiredAt: dto.expiredAt,
+            numOfWorkers: +dto.numOfWorkers,
             ids: image.map((image) => image.public_id),
             imagpath: image.map((image) => image.secure_url),
             area: dto.area,
@@ -50,27 +57,13 @@ export class PermitService {
             location: dto.location,
             equipments: dto.equipments,
             description: dto.description,
-            workInExcavation: dto.workInExcavation,
-            workInConfinedSpace: dto.workInConfinedSpace,
-            fallFromHight: dto.fallFromHight,
-            fumes: dto.fumes,
-            healthHazards: dto.healthHazards,
-            electricalHazards: dto.electricalHazards,
-            fireHazards: dto.fireHazards,
-            protrudingParts: dto.protrudingParts,
-            fallingObjects: dto.fallingObjects,
-            noise: dto.noise,
-            heat: dto.heat,
-            vibration: dto.vibration,
-            adversWeather: dto.adversWeather,
-            flyingParticles: dto.flyingParticles,
-            movingVehicle: dto.movingVehicle,
+            hazardsOfWork,
+            measuresTaken,
             workPlaceInspected: dto.workPlaceInspected,
             equipmentsInspected: dto.equipmentsInspected,
             riskAssessmentDiscussed: dto.riskAssessmentDiscussed,
             PPEGood: dto.PPEGood,
             workSteps: dto.workSteps,
-            tripping: dto.tripping,
             hardBreakat: dto.hardBreakat,
             laborsGood: dto.laborsGood,
             dangerMeeting: dto.dangerMeeting,
@@ -97,6 +90,7 @@ export class PermitService {
             endDate: dto.endDate,
             startAt: dto.startAt,
             expiredAt: dto.expiredAt,
+            numOfWorkers: +dto.numOfWorkers,
             ids: image.map((image) => image.public_id),
             imagpath: image.map((image) => image.secure_url),
             area: dto.area,
@@ -105,27 +99,13 @@ export class PermitService {
             location: dto.location,
             equipments: dto.equipments,
             description: dto.description,
-            workInExcavation: dto.workInExcavation,
-            workInConfinedSpace: dto.workInConfinedSpace,
-            fallFromHight: dto.fallFromHight,
-            fumes: dto.fumes,
-            healthHazards: dto.healthHazards,
-            electricalHazards: dto.electricalHazards,
-            fireHazards: dto.fireHazards,
-            protrudingParts: dto.protrudingParts,
-            fallingObjects: dto.fallingObjects,
-            noise: dto.noise,
-            heat: dto.heat,
-            vibration: dto.vibration,
-            adversWeather: dto.adversWeather,
-            flyingParticles: dto.flyingParticles,
-            movingVehicle: dto.movingVehicle,
+            hazardsOfWork,
+            measuresTaken,
             workPlaceInspected: dto.workPlaceInspected,
             equipmentsInspected: dto.equipmentsInspected,
             riskAssessmentDiscussed: dto.riskAssessmentDiscussed,
             PPEGood: dto.PPEGood,
             workSteps: dto.workSteps,
-            tripping: dto.tripping,
             hardBreakat: dto.hardBreakat,
             laborsGood: dto.laborsGood,
             dangerMeeting: dto.dangerMeeting,
@@ -137,6 +117,133 @@ export class PermitService {
             mandatoryPPE,
             additionalPPE,
             siteCondition,
+            additionalSafty: dto.additionalSafty,
+            documents,
+            issuedBy: user.userId,
+            status: 'pending',
+          },
+        });
+        return permit;
+      }
+    } catch (e) {
+      throw e;
+    }
+  }
+
+  async creatConfinedSpaceEntryPermit(dto, user, file) {
+    let additionalPPE = dto.additionalPPE;
+    let siteCondition = dto.siteCondition;
+    let mandatoryPPE = dto.mandatoryPPE;
+    let documents = dto.documents;
+    let hazardsOfWork = dto.hazardsOfWork;
+    let measuresTaken = dto.measuresTaken;
+    if (typeof hazardsOfWork === 'string') {
+      hazardsOfWork = [hazardsOfWork];
+    }
+    if (typeof measuresTaken === 'string') {
+      measuresTaken = [measuresTaken];
+    }
+    if (typeof additionalPPE === 'string') {
+      additionalPPE = [additionalPPE];
+    }
+    if (typeof siteCondition === 'string') {
+      siteCondition = [siteCondition];
+    }
+    if (typeof mandatoryPPE === 'string') {
+      mandatoryPPE = [mandatoryPPE];
+    }
+    if (typeof documents === 'string') {
+      documents = [documents];
+    }
+    try {
+      const image = [];
+      for (const doc of file) {
+        const img = await this.uploadImage(doc).catch((e) => {
+          throw e;
+        });
+        image.push(img);
+      }
+      if (user.company !== 'ZTPC') {
+        const permit = await this.db.permit.create({
+          data: {
+            subConstructionRep: await user.userName,
+            startDate: dto.startDate,
+            endDate: dto.endDate,
+            startAt: dto.startAt,
+            expiredAt: dto.expiredAt,
+            numOfWorkers: +dto.numOfWorkers,
+            ids: image.map((image) => image.public_id),
+            imagpath: image.map((image) => image.secure_url),
+            area: dto.area,
+            permitType: dto.permitType,
+            issuedTo: dto.issuedTo,
+            location: dto.location,
+            equipments: dto.equipments,
+            description: dto.description,
+            hazardsOfWork,
+            measuresTaken,
+            desOfConfinedSpace: dto.desOfConfinedSpace,
+            voltage: dto.voltage,
+            watcherName: dto.watcherName,
+            namesOfEnteringEmp: dto.namesOfEnteringEmp,
+            mandatoryPPE,
+            additionalPPE,
+            confinedSpacePartOfSystem: dto.confinedSpacePartOfSystem,
+            connectedElectrical: dto.connectedElectrical,
+            gasTest: dto.gasTest,
+            forcedVentilation: dto.forcedVentilation,
+            confinedTraning: dto.confinedTraning,
+            confinedAccess: dto.confinedAccess,
+            watchman: dto.watchman,
+            confinedBurning: dto.confinedBurning,
+            riskAssessmentDiscussed: dto.riskAssessmentDiscussed,
+            electricitySupply: dto.electricitySupply,
+            adequateLighting: dto.adequateLighting,
+            confinedAdditionalPPE: dto.confinedAdditionalPPE,
+            additionalSafty: dto.additionalSafty,
+            documents,
+            issuedBy: user.userId,
+            status: 'pending',
+          },
+        });
+        return permit;
+      } else {
+        const permit = await this.db.permit.create({
+          data: {
+            constructionRep: await user.userName,
+            startDate: dto.startDate,
+            endDate: dto.endDate,
+            startAt: dto.startAt,
+            expiredAt: dto.expiredAt,
+            numOfWorkers: +dto.numOfWorkers,
+            ids: image.map((image) => image.public_id),
+            imagpath: image.map((image) => image.secure_url),
+            area: dto.area,
+            permitType: dto.permitType,
+            issuedTo: dto.issuedTo,
+            location: dto.location,
+            equipments: dto.equipments,
+            description: dto.description,
+            desOfConfinedSpace: dto.desOfConfinedSpace,
+            voltage: dto.voltage,
+            watcherName: dto.watcherName,
+            namesOfEnteringEmp: dto.namesOfEnteringEmp,
+            hazardsOfWork,
+            measuresTaken,
+            mandatoryPPE,
+            additionalPPE,
+            confinedSpacePartOfSystem: dto.confinedSpacePartOfSystem,
+            connectedElectrical: dto.connectedElectrical,
+            gasTest: dto.gasTest,
+            forcedVentilation: dto.forcedVentilation,
+            confinedTraning: dto.confinedTraning,
+            confinedAccess: dto.confinedAccess,
+            watchman: dto.watchman,
+            confinedBurning: dto.confinedBurning,
+            riskAssessmentDiscussed: dto.riskAssessmentDiscussed,
+            electricitySupply: dto.electricitySupply,
+            adequateLighting: dto.adequateLighting,
+            confinedAdditionalPPE: dto.confinedAdditionalPPE,
             additionalSafty: dto.additionalSafty,
             documents,
             issuedBy: user.userId,
