@@ -54,7 +54,7 @@ model Permit {
   dealtWithPoisioned String?
   markers String?
   watcherName String?
-  numOfWorkers Int?
+  numOfWorkers String?
   desOfConfinedSpace String?
   voltage String?
   hazardsOfWork String[]
