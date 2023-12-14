@@ -36,6 +36,30 @@ export class PermitController {
   }
 
   @UseGuards(JwtGuard)
+  @Post('extend/:id')
+  async extend(
+    @Param('id') id: string,
+    @GetUser() user,
+    @Body() dto,
+    @Res({ passthrough: true }) res: Response,
+  ) {
+    await this.PermitService.extend(id, dto);
+    return res.redirect('../myPermits');
+  }
+
+  @UseGuards(JwtGuard)
+  @Post('renew/:id')
+  async renew(
+    @GetUser() user,
+    @Param('id') id: string,
+    @Body() dto,
+    @Res({ passthrough: true }) res: Response,
+  ) {
+    await this.PermitService.renew(id, dto);
+    return res.redirect('../myPermits');
+  }
+
+  @UseGuards(JwtGuard)
   @Post('creatColdWorkPermit')
   @UseInterceptors(FilesInterceptor('file'))
   async creatColdWorkPermit(
@@ -45,7 +69,7 @@ export class PermitController {
     @Res({ passthrough: true }) res: Response,
   ) {
     await this.PermitService.creatColdWorkPermit(dto, user, file);
-    res.redirect('/home');
+    res.redirect('permit/myPermits');
   }
 
   @UseGuards(JwtGuard)
@@ -175,7 +199,6 @@ export class PermitController {
     user: { userId: string; role; company: string },
   ) {
     const permit = await this.PermitService.getPermit(id);
-
     return { user, permit };
   }
 

@@ -328,14 +328,14 @@ export class PermitService {
   async activeAllPermits() {
     return await this.db.permit.findMany({
       where: {
-        status: 'approved',
+        status: 'active',
       },
     });
   }
   async activeMyPermits(issuedBy) {
     return await this.db.permit.findMany({
       where: {
-        status: 'approved',
+        status: 'active',
         issuedBy,
       },
     });
@@ -344,7 +344,7 @@ export class PermitService {
   async activeCompanyPermits(issuedTo) {
     return await this.db.permit.findMany({
       where: {
-        status: 'approved',
+        status: 'active',
         issuedTo,
       },
     });
@@ -420,6 +420,36 @@ export class PermitService {
     });
   }
 
+  async extend(id, dto) {
+    return await this.db.permit.update({
+      where: {
+        id,
+      },
+      data: {
+        expiredAt: dto.expiredAt,
+        status: 'pending',
+        HSERep: '',
+        subHSERep: '',
+        PTWCordinator: '',
+      },
+    });
+  }
+
+  async renew(id, dto) {
+    return await this.db.permit.update({
+      where: {
+        id,
+      },
+      data: {
+        endDate: dto.endDate,
+        status: 'pending',
+        HSERep: '',
+        subHSERep: '',
+        PTWCordinator: '',
+      },
+    });
+  }
+
   async expire() {
     const now = new Date();
     const dd = String(now.getDate()).padStart(2, '0');
@@ -488,7 +518,7 @@ export class PermitService {
         },
         data: {
           PTWCordinator: `approved by ${user.userName}`,
-          status: 'approved',
+          status: 'active',
         },
       });
     }

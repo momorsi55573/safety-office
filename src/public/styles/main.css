@@ -22,3 +22,22 @@
 {
     height: 100%;
 }
+.stopped  
+{
+    background-color: red;
+}
+.rejected
+{
+    background-color: red;
+}
+.expired {
+    background-color: red;
+}
+.pending
+{
+    background-color: yellow;
+}
+.active
+{
+    background-color: green;
+}

@@ -18,19 +18,19 @@
         <div class="container">
             <div class="form-group">
               <label for="exampleInputEmail1">Start Date</label>
-              <input class="form-control" type="text" id="startDate" aria-describedby="emailHelp" placeholder="start Date" value="<%= permit.startDate %>" name="startDate" required>
+              <input class="form-control" type="text" aria-describedby="emailHelp" placeholder="start Date" value="<%= permit.startDate %>" name="startDate" required>
             </div>
             <div class="form-group">
               <label for="exampleInputEmail1">end Date</label>
-              <input class="form-control" type="text" id="endDate" aria-describedby="emailHelp" placeholder="end Date" value="<%= permit.endDate %>" name="endDate" required>
+              <input class="form-control" type="text" aria-describedby="emailHelp" placeholder="end Date" value="<%= permit.endDate %>" name="endDate" required>
             </div>
             <div class="form-group">
               <label for="exampleInputEmail1">start At</label>
-              <input class="form-control" type="text" id="startAt" aria-describedby="emailHelp" placeholder="start At" value="<%= permit.startAt %>" name="startAt" required>
+              <input class="form-control" type="text" aria-describedby="emailHelp" placeholder="start At" value="<%= permit.startAt %>" name="startAt" required>
             </div>
             <div class="form-group">
               <label for="exampleInputEmail1">expired At</label>
-              <input class="form-control" type="text" id="expiredAt" aria-describedby="emailHelp" placeholder="expiredAt"  value="<%= permit.expiredAt %>" name="expiredAt" required>
+              <input class="form-control" type="text" aria-describedby="emailHelp" placeholder="expiredAt"  value="<%= permit.expiredAt %>" name="expiredAt" required>
             </div>
             <div class="form-group">
               <label for="exampleInputEmail1">area</label>
@@ -302,13 +302,74 @@
                                     </div>  
                                   <% } %>
                                   <%if (user.role === 'Admin') { %>
-                                      <div class="row container">
-                                          <a href="/permit/approve/<%= permit.id %>" type="button" class="btn btn-primary mr-2">approve</a>
-                                          <a href="/permit/reject/<%= permit.id %>" type="button" class="btn btn-primary mr-2">reject</a>
-                                          <a href="/permit/stop/<%= permit.id %>" type="button" class="btn btn-primary mr-2">stop</a>
-                                        </div>  
-                                      <% } %>
-                   
+                                    <div class="row container">
+                                        <a href="/permit/approve/<%= permit.id %>" type="button" class="btn btn-primary mr-2">approve</a>
+                                        <a href="/permit/reject/<%= permit.id %>" type="button" class="btn btn-primary mr-2">reject</a>
+                                        <a href="/permit/stop/<%= permit.id %>" type="button" class="btn btn-primary mr-2">stop</a>
+                                        <%if (permit.status === 'expired') { %>
+                                          <button type="button" class="btn btn-primary mr-2" data-toggle="modal" data-target="#exampleModal">
+                                              extend
+                                          </button>
+                                          
+                                          <!-- Modal -->
+                                          <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog" role="document">
+                                              <div class="modal-content">
+                                                <div class="modal-header">
+                                                  <h5 class="modal-title" id="exampleModalLabel">request extention</h5>
+                                                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                  </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <form action="/permit/extend/<%= permit.id %>" method="post">
+                                                        <div class="form-group">
+                                                            <label for="exampleInputEmail1">expired At</label>
+                                                            <input class="form-control" type="text" id="expiredAt" aria-describedby="emailHelp" placeholder="expiredAt" name="expiredAt" required>
+                                                          </div>
+                                                          <div class="modal-footer">
+                                                              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                              <button type="submit" value="Submit" class="btn btn-primary">request extention</button>
+                                                            </div>
+                                                        </form>
+                                                </div>
+                                              
+                                              </div>
+                                            </div>
+                                          </div> 
+                                          <button type="button" class="btn btn-primary mr-2" data-toggle="modal" data-target="#renew">
+                                              renew
+                                          </button>
+                                          
+                                          <!-- Modal -->
+                                          <div class="modal fade" id="renew" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog" role="document">
+                                              <div class="modal-content">
+                                                <div class="modal-header">
+                                                  <h5 class="modal-title" id="exampleModalLabel">renew</h5>
+                                                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                  </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <form action="/permit/renew/<%= permit.id %>" method="post">
+                                                        <div class="form-group">
+                                                            <label for="exampleInputEmail1">expired At</label>
+                                                            <input class="form-control" type="text" id="endDate" aria-describedby="emailHelp" placeholder="endDate" name="endDate" required>
+                                                          </div>
+                                                          <div class="modal-footer">
+                                                              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                              <button type="submit" value="Submit" class="btn btn-primary">renew</button>
+                                                            </div>
+                                                        </form>
+                                                </div>
+                                              
+                                              </div>
+                                            </div>
+                                          </div>                           
+                                          <% } %>                            
+                                      </div>  
+                                    <% } %>
           
           </div>         
         <% } %>
@@ -318,19 +379,19 @@
             <div class="container">
                 <div class="form-group">
                   <label for="exampleInputEmail1">Start Date</label>
-                  <input class="form-control" type="text" id="startDate" aria-describedby="emailHelp" placeholder="start Date" value="<%= permit.startDate %>" name="startDate" required>
+                  <input class="form-control" type="text" aria-describedby="emailHelp" placeholder="start Date" value="<%= permit.startDate %>" name="startDate" required>
                 </div>
                 <div class="form-group">
                   <label for="exampleInputEmail1">end Date</label>
-                  <input class="form-control" type="text" id="endDate" aria-describedby="emailHelp" placeholder="end Date" value="<%= permit.endDate %>" name="endDate" required>
+                  <input class="form-control" type="text" aria-describedby="emailHelp" placeholder="end Date" value="<%= permit.endDate %>" name="endDate" required>
                 </div>
                 <div class="form-group">
                   <label for="exampleInputEmail1">start At</label>
-                  <input class="form-control" type="text" id="startAt" aria-describedby="emailHelp" placeholder="start At" value="<%= permit.startAt %>" name="startAt" required>
+                  <input class="form-control" type="text" aria-describedby="emailHelp" placeholder="start At" value="<%= permit.startAt %>" name="startAt" required>
                 </div>
                 <div class="form-group">
                   <label for="exampleInputEmail1">expired At</label>
-                  <input class="form-control" type="text" id="expiredAt" aria-describedby="emailHelp" placeholder="expiredAt"  value="<%= permit.expiredAt %>" name="expiredAt" required>
+                  <input class="form-control" type="text" aria-describedby="emailHelp" placeholder="expiredAt"  value="<%= permit.expiredAt %>" name="expiredAt" required>
                 </div>
                 <div class="form-group">
                   <label for="exampleInputEmail1">area</label>
@@ -519,9 +580,9 @@
                               <div class="row container">
                                   <a href="/permit/approve/<%= permit.id %>" type="button" class="btn btn-primary mr-2">approve</a>
                                   <a href="/permit/reject/<%= permit.id %>" type="button" class="btn btn-primary mr-2">reject</a>
-                                  <a href="/permit/extend" type="button" class="btn btn-primary mr-2">extend</a>                            
-                                      <a href="/permit/renew" type="button" class="btn btn-primary mr-2">renew</a>
-                                </div>  
+                                 
+
+                                    </div>  
                               <% } %>
                               <%if (user.role === 'ENG' && user.company !== 'ZTPC') { %>
                                   <div class="row container">
@@ -547,6 +608,68 @@
                                               <a href="/permit/approve/<%= permit.id %>" type="button" class="btn btn-primary mr-2">approve</a>
                                               <a href="/permit/reject/<%= permit.id %>" type="button" class="btn btn-primary mr-2">reject</a>
                                               <a href="/permit/stop/<%= permit.id %>" type="button" class="btn btn-primary mr-2">stop</a>
+                                              <%if (permit.status === 'expired') { %>
+                                                <button type="button" class="btn btn-primary mr-2" data-toggle="modal" data-target="#exampleModal">
+                                                    extend
+                                                </button>
+                                                
+                                                <!-- Modal -->
+                                                <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                  <div class="modal-dialog" role="document">
+                                                    <div class="modal-content">
+                                                      <div class="modal-header">
+                                                        <h5 class="modal-title" id="exampleModalLabel">request extention</h5>
+                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                          <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                      </div>
+                                                      <div class="modal-body">
+                                                          <form action="/permit/extend/<%= permit.id %>" method="post">
+                                                              <div class="form-group">
+                                                                  <label for="exampleInputEmail1">expired At</label>
+                                                                  <input class="form-control" type="text" id="expiredAt" aria-describedby="emailHelp" placeholder="expiredAt" name="expiredAt" required>
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                                    <button type="submit" value="Submit" class="btn btn-primary">request extention</button>
+                                                                  </div>
+                                                              </form>
+                                                      </div>
+                                                    
+                                                    </div>
+                                                  </div>
+                                                </div> 
+                                                <button type="button" class="btn btn-primary mr-2" data-toggle="modal" data-target="#renew">
+                                                    renew
+                                                </button>
+                                                
+                                                <!-- Modal -->
+                                                <div class="modal fade" id="renew" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                  <div class="modal-dialog" role="document">
+                                                    <div class="modal-content">
+                                                      <div class="modal-header">
+                                                        <h5 class="modal-title" id="exampleModalLabel">renew</h5>
+                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                          <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                      </div>
+                                                      <div class="modal-body">
+                                                          <form action="/permit/renew/<%= permit.id %>" method="post">
+                                                              <div class="form-group">
+                                                                  <label for="exampleInputEmail1">expired At</label>
+                                                                  <input class="form-control" type="text" id="endDate" aria-describedby="emailHelp" placeholder="endDate" name="endDate" required>
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                                    <button type="submit" value="Submit" class="btn btn-primary">renew</button>
+                                                                  </div>
+                                                              </form>
+                                                      </div>
+                                                    
+                                                    </div>
+                                                  </div>
+                                                </div>                           
+                                                <% } %>                            
                                             </div>  
                                           <% } %>
                        
@@ -573,20 +696,22 @@
   <script>
     $(function() {
        $("#startAt").timepicker({
-    timeFormat: 'h:mm p',
-    interval: 60,
-   
-    dynamic: false,
-    dropdown: true,
-    scrollbar: true
+        zindex: 9999999,
+            timeFormat: 'HH:mm',
+      interval: 30,
+      
+      dynamic: false,
+      dropdown: true,
+      scrollbar: true
 });
     });
     </script>
      <script>
       $(function() {
          $("#expiredAt").timepicker({
-      timeFormat: 'h:mm p',
-      interval: 60,
+            zindex: 9999999,
+            timeFormat: 'HH:mm',
+      interval: 30,
       
       dynamic: false,
       dropdown: true,

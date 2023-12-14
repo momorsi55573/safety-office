@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.css">
+  <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link rel="stylesheet" type="text/css" href="/src/public/styles/main.css">
+  <link rel="stylesheet" href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <title>create electrical work permit</title>
+</head>
+<body>
+  <div class="container">
+    <form action="/permit/creatElectricalWorkPermit" enctype="multipart/form-data" method="post">
+      <div class="form-group">
+        <label for="exampleInputEmail1">Start Date</label>
+        <input class="form-control" type="text" id="startDate" aria-describedby="emailHelp" placeholder="start Date" name="startDate" required>
+      </div>
+      <div class="form-group">
+        <label for="exampleInputEmail1">end Date</label>
+        <input class="form-control" type="text" id="endDate" aria-describedby="emailHelp" placeholder="end Date" name="endDate" required>
+      </div>
+      <div class="form-group">
+        <label for="exampleInputEmail1">start At</label>
+        <input class="form-control" type="text" id="startAt" aria-describedby="emailHelp" placeholder="start At" name="startAt" required>
+      </div>
+      <div class="form-group">
+        <label for="exampleInputEmail1">expired At</label>
+        <input class="form-control" type="text" id="expiredAt" aria-describedby="emailHelp" placeholder="expiredAt" name="expiredAt" required>
+      </div>
+      <div class="form-group">
+        <label for="exampleInputEmail1">area</label>
+        <input class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter area" name="area" required>
+      </div>
+
+      <div class="form-group">
+        <label for="exampleInputEmail1">location</label>
+        <input class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter location" name="location" required>
+      </div>
+     
+      <div class="form-group">
+        <label for="exampleInputEmail1">numbers of workers involved</label>
+        <input class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter numbers of workers involved" name="numOfWorkers" required>
+      </div>
+
+      <div class="form-group">
+        <label for="exampleInputEmail1">equipments</label>
+        <textarea class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter equipments" name="equipments" required></textarea>
+      </div>
+      <div class="form-group">
+        <label for="exampleInputEmail1">additional Safty</label>
+        <textarea class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter additional Safty" name="additionalSafty"></textarea>
+      </div>
+      <div class="form-group">
+        <label for="exampleInputEmail1">description of work</label>
+        <textarea class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter description of work" name="description" required></textarea>
+      </div>
+     
+      <div class="pt-2">
+        <label for="exampleInputEmail1">mandatory PPE</label>
+
+        <select class="js-example-basic-multiple" id="category" aria-placeholder="mandatory PPE" multiple="multiple" name="mandatoryPPE" style="width: 100%" required="">
+        
+            <option value="safety shoes">safety shoes</option>
+            <option value="vest">vest</option>
+            <option value="helmet">helmet</option>
+            <option value="goggles">goggles</option>
+
+            
+    </select>
+    </div>
+         
+    <div class="pt-2">
+        <label for="exampleInputEmail1">additional PPE</label>
+        <select class="js-example-basic-multiple" id="category1" aria-placeholder="additional PPE" multiple="multiple" name="additionalPPE" style="width: 100%">
+
+        <option value="dust mask">dust mask</option>
+        <option value="ear muff">ear muff</option>
+        <option value="ear plug">ear plug</option>
+        
+    </select></div>
+
+        <div class="pt-2">
+            <label for="exampleInputEmail1">documents</label>
+    
+            <select class="js-example-basic-multiple" id="category3" aria-placeholder="documents" multiple="multiple" name="documents" style="width: 100%" required="">
+                
+                <option value="Methods"> Methods </option>
+                <option value="Risk Assessment"> Risk Assessment </option>
+                <option value="TBT">TBT</option>
+                <option value="Layout">Layout</option>
+            </select></div>
+            <div class="pt-2">
+              <label for="exampleInputEmail1">type of hazards and risks associated with cold work activity</label>
+      
+              <select class="js-example-basic-multiple" id="category4" aria-placeholder="documents" multiple="multiple" name="hazardsOfWork" style="width: 100%" required="">
+                  
+                  <option value="work in excavation"> work in excavation </option>
+                  <option value="work in confined space">work in confined space</option>
+                  <option value="fall from hight">fall from hight</option>
+                  <option value="fumes / emissions">fumes / emissions</option>
+                  <option value="health hazards">health hazards</option>
+                  <option value="electrical hazards">electrical hazards</option>
+                  <option value="fire hazards">fire hazards</option>
+                  <option value="protruding parts">protruding parts</option>
+                  <option value="falling Objects">falling Objects</option>
+                  <option value="noise">noise</option>
+                  <option value="heat">heat</option>
+                  <option value="vibration">vibration</option>
+                  <option value="advers Weather">advers Weather</option>
+                  <option value="flying particles">flying particles</option>
+                  <option value="tripping / slipping">tripping / slipping</option>
+                  <option value="moving Vehicle">moving Vehicle</option>
+              </select>
+            </div>
+              <div class="pt-2">
+                <label for="exampleInputEmail1">measures taken</label>
+        
+                <select class="js-example-basic-multiple" id="category5" aria-placeholder="documents" multiple="multiple" name="measuresTaken" style="width: 100%" required="">
+                  <option value="job hazard analysis">job hazard analysis</option>
+                  <option value="risk Assessment">risk Assessment</option>
+                  <option value="tool box talk">tool box talk</option>
+                  <option value="lock out tag out">lock out tag out</option>
+                  <option value="gas testing">gas testing</option>
+                </select>
+              </div>
+
+            <div class="form-group pt-2">
+                <label for="exampleInputEmail1">attachments</label>
+              <input type='file' name='file' multiple />
+              </div>
+      
+        <div class="row">
+    <div class="pt-2 mr-5">
+        <label for="exampleInputEmail1">issued to</label>
+      <select name="issuedTo" required>
+        <option value="ZTPC"> ZTPC </option>
+        <option value="GTCI"> GTCI </option>
+        <option value="Smart">Smart</option>
+        <option value="Complete">Complete</option>
+    </select>
+</div>
+<input type="hidden" value="cold work permit" name="permitType">
+
+<div class="pt-2 mr-5">
+<label for="exampleInputEmail1">has the site been inspected prior to commencing work?</label>
+  <select name="workPlaceInspected" required>
+    <option value=true> yes </option>
+    <option value=false> no </option>
+</select>
+</div>
+<div class="pt-2 mr-5">
+<label for="exampleInputEmail1">have the equip/tools been checked and in an acceotable condition?</label>
+  <select name="equipmentsInspected" required>
+    <option value=true> yes </option>
+    <option value=false> no </option>
+</select>
+</div>
+<div class="pt-2 mr-5">
+<label for="exampleInputEmail1">have potential hazard been discussed and assessed?</label>
+  <select name="riskAssessmentDiscussed" required>
+    <option value=true> yes </option>
+    <option value=false> no </option>
+</select>
+</div>
+<div class="pt-2 mr-5">
+<label for="exampleInputEmail1">is all personal protective equipment (ppe) in place and operable?</label>
+  <select name="PPEGood" required>
+    <option value=true> yes </option>
+    <option value=false> no </option>
+</select>
+</div>
+<div class="pt-2 mr-5">
+<label for="exampleInputEmail1">approved work method statment provided?</label>
+  <select name="workSteps" required>
+    <option value=true> yes </option>
+    <option value=false> no </option>
+</select>
+</div>
+<div class="pt-2 mr-5">
+<label for="exampleInputEmail1">work area barrcaded?</label>
+  <select name="hardBreakat" required>
+    <option value=true> yes </option>
+    <option value=false> no </option>
+</select>
+</div>
+<div class="pt-2 mr-5">
+<label for="exampleInputEmail1">are qualified, trained and authorized people attending the job?</label>
+  <select name="laborsGood" required>
+    <option value=true> yes </option>
+    <option value=false> no </option>
+</select>
+</div>
+<div class="pt-2 mr-5">
+<label for="exampleInputEmail1">workers instructed in thier work / tasks (talk box meeting)?</label>
+  <select name="dangerMeeting" required>
+    <option value=true> yes </option>
+    <option value=false> no </option>
+</select>
+</div>
+<div class="pt-2 mr-5">
+<label for="exampleInputEmail1">are fire extinguishersbin place?</label>
+  <select name="fireFightersExist" required>
+    <option value=true> yes </option>
+    <option value=false> no </option>
+</select>
+</div>
+
+<div class="pt-2 mr-5">
+<label for="exampleInputEmail1">process equipment depressured / drained / isolated and tagged (attach isolation list)</label>
+  <select name="isolated" required>
+    <option value=true> yes </option>
+    <option value=false> no </option>
+</select>
+</div>
+
+<div class="pt-2 mr-5">
+<label for="exampleInputEmail1">there are no conflicts with any other work activities?</label>
+  <select name="noConflict" required>
+    <option value=true> yes </option>
+    <option value=false> no </option>
+</select>
+</div>
+
+<div class="pt-2 mr-5">
+<label for="exampleInputEmail1">precautions in place for exposure to hazardous / toxic materials?</label>
+  <select name="dealtWithPoisioned" required>
+    <option value=true> yes </option>
+    <option value=false> no </option>
+</select>
+</div>
+
+<div class="pt-2 mr-5">
+<label for="exampleInputEmail1">warning signs provided?</label>
+  <select name="markers" required>
+    <option value=true> yes </option>
+    <option value=false> no </option>
+</select>
+</div>
+</div>
+        
+      <div class="form-group form-check">
+        
+      </div>
+      <button type="submit" value="Submit" class="btn btn-primary">Submit</button>
+    </form>
+  </div>
+</div>
+<script src="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script><script type="text/javascript">	
+	$(".js-example-basic-multiple").select2();
+</script>
+<script>
+  $(function() {
+     $("#startDate").datepicker({ dateFormat: 'dd-mm-yy' });
+  });
+  </script>
+  <script>
+    $(function() {
+       $("#endDate").datepicker({ dateFormat: 'dd-mm-yy' });
+    });
+    </script>
+  <script>
+    $(function() {
+       $("#startAt").timepicker({
+    timeFormat: 'HH:mm',
+    interval: 30,
+   
+    dynamic: false,
+    dropdown: true,
+    scrollbar: true
+});
+    });
+    </script>
+     <script>
+      $(function() {
+         $("#expiredAt").timepicker({
+      timeFormat: 'HH:mm',
+      interval: 30,
+      
+      dynamic: false,
+      dropdown: true,
+      scrollbar: true
+  });
+      });
+      </script>
+</body>
+</html>
