@@ -32,7 +32,12 @@ export class AuthService {
         throw new ForbiddenException('password incorrect');
       }
 
-      return this.signUser(user.id, user.role, user.company, user.userName);
+      return await this.signUser(
+        user.id,
+        user.role,
+        user.company,
+        user.userName,
+      );
     } catch (e) {
       throw e;
     }
