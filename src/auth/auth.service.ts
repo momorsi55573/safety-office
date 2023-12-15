@@ -21,7 +21,7 @@ export class AuthService {
       });
 
       if (!user) {
-        throw new NotFoundException('user incorrect');
+        return { access_token: 'user incorrect' };
       }
       let pwMatches: boolean;
 
@@ -29,7 +29,7 @@ export class AuthService {
         pwMatches = true;
       }
       if (!pwMatches) {
-        throw new ForbiddenException('password incorrect');
+        return { access_token: 'password incorrect' };
       }
 
       return await this.signUser(

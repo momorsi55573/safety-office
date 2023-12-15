@@ -7,6 +7,7 @@ import {
   Get,
   HttpCode,
   HttpStatus,
+  NotFoundException,
   Post,
   Res,
   UseGuards,
@@ -26,7 +27,14 @@ export class AuthController {
     @Res({ passthrough: true }) res: Response,
   ) {
     const { access_token } = await this.authService.signin(dto);
-    res.cookie('access_token', access_token).redirect('/home');
+    if (
+      access_token === 'user incorrect' ||
+      access_token === 'password incorrect'
+    ) {
+      res.redirect('/');
+    } else {
+      res.cookie('access_token', access_token).redirect('/home');
+    }
   }
 
   @UseGuards(JwtGuard, RolesGuard)
