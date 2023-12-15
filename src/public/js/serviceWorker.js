@@ -11,6 +11,17 @@ const urlBase64ToUint8Array = (base64String) => {
     }
     return outPutArray;
     };
+    const saveSubscription = async (subscription) => {
+        const SERVER_URL = 'http://localhost:3000/save-subscription';
+        const response = await fetch(SERVER_URL, {
+            method: 'post',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(subscription),
+        });
+        return response.json();
+    };
 self.addEventListener('activate', async (e) => {
   const subscription = await self.registration.pushManager.subscribe({
     userVisibleOnly: true,
@@ -18,7 +29,8 @@ self.addEventListener('activate', async (e) => {
         'BEiMjwCnIJ1Ns3Voriu2cpL1x4hr4mioj3Pb-pehWOxJmfj8bOrEccOp0zdWsepAqrU2y77Y_KgF4d6IwPTmSvs'
     )
   });
-  console.log(subscription)
+  const response = await saveSubscription(subscription);
+  console.log(response)
 });
 
 //Public Key:
