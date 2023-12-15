@@ -1,14 +1,15 @@
 /* eslint-disable prettier/prettier */
-if ('serviceWorker' in navigator) {
-    window.addEventListener('load', () => {
-      navigator.serviceWorker
-        .register('../public/js/serviceWorker.js')
-        .then((registration) => {
-          console.log('Service worker registered:', registration);
-        })
-        .catch((error) => {
-          console.log('Service worker registration failed:', error);
-        });
-    });
-  }
-  
+ const checkPermission = () => {
+    if (!('serviceWorker' in navigator)) {
+        throw new Error('No Service Worker support!');
+        
+    }
+ }
+
+ const registerServiceWorker = async () => {
+    const swRegistration = await navigator.serviceWorker.register('../public/js/serviceWorker.js');
+    return swRegistration;
+ }
+
+ checkPermission();
+ registerServiceWorker()
