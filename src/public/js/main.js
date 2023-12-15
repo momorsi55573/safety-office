@@ -4,7 +4,7 @@ const CheckPermission = () => {
     if (!('serviceWorker' in navigator)) {
         throw new Error('No Service Worker support!');
     }
-    if (!('notifications' in window)) {
+    if (!('Notification' in window)) {
         throw new Error('No api support!');
     }
 }
@@ -15,16 +15,20 @@ const registerServiceWorker = async () => {
 }
 
 const requestNotificationPermission = async () => {
-    const permission = await window.Notification.requestPermission();
+    const permission = await Notification.requestPermission();
     // value of permission can be 'granted', 'default', 'denied'
     // granted: user has accepted the request
     // default: user has dismissed the notification permission popup by clicking on x
     // denied: user has denied the request.
     if (permission !== 'granted') {
         throw new Error('Permission not granted for Notification');
-    }else{ new Notification('Hi there!');}
+    }
 }
 
-CheckPermission();
-registerServiceWorker();
-requestNotificationPermission();
+async function main() {
+    await registerServiceWorker();
+    await requestNotificationPermission();
+    
+}
+main();
+
