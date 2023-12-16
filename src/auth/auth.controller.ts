@@ -40,8 +40,12 @@ export class AuthController {
   @UseGuards(JwtGuard, RolesGuard)
   @Roles('Admin')
   @Post('creatUser')
-  signup(@Body() dto: CreateUserDto) {
-    return this.authService.creatuser(dto);
+  signup(
+    @Body() dto: CreateUserDto,
+    @Res({ passthrough: true }) res: Response,
+  ) {
+    await this.authService.creatuser(dto);
+    return res.redirect('/home');
   }
 
   @Get('logout')
