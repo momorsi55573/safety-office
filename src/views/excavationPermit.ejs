@@ -10,11 +10,11 @@
   <link rel="stylesheet" href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
   <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-  <title>create electrical work permit</title>
+  <title>excavation permit</title>
 </head>
 <body>
   <div class="container">
-    <form action="/permit/createElecterecalWorkPermit" enctype="multipart/form-data" method="post">
+    <form action="/permit/creatColdWorkPermit" enctype="multipart/form-data" method="post">
       <div class="form-group">
         <label for="exampleInputEmail1">Start Date</label>
         <input class="form-control" type="text" id="startDate" aria-describedby="emailHelp" placeholder="start Date" name="startDate" required>
@@ -45,10 +45,12 @@
         <label for="exampleInputEmail1">numbers of workers involved</label>
         <input class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter numbers of workers involved" name="numOfWorkers" required>
       </div>
+
       <div class="form-group">
-        <label for="exampleInputEmail1">power supplied from</label>
-        <input class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter power supplied from" name="power" required>
+        <label for="exampleInputEmail1">numbers of workers involved</label>
+        <input class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter numbers of workers involved" name="numOfWorkers" required>
       </div>
+
       <div class="form-group">
         <label for="exampleInputEmail1">equipments</label>
         <textarea class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter equipments" name="equipments" required></textarea>
@@ -83,9 +85,9 @@
         <option value="dust mask">dust mask</option>
         <option value="ear muff">ear muff</option>
         <option value="ear plug">ear plug</option>
-        <option value="arc flash suite">arc flash suite</option>
         
     </select></div>
+    
 
         <div class="pt-2">
             <label for="exampleInputEmail1">documents</label>
@@ -113,9 +115,6 @@
                   <option value="falling Objects">falling Objects</option>
                   <option value="noise">noise</option>
                   <option value="heat">heat</option>
-                  <option value="manual handling">manual handling</option>
-                  <option value="arc flash">arc flash</option>
-                  <option value="fualty tool">fualty tool</option>
                   <option value="vibration">vibration</option>
                   <option value="advers Weather">advers Weather</option>
                   <option value="flying particles">flying particles</option>
@@ -132,11 +131,6 @@
                   <option value="tool box talk">tool box talk</option>
                   <option value="lock out tag out">lock out tag out</option>
                   <option value="gas testing">gas testing</option>
-                  <option value="access">access</option>
-                  <option value="full supervision">full supervision</option>
-                  <option value="prove dead">prove dead</option>
-                  <option value="rescue hock">rescue hock</option>
-                  <option value="isolation mat">isolation mat</option>
                 </select>
               </div>
 
@@ -155,7 +149,7 @@
         <option value="Complete">Complete</option>
     </select>
 </div>
-<input type="hidden" value="electrical work permit" name="permitType">
+<input type="hidden" value="cold work permit" name="permitType">
 
 <div class="pt-2 mr-5">
 <label for="exampleInputEmail1">has the site been inspected prior to commencing work?</label>
@@ -164,13 +158,6 @@
     <option value=false> no </option>
 </select>
 </div>
-<div class="pt-2 mr-5">
-  <label for="exampleInputEmail1">earthing provided</label>
-    <select name="earthingProvided" required>
-      <option value=true> yes </option>
-      <option value=false> no </option>
-  </select>
-  </div>
 <div class="pt-2 mr-5">
 <label for="exampleInputEmail1">have the equip/tools been checked and in an acceotable condition?</label>
   <select name="equipmentsInspected" required>
@@ -243,22 +230,6 @@
     <option value=false> no </option>
 </select>
 </div>
-
-<div class="pt-2 mr-5">
-  <label for="exampleInputEmail1">is voltage detection instrument required?</label>
-    <select name="voltageDetection" required>
-      <option value=true> yes </option>
-      <option value=false> no </option>
-  </select>
-  </div>
-
-  <div class="pt-2 mr-5">
-    <label for="exampleInputEmail1">loto System in place?</label>
-      <select name="loto" required>
-        <option value=true> yes </option>
-        <option value=false> no </option>
-    </select>
-    </div>
 
 <div class="pt-2 mr-5">
 <label for="exampleInputEmail1">precautions in place for exposure to hazardous / toxic materials?</label>

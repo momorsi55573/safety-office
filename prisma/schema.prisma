@@ -20,6 +20,7 @@ model User {
 }
 
 model Permit {
+  tests test[]
   id String @id @default(auto()) @map("_id") @db.ObjectId
   createdAt DateTime @default(now())
   startDate String 
@@ -71,13 +72,6 @@ model Permit {
   watchman String?
   namesOfEnteringEmp String?
   confinedAdditionalPPE String?
-  testDate String[]
-  testTime String[]
-  testDetectorName String[]
-  testLEL String[]
-  testO2 String[]
-  testCO String[]
-  testH2S String[]
   confinedEntryPremited String[]
   power String?
   earthingProvided String?
@@ -90,6 +84,19 @@ model Permit {
   PTWCordinator String?
    user User @relation(fields: [issuedBy], references: [id])
   issuedBy String @db.ObjectId
+}
+
+model test {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+  testDate String
+  testTime String
+  testDetectorName String
+  testLEL String
+  testO2 String
+  testCO String
+  testH2S String
+  permit Permit @relation(fields: [per], references: [id])
+  per String @db.ObjectId
 }
 
 enum Role {

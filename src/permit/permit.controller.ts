@@ -39,7 +39,6 @@ export class PermitController {
   @Post('extend/:id')
   async extend(
     @Param('id') id: string,
-    @GetUser() user,
     @Body() dto,
     @Res({ passthrough: true }) res: Response,
   ) {
@@ -48,9 +47,19 @@ export class PermitController {
   }
 
   @UseGuards(JwtGuard)
+  @Post('addTest/:id')
+  async addTest(
+    @Param('id') id: string,
+    @Body() dto,
+    @Res({ passthrough: true }) res: Response,
+  ) {
+    await this.PermitService.addTest(id, dto);
+    return res.redirect('../myPermits');
+  }
+
+  @UseGuards(JwtGuard)
   @Post('renew/:id')
   async renew(
-    @GetUser() user,
     @Param('id') id: string,
     @Body() dto,
     @Res({ passthrough: true }) res: Response,
@@ -69,7 +78,7 @@ export class PermitController {
     @Res({ passthrough: true }) res: Response,
   ) {
     await this.PermitService.creatColdWorkPermit(dto, user, file);
-    res.redirect('permit/myPermits');
+    res.redirect('/home');
   }
 
   @UseGuards(JwtGuard)
@@ -93,22 +102,22 @@ export class PermitController {
   }
 
   @UseGuards(JwtGuard)
-  @Get('electercalWorkPermit')
-  @Render('electercalWorkPermit')
-  electercalWorkPermit() {
+  @Get('electerecalWorkPermit')
+  @Render('electerecalWorkPermit')
+  electerecalWorkPermit() {
     return;
   }
 
   @UseGuards(JwtGuard)
-  @Post('createlectercalWorkPermit')
+  @Post('createElecterecalWorkPermit')
   @UseInterceptors(FilesInterceptor('file'))
-  async createlectercalWorkPermit(
+  async createElecterecalWorkPermit(
     @Body() dto,
     @GetUser() user,
     @UploadedFiles() file,
     @Res({ passthrough: true }) res: Response,
   ) {
-    await this.PermitService.createlectercalWorkPermit(dto, user, file);
+    await this.PermitService.createElecterecalWorkPermit(dto, user, file);
     res.redirect('/home');
   }
 
@@ -218,8 +227,9 @@ export class PermitController {
     @GetUser()
     user: { userId: string; role; company: string },
   ) {
+    const test = await this.PermitService.getTest(id);
     const permit = await this.PermitService.getPermit(id);
-    return { user, permit };
+    return { user, permit, test };
   }
 
   @UseGuards(JwtGuard)
