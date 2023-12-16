@@ -272,6 +272,9 @@
                                       <textarea class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" required><%= permit.subHSERep %></textarea>
                                   </div>
                                                               <% } %>
+
+                                                        
+
                       </div>
       
                       <%if (user.role === 'ENG' && user.company === 'ZTPC') { %>
@@ -325,7 +328,7 @@
                                                     <form action="/permit/extend/<%= permit.id %>" method="post">
                                                         <div class="form-group">
                                                             <label for="exampleInputEmail1">expired At</label>
-                                                            <input class="form-control" type="text" id="expiredAt" aria-describedby="emailHelp" placeholder="expiredAt" name="expiredAt" required>
+                                                            <input class="form-control" type="text" id="expiredAt" aria-describedby="emailHelp" placeholder="expiredAt" name="extendExpiredAt" required>
                                                           </div>
                                                           <div class="modal-footer">
                                                               <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -354,8 +357,8 @@
                                                 <div class="modal-body">
                                                     <form action="/permit/renew/<%= permit.id %>" method="post">
                                                         <div class="form-group">
-                                                            <label for="exampleInputEmail1">expired At</label>
-                                                            <input class="form-control" type="text" id="endDate" aria-describedby="emailHelp" placeholder="endDate" name="endDate" required>
+                                                            <label for="exampleInputEmail1">end date</label>
+                                                            <input class="form-control" type="text" id="endDate" aria-describedby="emailHelp" placeholder="endDate" name="renewEndDate" required>
                                                           </div>
                                                           <div class="modal-footer">
                                                               <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

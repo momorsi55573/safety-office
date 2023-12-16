@@ -130,6 +130,129 @@ export class PermitService {
     }
   }
 
+  async createlectercalWorkPermit(dto, user, file) {
+    let additionalPPE = dto.additionalPPE;
+    let siteCondition = dto.siteCondition;
+    let mandatoryPPE = dto.mandatoryPPE;
+    let documents = dto.documents;
+    let hazardsOfWork = dto.hazardsOfWork;
+    let measuresTaken = dto.measuresTaken;
+    if (typeof hazardsOfWork === 'string') {
+      hazardsOfWork = [hazardsOfWork];
+    }
+    if (typeof measuresTaken === 'string') {
+      measuresTaken = [measuresTaken];
+    }
+    if (typeof additionalPPE === 'string') {
+      additionalPPE = [additionalPPE];
+    }
+    if (typeof siteCondition === 'string') {
+      siteCondition = [siteCondition];
+    }
+    if (typeof mandatoryPPE === 'string') {
+      mandatoryPPE = [mandatoryPPE];
+    }
+    if (typeof documents === 'string') {
+      documents = [documents];
+    }
+    try {
+      const image = [];
+      for (const doc of file) {
+        const img = await this.uploadImage(doc).catch((e) => {
+          throw e;
+        });
+        image.push(img);
+      }
+      if (user.company !== 'ZTPC') {
+        const permit = await this.db.permit.create({
+          data: {
+            subConstructionRep: await user.userName,
+            startDate: dto.startDate,
+            endDate: dto.endDate,
+            startAt: dto.startAt,
+            expiredAt: dto.expiredAt,
+            numOfWorkers: +dto.numOfWorkers,
+            ids: image.map((image) => image.public_id),
+            imagpath: image.map((image) => image.secure_url),
+            area: dto.area,
+            permitType: dto.permitType,
+            issuedTo: dto.issuedTo,
+            location: dto.location,
+            equipments: dto.equipments,
+            description: dto.description,
+            hazardsOfWork,
+            measuresTaken,
+            workPlaceInspected: dto.workPlaceInspected,
+            equipmentsInspected: dto.equipmentsInspected,
+            riskAssessmentDiscussed: dto.riskAssessmentDiscussed,
+            PPEGood: dto.PPEGood,
+            workSteps: dto.workSteps,
+            hardBreakat: dto.hardBreakat,
+            laborsGood: dto.laborsGood,
+            dangerMeeting: dto.dangerMeeting,
+            fireFightersExist: dto.fireFightersExist,
+            noConflict: dto.noConflict,
+            isolated: dto.isolated,
+            dealtWithPoisioned: dto.dealtWithPoisioned,
+            markers: dto.markers,
+            mandatoryPPE,
+            additionalPPE,
+            siteCondition,
+            additionalSafty: dto.additionalSafty,
+            documents,
+            issuedBy: user.userId,
+            status: 'pending',
+          },
+        });
+        return permit;
+      } else {
+        const permit = await this.db.permit.create({
+          data: {
+            constructionRep: await user.userName,
+            startDate: dto.startDate,
+            endDate: dto.endDate,
+            startAt: dto.startAt,
+            expiredAt: dto.expiredAt,
+            numOfWorkers: +dto.numOfWorkers,
+            ids: image.map((image) => image.public_id),
+            imagpath: image.map((image) => image.secure_url),
+            area: dto.area,
+            permitType: dto.permitType,
+            issuedTo: dto.issuedTo,
+            location: dto.location,
+            equipments: dto.equipments,
+            description: dto.description,
+            hazardsOfWork,
+            measuresTaken,
+            workPlaceInspected: dto.workPlaceInspected,
+            equipmentsInspected: dto.equipmentsInspected,
+            riskAssessmentDiscussed: dto.riskAssessmentDiscussed,
+            PPEGood: dto.PPEGood,
+            workSteps: dto.workSteps,
+            hardBreakat: dto.hardBreakat,
+            laborsGood: dto.laborsGood,
+            dangerMeeting: dto.dangerMeeting,
+            fireFightersExist: dto.fireFightersExist,
+            noConflict: dto.noConflict,
+            isolated: dto.isolated,
+            dealtWithPoisioned: dto.dealtWithPoisioned,
+            markers: dto.markers,
+            mandatoryPPE,
+            additionalPPE,
+            siteCondition,
+            additionalSafty: dto.additionalSafty,
+            documents,
+            issuedBy: user.userId,
+            status: 'pending',
+          },
+        });
+        return permit;
+      }
+    } catch (e) {
+      throw e;
+    }
+  }
+
   async creatConfinedSpaceEntryPermit(dto, user, file) {
     let additionalPPE = dto.additionalPPE;
     let siteCondition = dto.siteCondition;
@@ -428,8 +551,6 @@ export class PermitService {
       data: {
         expiredAt: dto.expiredAt,
         status: 'pending',
-        HSERep: '',
-        subHSERep: '',
         PTWCordinator: '',
       },
     });
@@ -443,8 +564,6 @@ export class PermitService {
       data: {
         endDate: dto.endDate,
         status: 'pending',
-        HSERep: '',
-        subHSERep: '',
         PTWCordinator: '',
       },
     });

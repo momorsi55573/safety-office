@@ -88,7 +88,6 @@ model Permit {
   issuedBy String @db.ObjectId
 }
 
-
 enum Role {
     Officer
     Admin 

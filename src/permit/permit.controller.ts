@@ -93,6 +93,26 @@ export class PermitController {
   }
 
   @UseGuards(JwtGuard)
+  @Get('electercalWorkPermit')
+  @Render('electercalWorkPermit')
+  electercalWorkPermit() {
+    return;
+  }
+
+  @UseGuards(JwtGuard)
+  @Post('createlectercalWorkPermit')
+  @UseInterceptors(FilesInterceptor('file'))
+  async createlectercalWorkPermit(
+    @Body() dto,
+    @GetUser() user,
+    @UploadedFiles() file,
+    @Res({ passthrough: true }) res: Response,
+  ) {
+    await this.PermitService.createlectercalWorkPermit(dto, user, file);
+    res.redirect('/home');
+  }
+
+  @UseGuards(JwtGuard)
   @Get('myPermits')
   @Render('myPermits')
   async myPermits(@GetUser() user: { userId: string; role; company: string }) {
