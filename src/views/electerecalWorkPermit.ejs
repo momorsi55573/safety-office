@@ -45,7 +45,10 @@
         <label for="exampleInputEmail1">numbers of workers involved</label>
         <input class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter numbers of workers involved" name="numOfWorkers" required>
       </div>
-
+      <div class="form-group">
+        <label for="exampleInputEmail1">power supplied from</label>
+        <input class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter power supplied from" name="power" required>
+      </div>
       <div class="form-group">
         <label for="exampleInputEmail1">equipments</label>
         <textarea class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter equipments" name="equipments" required></textarea>
@@ -80,6 +83,7 @@
         <option value="dust mask">dust mask</option>
         <option value="ear muff">ear muff</option>
         <option value="ear plug">ear plug</option>
+        <option value="arc flash suite">arc flash suite</option>
         
     </select></div>
 
@@ -109,6 +113,9 @@
                   <option value="falling Objects">falling Objects</option>
                   <option value="noise">noise</option>
                   <option value="heat">heat</option>
+                  <option value="manual handling">manual handling</option>
+                  <option value="arc flash">arc flash</option>
+                  <option value="fualty tool">fualty tool</option>
                   <option value="vibration">vibration</option>
                   <option value="advers Weather">advers Weather</option>
                   <option value="flying particles">flying particles</option>
@@ -125,6 +132,11 @@
                   <option value="tool box talk">tool box talk</option>
                   <option value="lock out tag out">lock out tag out</option>
                   <option value="gas testing">gas testing</option>
+                  <option value="access">access</option>
+                  <option value="full supervision">full supervision</option>
+                  <option value="prove dead">prove dead</option>
+                  <option value="rescue hock">rescue hock</option>
+                  <option value="isolation mat">isolation mat</option>
                 </select>
               </div>
 
@@ -152,6 +164,13 @@
     <option value=false> no </option>
 </select>
 </div>
+<div class="pt-2 mr-5">
+  <label for="exampleInputEmail1">earthing provided</label>
+    <select name="earthingProvided" required>
+      <option value=true> yes </option>
+      <option value=false> no </option>
+  </select>
+  </div>
 <div class="pt-2 mr-5">
 <label for="exampleInputEmail1">have the equip/tools been checked and in an acceotable condition?</label>
   <select name="equipmentsInspected" required>
@@ -224,6 +243,22 @@
     <option value=false> no </option>
 </select>
 </div>
+
+<div class="pt-2 mr-5">
+  <label for="exampleInputEmail1">is voltage detection instrument required?</label>
+    <select name="voltageDetection" required>
+      <option value=true> yes </option>
+      <option value=false> no </option>
+  </select>
+  </div>
+
+  <div class="pt-2 mr-5">
+    <label for="exampleInputEmail1">loto System in place?</label>
+      <select name="loto" required>
+        <option value=true> yes </option>
+        <option value=false> no </option>
+    </select>
+    </div>
 
 <div class="pt-2 mr-5">
 <label for="exampleInputEmail1">precautions in place for exposure to hazardous / toxic materials?</label>

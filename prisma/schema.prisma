@@ -79,6 +79,10 @@ model Permit {
   testCO String[]
   testH2S String[]
   confinedEntryPremited String[]
+  power String?
+  earthingProvided String?
+  voltageDetection String?
+  loto String?
   constructionRep String?
   subConstructionRep String?
   HSERep String?
