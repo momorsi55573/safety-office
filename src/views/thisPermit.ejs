@@ -271,7 +271,7 @@
                                                     <form action="/permit/extend/<%= permit.id %>" method="post">
                                                         <div class="form-group">
                                                             <label for="exampleInputEmail1">expired At</label>
-                                                            <input class="form-control" type="text" id="expiredAt" aria-describedby="emailHelp" placeholder="expiredAt" name="extendExpiredAt" required>
+                                                            <input class="form-control" type="text" id="extendExpiredAt" aria-describedby="emailHelp" placeholder="expiredAt" name="expiredAt" required>
                                                           </div>
                                                           <div class="modal-footer">
                                                               <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -302,7 +302,7 @@
                                                     <form action="/permit/renew/<%= permit.id %>" method="post">
                                                         <div class="form-group">
                                                             <label for="exampleInputEmail1">end date</label>
-                                                            <input class="form-control" type="text" id="endDate" aria-describedby="emailHelp" placeholder="endDate" name="renewEndDate" required>
+                                                            <input class="form-control" type="text" id="endDate" aria-describedby="emailHelp" placeholder="endDate" name="endDate" required>
                                                           </div>
                                                           <div class="modal-footer">
                                                               <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -485,6 +485,50 @@
                                   <label for="exampleInputEmail1"> status</label>
                                   <textarea class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" required><%= permit.status %></textarea>
                               </div>
+                              <% for(var i=0; i < extend.length; i++) { %>
+                                <div class="row">
+                                  <div class="form-group">
+                                    <label for="exampleInputEmail1">expired At</label>
+                                    <input class="form-control" type="text" aria-describedby="emailHelp" placeholder="expiredAt"  value="<%= permit.expiredAt %>" name="expiredAt" required>
+                                  </div>
+                                  <% if( permit.issuedTo === 'ZTPC'){ %>
+                                    <div class="form-group mr-5">
+                                        <label for="exampleInputEmail1">construction Rep</label>
+                                        <textarea class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" required><%= permit.constructionRep %></textarea>
+                                    </div>
+                                    <div class="form-group mr-5">
+                                        <label for="exampleInputEmail1">HSE Rep</label>
+                                        <textarea class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" required><%= permit.HSERep %></textarea>
+                                    </div>
+                                    <div class="form-group mr-5">
+                                        <label for="exampleInputEmail1">PTW Cordinator</label>
+                                        <textarea class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" required><%= permit.PTWCordinator %></textarea>
+                                    </div>
+                                    <% } else{ %>  
+                                        <div class="form-group mr-5">
+                                            <label for="exampleInputEmail1">construction Rep</label>
+                                            <textarea class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" required><%= permit.constructionRep %></textarea>
+                                        </div>
+                                        <div class="form-group mr-5">
+                                            <label for="exampleInputEmail1">HSE Rep</label>
+                                            <textarea class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" required><%= permit.HSERep %></textarea>
+                                        </div>
+                                        <div class="form-group mr-5">
+                                            <label for="exampleInputEmail1">PTW Cordinator</label>
+                                            <textarea class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" required><%= permit.PTWCordinator %></textarea>
+                                        </div>
+                                        <div class="form-group mr-5">
+                                            <label for="exampleInputEmail1">sub Construction Rep</label>
+                                            <textarea class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" required><%= permit.subConstructionRep %></textarea>
+                                        </div>
+                                        <div class="form-group mr-5">
+                                            <label for="exampleInputEmail1">sub HSE Rep</label>
+                                            <textarea class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" required><%= permit.subHSERep %></textarea>
+                                        </div>
+                                                                    <% } %>
+                            </div>               
+                                  <% } %>
+                                  
                               <% for(var i=0; i < test.length; i++) { %>
                                 <div class="row">
                               <div class="form-group">
@@ -515,7 +559,8 @@
                                 <label for="exampleInputEmail1">testH2S</label>
                                 <input class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter testH2S"  value="<%= test[i].testH2S %>" name="area" required>
                               </div>
-                            </div>                     <% } %>
+                            </div>               
+                                  <% } %>
                               <% if( permit.issuedTo === 'ZTPC'){ %>
                                   <div class="form-group mr-5">
                                       <label for="exampleInputEmail1">construction Rep</label>
@@ -712,7 +757,7 @@
                                                           <form action="/permit/extend/<%= permit.id %>" method="post">
                                                               <div class="form-group">
                                                                   <label for="exampleInputEmail1">expired At</label>
-                                                                  <input class="form-control" type="text" id="expiredAt" aria-describedby="emailHelp" placeholder="expiredAt" name="expiredAt" required>
+                                                                  <input class="form-control" type="text" id="extendExpiredAt" aria-describedby="emailHelp" placeholder="expireAt" name="expiredAt" required>
                                                                 </div>
                                                                 <div class="modal-footer">
                                                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -740,10 +785,12 @@
                                                       </div>
                                                       <div class="modal-body">
                                                           <form action="/permit/renew/<%= permit.id %>" method="post">
-                                                              <div class="form-group">
-                                                                  <label for="exampleInputEmail1">expired At</label>
-                                                                  <input class="form-control" type="text" id="endDate" aria-describedby="emailHelp" placeholder="endDate" name="endDate" required>
+                                                            
+                                                            <div class="form-group">
+                                                                  <label for="exampleInputEmail1">endDate</label>
+                                                                  <input class="form-control" type="text" id="ren" aria-describedby="emailHelp" placeholder="endDate" name="endDate" required>
                                                                 </div>
+                                                                
                                                                 <div class="modal-footer">
                                                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                                                                     <button type="submit" value="Submit" class="btn btn-primary">renew</button>
@@ -1033,7 +1080,7 @@
                                                           <form action="/permit/extend/<%= permit.id %>" method="post">
                                                               <div class="form-group">
                                                                   <label for="exampleInputEmail1">expired At</label>
-                                                                  <input class="form-control" type="text" id="expiredAt" aria-describedby="emailHelp" placeholder="expiredAt" name="extendExpiredAt" required>
+                                                                  <input class="form-control" type="text" id="extendExpiredAt" aria-describedby="emailHelp" placeholder="expiredAt" name="extendExpiredAt" required>
                                                                 </div>
                                                                 <div class="modal-footer">
                                                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -1099,6 +1146,11 @@
        $("#endDate").datepicker({ dateFormat: 'dd-mm-yy' });
     });
     </script>
+    <script>
+      $(function() {
+         $("#ren").datepicker({ dateFormat: 'dd-mm-yy' });
+      });
+      </script>
 <script>
   $(function() {
      $("#testDate").datepicker({ dateFormat: 'dd-mm-yy' });
@@ -1130,6 +1182,20 @@
   });
       });
       </script>
+           <script>
+            $(function() {
+               $("#extendExpiredAt").timepicker({
+                  zindex: 9999999,
+                  timeFormat: 'HH:mm',
+            interval: 30,
+            
+            dynamic: false,
+            dropdown: true,
+            scrollbar: true
+        });
+            });
+            </script>
+      
            <script>
             $(function() {
                $("#testTime").timepicker({

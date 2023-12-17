@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, Render } from '@nestjs/common';
 import { UploadApiResponse, UploadApiErrorResponse, v2 } from 'cloudinary';
 import { DbService } from 'src/db/db.service';
 import toStream = require('buffer-to-stream');
@@ -663,33 +663,57 @@ export class PermitService {
   }
 
   async extend(id, dto) {
-    return await this.db.permit.update({
+    await this.db.permit.update({
       where: {
         id,
       },
       data: {
-        expiredAt: dto.expiredAt,
         status: 'pending',
-        PTWCordinator: '',
+      },
+    });
+    return await this.db.extend.create({
+      data: {
+        per: id,
+        expiredAt: dto.expiredAt,
       },
     });
   }
 
   async renew(id, dto) {
-    return await this.db.permit.update({
+    await this.db.permit.update({
       where: {
         id,
       },
       data: {
-        endDate: dto.endDate,
         status: 'pending',
-        PTWCordinator: '',
+      },
+    });
+    return await this.db.renew.create({
+      data: {
+        per: id,
+        endDate: dto.expireAt,
       },
     });
   }
 
   async getTest(id) {
     return await this.db.test.findMany({
+      where: {
+        per: id,
+      },
+    });
+  }
+
+  async re(id) {
+    return await this.db.renew.findMany({
+      where: {
+        per: id,
+      },
+    });
+  }
+
+  async ex(id) {
+    return await this.db.extend.findMany({
       where: {
         per: id,
       },

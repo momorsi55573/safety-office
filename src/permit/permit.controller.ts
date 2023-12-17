@@ -227,9 +227,11 @@ export class PermitController {
     @GetUser()
     user: { userId: string; role; company: string },
   ) {
+    const extend = await this.PermitService.ex(id);
+    const renew = await this.PermitService.re(id);
     const test = await this.PermitService.getTest(id);
     const permit = await this.PermitService.getPermit(id);
-    return { user, permit, test };
+    return { user, permit, test, extend, renew };
   }
 
   @UseGuards(JwtGuard)

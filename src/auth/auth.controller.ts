@@ -40,7 +40,7 @@ export class AuthController {
   @UseGuards(JwtGuard, RolesGuard)
   @Roles('Admin')
   @Post('creatUser')
-  signup(
+  async signup(
     @Body() dto: CreateUserDto,
     @Res({ passthrough: true }) res: Response,
   ) {
