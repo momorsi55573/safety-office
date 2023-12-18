@@ -691,7 +691,7 @@ export class PermitService {
     return await this.db.renew.create({
       data: {
         per: id,
-        endDate: dto.expireAt,
+        endDate: dto.endDate,
       },
     });
   }
@@ -743,15 +743,28 @@ export class PermitService {
     const hh = now.getHours();
     const min = now.getMinutes();
     const time = hh + ':' + min;
-
     const today = dd + '-' + mm + '-' + yyyy;
     const permits = await this.db.permit.findMany();
     permits.forEach(async (permit) => {
+      const ex = await this.db.extend.findMany({
+        where: {
+          per: permit.id,
+        },
+      });
+      const re = await this.db.renew.findMany({
+        where: {
+          per: permit.id,
+        },
+      });
       if (
-        (permit.status !== 'expired' && permit.endDate < today) ||
+        (permit.status !== 'expired' &&
+          permit.endDate < today &&
+          re[-1].endDate < today) ||
         (permit.status !== 'expired' &&
           permit.expiredAt < time &&
-          permit.endDate <= today)
+          ex[-1].expiredAt &&
+          permit.endDate <= today &&
+          re[-1].endDate < today)
       ) {
         return await this.db.permit.update({
           where: {
