@@ -740,9 +740,12 @@ export class PermitService {
     const dd = String(now.getDate()).padStart(2, '0');
     const mm = String(now.getMonth() + 1).padStart(2, '0'); //January is 0!
     const yyyy = now.getFullYear();
-    const hh = now.getHours();
+    let hh: any = now.getHours();
+    if (hh < 10) {
+      hh = +String(0) + String(hh);
+    }
     const min = now.getMinutes();
-    const time = hh + ':' + min;
+    const time = String(hh + ':' + min);
     const today = dd + '-' + mm + '-' + yyyy;
     const permits = await this.db.permit.findMany();
     permits.forEach(async (permit) => {
@@ -759,12 +762,24 @@ export class PermitService {
       if (
         (permit.status !== 'expired' &&
           permit.endDate < today &&
-          re[-1].endDate < today) ||
+          re.length === 0) ||
         (permit.status !== 'expired' &&
           permit.expiredAt < time &&
-          ex[-1].expiredAt &&
           permit.endDate <= today &&
-          re[-1].endDate < today)
+          ex.length === 0 &&
+          re.length === 0) ||
+        (permit.status !== 'expired' &&
+          re.length > 0 &&
+          re[re.length - 1].endDate < today) ||
+        (ex.length > 0 &&
+          permit.status !== 'expired' &&
+          ex[ex.length - 1].expiredAt > time &&
+          re.length === 0) ||
+        (ex.length > 0 &&
+          permit.status !== 'expired' &&
+          ex[ex.length - 1].expiredAt < time &&
+          re.length > 0 &&
+          re[re.length - 1].endDate <= today)
       ) {
         return await this.db.permit.update({
           where: {
