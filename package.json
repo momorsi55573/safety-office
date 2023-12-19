@@ -1,4 +1,7 @@
 {
+  "engines": {
+    "node": "v20.7.0"
+  },
   "name": "safety",
   "version": "0.0.1",
   "description": "",

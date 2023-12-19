@@ -43,9 +43,9 @@ export class AuthService {
     }
   }
 
-   creatuser(dto: CreateUserDto) {
+  async creatuser(dto: CreateUserDto) {
     try {
-       this.db.user.create({
+      await this.db.user.create({
         data: {
           userName: dto.userName,
           password: dto.password,
