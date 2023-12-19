@@ -40,9 +40,10 @@ export class PermitController {
   async extend(
     @Param('id') id: string,
     @Body() dto,
+    @GetUser() user,
     @Res({ passthrough: true }) res: Response,
   ) {
-    await this.PermitService.extend(id, dto);
+    await this.PermitService.extend(id, dto, user);
     return res.redirect('../myPermits');
   }
 
@@ -62,9 +63,10 @@ export class PermitController {
   async renew(
     @Param('id') id: string,
     @Body() dto,
+    @GetUser() user,
     @Res({ passthrough: true }) res: Response,
   ) {
-    await this.PermitService.renew(id, dto);
+    await this.PermitService.renew(id, dto, user);
     return res.redirect('../myPermits');
   }
 
@@ -122,14 +124,34 @@ export class PermitController {
   }
 
   @UseGuards(JwtGuard)
+  @Get('excavationWorkPermit')
+  @Render('excavationWorkPermit')
+  excavationWorkPermit() {
+    return;
+  }
+
+  @UseGuards(JwtGuard)
+  @Post('createExcavationWorkPermit')
+  @UseInterceptors(FilesInterceptor('file'))
+  async createExcavationWorkPermit(
+    @Body() dto,
+    @GetUser() user,
+    @UploadedFiles() file,
+    @Res({ passthrough: true }) res: Response,
+  ) {
+    await this.PermitService.createExcavationWorkPermit(dto, user, file);
+    res.redirect('/home');
+  }
+
+  @UseGuards(JwtGuard)
   @Get('myPermits')
   @Render('myPermits')
   async myPermits(@GetUser() user: { userId: string; role; company: string }) {
     await this.PermitService.expire();
-    const allPermits = (await this.PermitService.getAllPermits()).reverse();
     const myPermits = (
       await this.PermitService.getMyPermits(user.userId)
     ).reverse();
+    const allPermits = (await this.PermitService.getAllPermits()).reverse();
     const companyPermits = (
       await this.PermitService.getCompanyPermits(user.company)
     ).reverse();
@@ -255,6 +277,54 @@ export class PermitController {
     @Res({ passthrough: true }) res: Response,
   ) {
     await this.PermitService.reject(id, user);
+    res.redirect('/home');
+  }
+
+  @UseGuards(JwtGuard)
+  @Get('approveEX/:id')
+  async approveEX(
+    @Param('id') id: string,
+    @GetUser()
+    user: { userId: string; role; company: string; userName: string },
+    @Res({ passthrough: true }) res: Response,
+  ) {
+    await this.PermitService.approveEX(id, user);
+    res.redirect('/home');
+  }
+
+  @UseGuards(JwtGuard)
+  @Get('rejectEX/:id')
+  async rejectEX(
+    @Param('id') id: string,
+    @GetUser()
+    user: { userId: string; role; company: string; userName: string },
+    @Res({ passthrough: true }) res: Response,
+  ) {
+    await this.PermitService.rejectEX(id, user);
+    res.redirect('/home');
+  }
+
+  @UseGuards(JwtGuard)
+  @Get('approveRE/:id')
+  async approveRE(
+    @Param('id') id: string,
+    @GetUser()
+    user: { userId: string; role; company: string; userName: string },
+    @Res({ passthrough: true }) res: Response,
+  ) {
+    await this.PermitService.approveRE(id, user);
+    res.redirect('/home');
+  }
+
+  @UseGuards(JwtGuard)
+  @Get('rejectRE/:id')
+  async rejectRE(
+    @Param('id') id: string,
+    @GetUser()
+    user: { userId: string; role; company: string; userName: string },
+    @Res({ passthrough: true }) res: Response,
+  ) {
+    await this.PermitService.rejectRE(id, user);
     res.redirect('/home');
   }
 

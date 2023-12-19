@@ -72,13 +72,15 @@ model Permit {
   electricitySupply String?
   adequateLighting String?
   watchman String?
-  namesOfEnteringEmp String?
   confinedAdditionalPPE String?
   confinedEntryPremited String[]
   power String?
   earthingProvided String?
   voltageDetection String?
   loto String?
+  exLength String?
+  exWidth String?
+  exDepth String?
   constructionRep String?
   subConstructionRep String?
   HSERep String?

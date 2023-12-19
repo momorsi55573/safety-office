@@ -130,7 +130,7 @@ export class PermitService {
     }
   }
 
-  async creatExcavationPermit(dto, user, file) {
+  async createExcavationWorkPermit(dto, user, file) {
     let additionalPPE = dto.additionalPPE;
     let mandatoryPPE = dto.mandatoryPPE;
     let documents = dto.documents;
@@ -427,7 +427,6 @@ export class PermitService {
             desOfConfinedSpace: dto.desOfConfinedSpace,
             voltage: dto.voltage,
             watcherName: dto.watcherName,
-            namesOfEnteringEmp: dto.namesOfEnteringEmp,
             mandatoryPPE,
             additionalPPE,
             confinedSpacePartOfSystem: dto.confinedSpacePartOfSystem,
@@ -469,7 +468,6 @@ export class PermitService {
             desOfConfinedSpace: dto.desOfConfinedSpace,
             voltage: dto.voltage,
             watcherName: dto.watcherName,
-            namesOfEnteringEmp: dto.namesOfEnteringEmp,
             hazardsOfWork,
             measuresTaken,
             mandatoryPPE,
@@ -662,7 +660,7 @@ export class PermitService {
     });
   }
 
-  async extend(id, dto) {
+  async extend(id, dto, user) {
     await this.db.permit.update({
       where: {
         id,
@@ -679,7 +677,7 @@ export class PermitService {
     });
   }
 
-  async renew(id, dto) {
+  async renew(id, dto, user) {
     await this.db.permit.update({
       where: {
         id,
@@ -688,12 +686,23 @@ export class PermitService {
         status: 'pending',
       },
     });
-    return await this.db.renew.create({
-      data: {
-        per: id,
-        endDate: dto.endDate,
-      },
-    });
+    if (user.company !== 'ZTPC') {
+      return await this.db.renew.create({
+        data: {
+          per: id,
+          endDate: dto.endDate,
+          subConstructionRep: await user.userName,
+        },
+      });
+    } else {
+      return await this.db.renew.create({
+        data: {
+          per: id,
+          endDate: dto.endDate,
+          constructionRep: await user.userName,
+        },
+      });
+    }
   }
 
   async getTest(id) {
@@ -748,6 +757,7 @@ export class PermitService {
     const time = String(hh + ':' + min);
     const today = dd + '-' + mm + '-' + yyyy;
     const permits = await this.db.permit.findMany();
+
     permits.forEach(async (permit) => {
       const ex = await this.db.extend.findMany({
         where: {
@@ -759,6 +769,7 @@ export class PermitService {
           per: permit.id,
         },
       });
+
       if (
         (permit.status !== 'expired' &&
           permit.endDate < today &&
@@ -773,13 +784,16 @@ export class PermitService {
           re[re.length - 1].endDate < today) ||
         (ex.length > 0 &&
           permit.status !== 'expired' &&
-          ex[ex.length - 1].expiredAt > time &&
+          ex[ex.length - 1].expiredAt < time &&
           re.length === 0) ||
         (ex.length > 0 &&
           permit.status !== 'expired' &&
           ex[ex.length - 1].expiredAt < time &&
           re.length > 0 &&
-          re[re.length - 1].endDate <= today)
+          re[re.length - 1].endDate <= today) ||
+        (ex.length === 0 &&
+          permit.status !== 'expired' &&
+          permit.expiredAt < time)
       ) {
         return await this.db.permit.update({
           where: {
@@ -876,6 +890,230 @@ export class PermitService {
         data: {
           PTWCordinator: `rejected by ${user.userName}`,
           status: 'rejected',
+        },
+      });
+    }
+  }
+
+  async approveEX(id, user) {
+    if (user.company === 'ZTPC' && user.role === 'Officer') {
+      return await this.db.extend.update({
+        where: {
+          id,
+        },
+        data: {
+          HSERep: `approved by ${user.userName}`,
+        },
+      });
+    }
+    if (user.company !== 'ZTPC' && user.role === 'Officer') {
+      return await this.db.extend.update({
+        where: {
+          id,
+        },
+        data: {
+          subHSERep: `approved by ${user.userName}`,
+        },
+      });
+    }
+    if (user.company === 'ZTPC' && user.role === 'ENG') {
+      return await this.db.extend.update({
+        where: {
+          id,
+        },
+        data: {
+          constructionRep: `approved by ${user.userName}`,
+        },
+      });
+    }
+    if (user.role === 'Moderator') {
+      const extend = await this.db.extend.findUnique({
+        where: {
+          id,
+        },
+      });
+      await this.db.permit.update({
+        where: {
+          id: extend.per,
+        },
+        data: {
+          status: 'active',
+        },
+      });
+      return await this.db.extend.update({
+        where: {
+          id,
+        },
+        data: {
+          PTWCordinator: `approved by ${user.userName}`,
+        },
+      });
+    }
+  }
+
+  async rejectEX(id, user) {
+    if (user.company === 'ZTPC' && user.role === 'Officer') {
+      return await this.db.extend.update({
+        where: {
+          id,
+        },
+        data: {
+          HSERep: `rejected by ${user.userName}`,
+        },
+      });
+    }
+    if (user.company !== 'ZTPC' && user.role === 'Officer') {
+      return await this.db.extend.update({
+        where: {
+          id,
+        },
+        data: {
+          subHSERep: `rejected by ${user.userName}`,
+        },
+      });
+    }
+    if (user.company === 'ZTPC' && user.role === 'ENG') {
+      return await this.db.extend.update({
+        where: {
+          id,
+        },
+        data: {
+          constructionRep: `rejected by ${user.userName}`,
+        },
+      });
+    }
+    if (user.role === 'Moderator') {
+      const extend = await this.db.extend.findUnique({
+        where: {
+          id,
+        },
+      });
+      await this.db.permit.update({
+        where: {
+          id: extend.per,
+        },
+        data: {
+          status: 'rejected',
+        },
+      });
+      return await this.db.extend.update({
+        where: {
+          id,
+        },
+        data: {
+          PTWCordinator: `rejected by ${user.userName}`,
+        },
+      });
+    }
+  }
+
+  async approveRE(id, user) {
+    if (user.company === 'ZTPC' && user.role === 'Officer') {
+      return await this.db.renew.update({
+        where: {
+          id,
+        },
+        data: {
+          HSERep: `approved by ${user.userName}`,
+        },
+      });
+    }
+    if (user.company !== 'ZTPC' && user.role === 'Officer') {
+      return await this.db.renew.update({
+        where: {
+          id,
+        },
+        data: {
+          subHSERep: `approved by ${user.userName}`,
+        },
+      });
+    }
+    if (user.company === 'ZTPC' && user.role === 'ENG') {
+      return await this.db.renew.update({
+        where: {
+          id,
+        },
+        data: {
+          constructionRep: `approved by ${user.userName}`,
+        },
+      });
+    }
+    if (user.role === 'Moderator') {
+      const renew = await this.db.renew.findUnique({
+        where: {
+          id,
+        },
+      });
+      await this.db.permit.update({
+        where: {
+          id: renew.per,
+        },
+        data: {
+          status: 'active',
+        },
+      });
+      return await this.db.renew.update({
+        where: {
+          id,
+        },
+        data: {
+          PTWCordinator: `approved by ${user.userName}`,
+        },
+      });
+    }
+  }
+
+  async rejectRE(id, user) {
+    if (user.company === 'ZTPC' && user.role === 'Officer') {
+      return await this.db.renew.update({
+        where: {
+          id,
+        },
+        data: {
+          HSERep: `rejected by ${user.userName}`,
+        },
+      });
+    }
+    if (user.company !== 'ZTPC' && user.role === 'Officer') {
+      return await this.db.renew.update({
+        where: {
+          id,
+        },
+        data: {
+          subHSERep: `rejected by ${user.userName}`,
+        },
+      });
+    }
+    if (user.company === 'ZTPC' && user.role === 'ENG') {
+      return await this.db.renew.update({
+        where: {
+          id,
+        },
+        data: {
+          constructionRep: `rejected by ${user.userName}`,
+        },
+      });
+    }
+    if (user.role === 'Moderator') {
+      const renew = await this.db.renew.findUnique({
+        where: {
+          id,
+        },
+      });
+      await this.db.permit.update({
+        where: {
+          id: renew.per,
+        },
+        data: {
+          status: 'rejected',
+        },
+      });
+      return await this.db.renew.update({
+        where: {
+          id,
+        },
+        data: {
+          PTWCordinator: `rejected by ${user.userName}`,
         },
       });
     }

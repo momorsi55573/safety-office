@@ -175,7 +175,98 @@
                               <label for="exampleInputEmail1"> status</label>
                               <textarea class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" required><%= permit.status %></textarea>
                           </div>
-      
+                          <% for(var i=0; i < extend.length; i++) { %>
+                             
+                            <div class="row border border-primary mb-2">
+                              <hr>
+                              <div class="form-group">
+                                <label for="exampleInputEmail1">expired At</label>
+                                <input class="form-control" type="text" aria-describedby="emailHelp" placeholder="expiredAt"  value="<%= extend[i].expiredAt %>" name="expiredAt" required>
+                              </div>
+                              <% if( permit.issuedTo === 'ZTPC'){ %>
+                                <div class="form-group ml-2 mr-2">
+                                    <label for="exampleInputEmail1">construction Rep</label>
+                                    <textarea class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" required><%= extend[i].constructionRep %></textarea>
+                                </div>
+                                <div class="form-group ml-2 mr-2">
+                                    <label for="exampleInputEmail1">HSE Rep</label>
+                                    <textarea class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" required><%= extend[i].HSERep %></textarea>
+                                </div>
+                                <div class="form-group ml-2 mr-2">
+                                    <label for="exampleInputEmail1">PTW Cordinator</label>
+                                    <textarea class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" required><%= extend[i].PTWCordinator %></textarea>
+                                </div>
+                                <% } else{ %>  
+                                    <div class="form-group ml-2 mr-2">
+                                        <label for="exampleInputEmail1">construction Rep</label>
+                                        <textarea class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" required><%= extend[i].constructionRep %></textarea>
+                                    </div>
+                                    <div class="form-group ml-2 mr-2">
+                                        <label for="exampleInputEmail1">HSE Rep</label>
+                                        <textarea class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" required><%= extend[i].HSERep %></textarea>
+                                    </div>
+                                    <div class="form-group ml-2 mr-2">
+                                        <label for="exampleInputEmail1">PTW Cordinator</label>
+                                        <textarea class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" required><%= extend[i].PTWCordinator %></textarea>
+                                    </div>
+                                    <div class="form-group ml-2 mr-2">
+                                        <label for="exampleInputEmail1">sub Construction Rep</label>
+                                        <textarea class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" required><%= extend[i].subConstructionRep %></textarea>
+                                    </div>
+                                    <div class="form-group ml-2 mr-2">
+                                        <label for="exampleInputEmail1">sub HSE Rep</label>
+                                        <textarea class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" required><%= extend[i].subHSERep %></textarea>
+                                    </div>
+                                                                <% } %>
+                                                                <a href="/permit/approveEX/<%=  extend[i].id %>" type="button" class="btn btn-primary mr-2">approve</a>
+                                                                <a href="/permit/rejectEX/<%=  extend[i].id %>" type="button" class="btn btn-primary mr-2">reject</a>
+                        </div>               
+                              <% } %>
+                              <% for(var i=0; i < renew.length; i++) { %>
+                                <div class="row border border-primary mb-2">
+                                  <div class="form-group">
+                                    <label for="exampleInputEmail1">end date</label>
+                                    <input class="form-control" type="text" aria-describedby="emailHelp" placeholder="expiredAt"  value="<%= renew[i].endDate %>" name="expiredAt" required>
+                                  </div>
+                                  <% if( permit.issuedTo === 'ZTPC'){ %>
+                                    <div class="form-group ml-2 mr-2">
+                                        <label for="exampleInputEmail1">construction Rep</label>
+                                        <textarea class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" required><%= renew[i].constructionRep %></textarea>
+                                    </div>
+                                    <div class="form-group ml-2 mr-2">
+                                        <label for="exampleInputEmail1">HSE Rep</label>
+                                        <textarea class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" required><%= renew[i].HSERep %></textarea>
+                                    </div>
+                                    <div class="form-group ml-2 mr-2">
+                                        <label for="exampleInputEmail1">PTW Cordinator</label>
+                                        <textarea class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" required><%= renew[i].PTWCordinator %></textarea>
+                                    </div>
+                                    <% } else{ %>  
+                                        <div class="form-group ml-2 mr-2">
+                                            <label for="exampleInputEmail1">construction Rep</label>
+                                            <textarea class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" required><%= renew[i].constructionRep %></textarea>
+                                        </div>
+                                        <div class="form-group ml-2 mr-2">
+                                            <label for="exampleInputEmail1">HSE Rep</label>
+                                            <textarea class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" required><%= renew[i].HSERep %></textarea>
+                                        </div>
+                                        <div class="form-group ml-2 mr-2">
+                                            <label for="exampleInputEmail1">PTW Cordinator</label>
+                                            <textarea class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" required><%= renew[i].PTWCordinator %></textarea>
+                                        </div>
+                                        <div class="form-group ml-2 mr-2">
+                                            <label for="exampleInputEmail1">sub Construction Rep</label>
+                                            <textarea class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" required><%= renew[i].subConstructionRep %></textarea>
+                                        </div>
+                                        <div class="form-group ml-2 mr-2">
+                                            <label for="exampleInputEmail1">sub HSE Rep</label>
+                                            <textarea class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" required><%= renew[i].subHSERep %></textarea>
+                                        </div>
+                                                                    <% } %>
+                                                                    <a href="/permit/approveRE/<%=  renew[i].id %>" type="button" class="btn btn-primary mr-2">approve</a>
+                                                                    <a href="/permit/rejectRE/<%=  renew[i].id %>" type="button" class="btn btn-primary mr-2">reject</a>
+                            </div>               
+                                  <% } %>
                           <% if( permit.issuedTo === 'ZTPC'){ %>
                               <div class="form-group mr-5">
                                   <label for="exampleInputEmail1">construction Rep</label>
@@ -366,10 +457,6 @@
                     <label for="exampleInputEmail1">description of confined space</label>
                     <textarea class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter description of confined space" name="desOfConfinedSpace" required><%= permit.desOfConfinedSpace %></textarea>
                   </div>
-                  <div class="form-group">
-                    <label for="exampleInputEmail1">names of the entering employes</label>
-                    <textarea class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter names of the entering employes" name="namesOfEnteringEmp" required><%= permit.namesOfEnteringEmp %></textarea>
-                  </div>
                 <div class="form-group">
                   <label for="exampleInputEmail1">additional Safty</label>
                   <textarea class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"><%= permit.additionalSafty %></textarea>
@@ -529,6 +616,8 @@
                                             <textarea class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" required><%= extend[i].subHSERep %></textarea>
                                         </div>
                                                                     <% } %>
+                                                                    <a href="/permit/approveEX/<%=  extend[i].id %>" type="button" class="btn btn-primary mr-2">approve</a>
+                                                                    <a href="/permit/rejectEX/<%=  extend[i].id %>" type="button" class="btn btn-primary mr-2">reject</a>
                             </div>               
                                   <% } %>
                                   <% for(var i=0; i < renew.length; i++) { %>
@@ -572,6 +661,8 @@
                                                 <textarea class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" required><%= renew[i].subHSERep %></textarea>
                                             </div>
                                                                         <% } %>
+                                                                        <a href="/permit/approveRE/<%=  renew[i].id %>" type="button" class="btn btn-primary mr-2">approve</a>
+                                                                        <a href="/permit/rejectRE/<%=  renew[i].id %>" type="button" class="btn btn-primary mr-2">reject</a>
                                 </div>               
                                       <% } %>
                               
@@ -1031,7 +1122,98 @@
                                     <label for="exampleInputEmail1"> status</label>
                                     <textarea class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" required><%= permit.status %></textarea>
                                 </div>
-            
+                                <% for(var i=0; i < extend.length; i++) { %>
+                             
+                                  <div class="row border border-primary mb-2">
+                                    <hr>
+                                    <div class="form-group">
+                                      <label for="exampleInputEmail1">expired At</label>
+                                      <input class="form-control" type="text" aria-describedby="emailHelp" placeholder="expiredAt"  value="<%= extend[i].expiredAt %>" name="expiredAt" required>
+                                    </div>
+                                    <% if( permit.issuedTo === 'ZTPC'){ %>
+                                      <div class="form-group ml-2 mr-2">
+                                          <label for="exampleInputEmail1">construction Rep</label>
+                                          <textarea class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" required><%= extend[i].constructionRep %></textarea>
+                                      </div>
+                                      <div class="form-group ml-2 mr-2">
+                                          <label for="exampleInputEmail1">HSE Rep</label>
+                                          <textarea class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" required><%= extend[i].HSERep %></textarea>
+                                      </div>
+                                      <div class="form-group ml-2 mr-2">
+                                          <label for="exampleInputEmail1">PTW Cordinator</label>
+                                          <textarea class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" required><%= extend[i].PTWCordinator %></textarea>
+                                      </div>
+                                      <% } else{ %>  
+                                          <div class="form-group ml-2 mr-2">
+                                              <label for="exampleInputEmail1">construction Rep</label>
+                                              <textarea class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" required><%= extend[i].constructionRep %></textarea>
+                                          </div>
+                                          <div class="form-group ml-2 mr-2">
+                                              <label for="exampleInputEmail1">HSE Rep</label>
+                                              <textarea class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" required><%= extend[i].HSERep %></textarea>
+                                          </div>
+                                          <div class="form-group ml-2 mr-2">
+                                              <label for="exampleInputEmail1">PTW Cordinator</label>
+                                              <textarea class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" required><%= extend[i].PTWCordinator %></textarea>
+                                          </div>
+                                          <div class="form-group ml-2 mr-2">
+                                              <label for="exampleInputEmail1">sub Construction Rep</label>
+                                              <textarea class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" required><%= extend[i].subConstructionRep %></textarea>
+                                          </div>
+                                          <div class="form-group ml-2 mr-2">
+                                              <label for="exampleInputEmail1">sub HSE Rep</label>
+                                              <textarea class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" required><%= extend[i].subHSERep %></textarea>
+                                          </div>
+                                                                      <% } %>
+                                                                      <a href="/permit/approveEX/<%=  extend[i].id %>" type="button" class="btn btn-primary mr-2">approve</a>
+                                                                      <a href="/permit/rejectEX/<%=  extend[i].id %>" type="button" class="btn btn-primary mr-2">reject</a>
+                              </div>               
+                                    <% } %>
+                                    <% for(var i=0; i < renew.length; i++) { %>
+                                      <div class="row border border-primary mb-2">
+                                        <div class="form-group">
+                                          <label for="exampleInputEmail1">end date</label>
+                                          <input class="form-control" type="text" aria-describedby="emailHelp" placeholder="expiredAt"  value="<%= renew[i].endDate %>" name="expiredAt" required>
+                                        </div>
+                                        <% if( permit.issuedTo === 'ZTPC'){ %>
+                                          <div class="form-group ml-2 mr-2">
+                                              <label for="exampleInputEmail1">construction Rep</label>
+                                              <textarea class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" required><%= renew[i].constructionRep %></textarea>
+                                          </div>
+                                          <div class="form-group ml-2 mr-2">
+                                              <label for="exampleInputEmail1">HSE Rep</label>
+                                              <textarea class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" required><%= renew[i].HSERep %></textarea>
+                                          </div>
+                                          <div class="form-group ml-2 mr-2">
+                                              <label for="exampleInputEmail1">PTW Cordinator</label>
+                                              <textarea class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" required><%= renew[i].PTWCordinator %></textarea>
+                                          </div>
+                                          <% } else{ %>  
+                                              <div class="form-group ml-2 mr-2">
+                                                  <label for="exampleInputEmail1">construction Rep</label>
+                                                  <textarea class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" required><%= renew[i].constructionRep %></textarea>
+                                              </div>
+                                              <div class="form-group ml-2 mr-2">
+                                                  <label for="exampleInputEmail1">HSE Rep</label>
+                                                  <textarea class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" required><%= renew[i].HSERep %></textarea>
+                                              </div>
+                                              <div class="form-group ml-2 mr-2">
+                                                  <label for="exampleInputEmail1">PTW Cordinator</label>
+                                                  <textarea class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" required><%= renew[i].PTWCordinator %></textarea>
+                                              </div>
+                                              <div class="form-group ml-2 mr-2">
+                                                  <label for="exampleInputEmail1">sub Construction Rep</label>
+                                                  <textarea class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" required><%= renew[i].subConstructionRep %></textarea>
+                                              </div>
+                                              <div class="form-group ml-2 mr-2">
+                                                  <label for="exampleInputEmail1">sub HSE Rep</label>
+                                                  <textarea class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" required><%= renew[i].subHSERep %></textarea>
+                                              </div>
+                                                                          <% } %>
+                                                                          <a href="/permit/approveRE/<%=  renew[i].id %>" type="button" class="btn btn-primary mr-2">approve</a>
+                                                                          <a href="/permit/rejectRE/<%=  renew[i].id %>" type="button" class="btn btn-primary mr-2">reject</a>
+                                  </div>               
+                                        <% } %>
                                 <% if( permit.issuedTo === 'ZTPC'){ %>
                                     <div class="form-group mr-5">
                                         <label for="exampleInputEmail1">construction Rep</label>
@@ -1127,7 +1309,7 @@
                                                           <form action="/permit/extend/<%= permit.id %>" method="post">
                                                               <div class="form-group">
                                                                   <label for="exampleInputEmail1">expired At</label>
-                                                                  <input class="form-control" type="text" id="extendExpiredAt" aria-describedby="emailHelp" placeholder="expiredAt" name="extendExpiredAt" required>
+                                                                  <input class="form-control" type="text" id="extendExpiredAt" aria-describedby="emailHelp" placeholder="expiredAt" name="expiredAt" required>
                                                                 </div>
                                                                 <div class="modal-footer">
                                                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
