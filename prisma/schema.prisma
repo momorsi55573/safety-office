@@ -81,6 +81,14 @@ model Permit {
   exLength String?
   exWidth String?
   exDepth String?
+  protectionAgainstCollapse String?
+  spolNotIn String?
+  exAccess String?
+  guardrial String?
+  exEntry String?
+  exJHA String?
+  exBarricaded String?
+  exLicense String?  
   constructionRep String?
   subConstructionRep String?
   HSERep String?

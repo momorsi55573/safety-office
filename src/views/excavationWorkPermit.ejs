@@ -14,7 +14,7 @@
 </head>
 <body>
   <div class="container">
-    <form action="/permit/creatColdWorkPermit" enctype="multipart/form-data" method="post">
+    <form action="/permit/createExcavationWorkPermit" enctype="multipart/form-data" method="post">
       <div class="form-group">
         <label for="exampleInputEmail1">Start Date</label>
         <input class="form-control" type="text" id="startDate" aria-describedby="emailHelp" placeholder="start Date" name="startDate" required>
@@ -153,7 +153,7 @@
                 <option value="Complete">Complete</option>
             </select>
         </div>
-        <input type="hidden" value="cold work permit" name="permitType">
+        <input type="hidden" value="excavation work permit" name="permitType">
         <div class="pt-5 text-center pb-5">
         <h5>all nominated precautions must be Completed before this permit is issued</h5>
         <h5>the following safety precautions must be taken for all excavation deeper than 1.2 m</h5>
@@ -162,28 +162,28 @@
  
 <div class="pt-2 mr-5">
 <label for="exampleInputEmail1">protection against collapse of sides by benching, sloping, shuttering, shoring, lagging or piling</label>
-  <select name="workPlaceInspected" required>
+  <select name="protectionAgainstCollapse" required>
     <option value=true> yes </option>
     <option value=false> no </option>
 </select>
 </div>
 <div class="pt-2 mr-5">
   <label for="exampleInputEmail1">materials or spol not be within 1.5 m od edge of excavation</label>
-    <select name="workPlaceInspected" required>
+    <select name="spolNotIn" required>
       <option value=true> yes </option>
       <option value=false> no </option>
   </select>
   </div>
   <div class="pt-2 mr-5">
     <label for="exampleInputEmail1">safe access and egress in and out of excavation every 8 m</label>
-      <select name="workPlaceInspected" required>
+      <select name="exAccess" required>
         <option value=true> yes </option>
         <option value=false> no </option>
     </select>
     </div>
     <div class="pt-2 mr-5">
       <label for="exampleInputEmail1">guardrial (top rail, midtrail and toe board) around the sidesof the excavation</label>
-        <select name="workPlaceInspected" required>
+        <select name="guardrial" required>
           <option value=true> yes </option>
           <option value=false> no </option>
       </select>
@@ -191,28 +191,28 @@
       <div class="pt-2 mr-5">
         <label for="exampleInputEmail1">entry into all excavations regardless of depth, must be assessed as to whether it is a confined space. <br> excavations 1.5 m deep require a confined space entry permit
         </label>
-          <select name="workPlaceInspected" required>
+          <select name="exEntry" required>
             <option value=true> yes </option>
             <option value=false> no </option>
         </select>
         </div>
         <div class="pt-2 mr-5">
-          <label for="exampleInputEmail1">has the site been inspected prior to commencing work?</label>
-            <select name="workPlaceInspected" required>
+          <label for="exampleInputEmail1">job hazard analysis required?</label>
+            <select name="exJHA" required>
               <option value=true> yes </option>
               <option value=false> no </option>
           </select>
           </div>
           <div class="pt-2 mr-5">
-            <label for="exampleInputEmail1">has the site been inspected prior to commencing work?</label>
-              <select name="workPlaceInspected" required>
+            <label for="exampleInputEmail1">barricaded by traffic flash lights</label>
+              <select name="exBarricaded" required>
                 <option value=true> yes </option>
                 <option value=false> no </option>
             </select>
             </div>
             <div class="pt-2 mr-5">
-              <label for="exampleInputEmail1">has the site been inspected prior to commencing work?</label>
-                <select name="workPlaceInspected" required>
+              <label for="exampleInputEmail1">operator license and its validity to be checked</label>
+                <select name="exLicense" required>
                   <option value=true> yes </option>
                   <option value=false> no </option>
               </select>

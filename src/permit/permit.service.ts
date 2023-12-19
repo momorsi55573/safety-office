@@ -178,19 +178,17 @@ export class PermitService {
             description: dto.description,
             hazardsOfWork,
             measuresTaken,
-            workPlaceInspected: dto.workPlaceInspected,
-            equipmentsInspected: dto.equipmentsInspected,
-            riskAssessmentDiscussed: dto.riskAssessmentDiscussed,
-            PPEGood: dto.PPEGood,
-            workSteps: dto.workSteps,
-            hardBreakat: dto.hardBreakat,
-            laborsGood: dto.laborsGood,
-            dangerMeeting: dto.dangerMeeting,
-            fireFightersExist: dto.fireFightersExist,
-            noConflict: dto.noConflict,
-            isolated: dto.isolated,
-            dealtWithPoisioned: dto.dealtWithPoisioned,
-            markers: dto.markers,
+            exLength: dto.exLength,
+            exWidth: dto.exWidth,
+            exDepth: dto.exDepth,
+            protectionAgainstCollapse: dto.protectionAgainstCollapse,
+            spolNotIn: dto.spolNotIn,
+            exAccess: dto.exAccess,
+            guardrial: dto.guardrial,
+            exEntry: dto.exEntry,
+            exJHA: dto.exJHA,
+            exBarricaded: dto.exBarricaded,
+            exLicense: dto.exLicense,
             mandatoryPPE,
             additionalPPE,
             additionalSafty: dto.additionalSafty,
@@ -219,19 +217,17 @@ export class PermitService {
             description: dto.description,
             hazardsOfWork,
             measuresTaken,
-            workPlaceInspected: dto.workPlaceInspected,
-            equipmentsInspected: dto.equipmentsInspected,
-            riskAssessmentDiscussed: dto.riskAssessmentDiscussed,
-            PPEGood: dto.PPEGood,
-            workSteps: dto.workSteps,
-            hardBreakat: dto.hardBreakat,
-            laborsGood: dto.laborsGood,
-            dangerMeeting: dto.dangerMeeting,
-            fireFightersExist: dto.fireFightersExist,
-            noConflict: dto.noConflict,
-            isolated: dto.isolated,
-            dealtWithPoisioned: dto.dealtWithPoisioned,
-            markers: dto.markers,
+            exLength: dto.exLength,
+            exWidth: dto.exWidth,
+            exDepth: dto.exDepth,
+            protectionAgainstCollapse: dto.protectionAgainstCollapse,
+            spolNotIn: dto.spolNotIn,
+            exAccess: dto.exAccess,
+            guardrial: dto.guardrial,
+            exEntry: dto.exEntry,
+            exJHA: dto.exJHA,
+            exBarricaded: dto.exBarricaded,
+            exLicense: dto.exLicense,
             mandatoryPPE,
             additionalPPE,
             additionalSafty: dto.additionalSafty,
@@ -498,11 +494,14 @@ export class PermitService {
   }
 
   async getAllPermits() {
-    return await this.db.permit.findMany();
+    return await this.db.permit.findMany({
+      take: 50,
+    });
   }
 
   async getMyPermits(issuedBy) {
     return await this.db.permit.findMany({
+      take: 50,
       where: {
         issuedBy,
       },
@@ -510,6 +509,7 @@ export class PermitService {
   }
   async getCompanyPermits(issuedTo) {
     return await this.db.permit.findMany({
+      take: 50,
       where: {
         issuedTo,
       },
@@ -517,6 +517,7 @@ export class PermitService {
   }
   async searchAllPermits(startDate) {
     return await this.db.permit.findMany({
+      take: 50,
       where: {
         startDate,
       },
@@ -524,6 +525,7 @@ export class PermitService {
   }
   async searchMyPermits(issuedBy, startDate) {
     return await this.db.permit.findMany({
+      take: 50,
       where: {
         startDate,
         issuedBy,
@@ -533,6 +535,7 @@ export class PermitService {
 
   async searchCompanyPermits(issuedTo, startDate) {
     return await this.db.permit.findMany({
+      take: 50,
       where: {
         startDate,
         issuedTo,
@@ -542,6 +545,7 @@ export class PermitService {
 
   async pendingAllPermits() {
     return await this.db.permit.findMany({
+      take: 50,
       where: {
         status: 'pending',
       },
@@ -549,6 +553,7 @@ export class PermitService {
   }
   async pendingMyPermits(issuedBy) {
     return await this.db.permit.findMany({
+      take: 50,
       where: {
         status: 'pending',
         issuedBy,
@@ -558,6 +563,7 @@ export class PermitService {
 
   async pendingCompanyPermits(issuedTo) {
     return await this.db.permit.findMany({
+      take: 50,
       where: {
         status: 'pending',
         issuedTo,
@@ -567,6 +573,7 @@ export class PermitService {
 
   async activeAllPermits() {
     return await this.db.permit.findMany({
+      take: 50,
       where: {
         status: 'active',
       },
@@ -574,6 +581,7 @@ export class PermitService {
   }
   async activeMyPermits(issuedBy) {
     return await this.db.permit.findMany({
+      take: 50,
       where: {
         status: 'active',
         issuedBy,
@@ -583,6 +591,7 @@ export class PermitService {
 
   async activeCompanyPermits(issuedTo) {
     return await this.db.permit.findMany({
+      take: 50,
       where: {
         status: 'active',
         issuedTo,
@@ -592,6 +601,7 @@ export class PermitService {
 
   async stoppedAllPermits() {
     return await this.db.permit.findMany({
+      take: 50,
       where: {
         status: 'stopped',
       },
@@ -599,6 +609,7 @@ export class PermitService {
   }
   async stoppedMyPermits(issuedBy) {
     return await this.db.permit.findMany({
+      take: 50,
       where: {
         status: 'stopped',
         issuedBy,
@@ -608,6 +619,7 @@ export class PermitService {
 
   async stoppedCompanyPermits(issuedTo) {
     return await this.db.permit.findMany({
+      take: 50,
       where: {
         status: 'stopped',
         issuedTo,
@@ -617,6 +629,7 @@ export class PermitService {
 
   async expiredAllPermits() {
     return await this.db.permit.findMany({
+      take: 50,
       where: {
         status: 'expired',
       },
@@ -624,6 +637,7 @@ export class PermitService {
   }
   async expiredMyPermits(issuedBy) {
     return await this.db.permit.findMany({
+      take: 50,
       where: {
         status: 'expired',
         issuedBy,
@@ -633,6 +647,7 @@ export class PermitService {
 
   async expiredCompanyPermits(issuedTo) {
     return await this.db.permit.findMany({
+      take: 50,
       where: {
         status: 'expired',
         issuedTo,
@@ -669,12 +684,23 @@ export class PermitService {
         status: 'pending',
       },
     });
-    return await this.db.extend.create({
-      data: {
-        per: id,
-        expiredAt: dto.expiredAt,
-      },
-    });
+    if (user.company !== 'ZTPC') {
+      return await this.db.extend.create({
+        data: {
+          per: id,
+          expiredAt: dto.expiredAt,
+          subConstructionRep: await user.userName,
+        },
+      });
+    } else {
+      return await this.db.extend.create({
+        data: {
+          per: id,
+          expiredAt: dto.expiredAt,
+          constructionRep: await user.userName,
+        },
+      });
+    }
   }
 
   async renew(id, dto, user) {
@@ -707,6 +733,7 @@ export class PermitService {
 
   async getTest(id) {
     return await this.db.test.findMany({
+      take: 50,
       where: {
         per: id,
       },
