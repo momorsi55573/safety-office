@@ -10,7 +10,6 @@ import { Response } from 'express';
     JwtModule.register({
       secret: process.env.JWT_SECRET,
       global: true,
-      signOptions: { expiresIn: '99d' },
     }),
   ],
   controllers: [AuthController],

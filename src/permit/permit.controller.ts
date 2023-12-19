@@ -10,6 +10,7 @@ import {
   Render,
   Res,
   UploadedFiles,
+  UseFilters,
   UseGuards,
   UseInterceptors,
 } from '@nestjs/common';
@@ -17,12 +18,14 @@ import { FilesInterceptor } from '@nestjs/platform-express';
 import { GetUser } from 'src/utils/decorators';
 import { JwtGuard } from 'src/utils/guards';
 import { Response } from 'express';
+import { ViewAuthFilter } from 'src/utils/decorators/filter.decorator';
 
 @Controller('permit')
 export class PermitController {
   constructor(private PermitService: PermitService) {}
   @UseGuards(JwtGuard)
   @Get('createPermit')
+  @UseFilters(ViewAuthFilter)
   @Render('createPermit')
   createPermit() {
     return;
@@ -30,6 +33,7 @@ export class PermitController {
 
   @UseGuards(JwtGuard)
   @Get('coldWorkPermit')
+  @UseFilters(ViewAuthFilter)
   @Render('coldWorkPermit')
   coldWorkPermit() {
     return;
@@ -71,40 +75,42 @@ export class PermitController {
   }
 
   @UseGuards(JwtGuard)
-  @Post('creatColdWorkPermit')
+  @Post('createColdWorkPermit')
   @UseInterceptors(FilesInterceptor('file'))
-  async creatColdWorkPermit(
+  async createColdWorkPermit(
     @Body() dto,
     @GetUser() user,
     @UploadedFiles() file,
     @Res({ passthrough: true }) res: Response,
   ) {
-    await this.PermitService.creatColdWorkPermit(dto, user, file);
+    await this.PermitService.createColdWorkPermit(dto, user, file);
     res.redirect('/home');
   }
 
   @UseGuards(JwtGuard)
   @Get('confinedSpaceEntryPermit')
+  @UseFilters(ViewAuthFilter)
   @Render('confinedSpaceEntryPermit')
   confinedSpaceEntryPermit() {
     return;
   }
 
   @UseGuards(JwtGuard)
-  @Post('creatConfinedSpaceEntryPermit')
+  @Post('createConfinedSpaceEntryPermit')
   @UseInterceptors(FilesInterceptor('file'))
-  async creatConfinedSpaceEntryPermit(
+  async createConfinedSpaceEntryPermit(
     @Body() dto,
     @GetUser() user,
     @UploadedFiles() file,
     @Res({ passthrough: true }) res: Response,
   ) {
-    await this.PermitService.creatConfinedSpaceEntryPermit(dto, user, file);
+    await this.PermitService.createConfinedSpaceEntryPermit(dto, user, file);
     res.redirect('/home');
   }
 
   @UseGuards(JwtGuard)
   @Get('electerecalWorkPermit')
+  @UseFilters(ViewAuthFilter)
   @Render('electerecalWorkPermit')
   electerecalWorkPermit() {
     return;
@@ -125,6 +131,7 @@ export class PermitController {
 
   @UseGuards(JwtGuard)
   @Get('excavationWorkPermit')
+  @UseFilters(ViewAuthFilter)
   @Render('excavationWorkPermit')
   excavationWorkPermit() {
     return;
@@ -144,7 +151,29 @@ export class PermitController {
   }
 
   @UseGuards(JwtGuard)
+  @Get('hotWorkPermit')
+  @UseFilters(ViewAuthFilter)
+  @Render('hotWorkPermit')
+  hotWorkPermit() {
+    return;
+  }
+
+  @UseGuards(JwtGuard)
+  @Post('createHotWorkPermit')
+  @UseInterceptors(FilesInterceptor('file'))
+  async createHotWorkPermit(
+    @Body() dto,
+    @GetUser() user,
+    @UploadedFiles() file,
+    @Res({ passthrough: true }) res: Response,
+  ) {
+    await this.PermitService.createHotWorkPermit(dto, user, file);
+    res.redirect('/home');
+  }
+
+  @UseGuards(JwtGuard)
   @Get('myPermits')
+  @UseFilters(ViewAuthFilter)
   @Render('myPermits')
   async myPermits(@GetUser() user: { userId: string; role; company: string }) {
     await this.PermitService.expire();
@@ -160,6 +189,7 @@ export class PermitController {
 
   @UseGuards(JwtGuard)
   @Get('searchPermits')
+  @UseFilters(ViewAuthFilter)
   @Render('searchPermits')
   async searchPermits(
     @Query('term') date: string,
@@ -179,6 +209,7 @@ export class PermitController {
 
   @UseGuards(JwtGuard)
   @Get('pendingPermits')
+  @UseFilters(ViewAuthFilter)
   @Render('pendingPermits')
   async pendingPermits(
     @GetUser() user: { userId: string; role; company: string },
@@ -195,6 +226,7 @@ export class PermitController {
 
   @UseGuards(JwtGuard)
   @Get('expiredPermits')
+  @UseFilters(ViewAuthFilter)
   @Render('expiredPermits')
   async expiredPermits(
     @GetUser() user: { userId: string; role; company: string },
@@ -211,6 +243,7 @@ export class PermitController {
 
   @UseGuards(JwtGuard)
   @Get('activePermits')
+  @UseFilters(ViewAuthFilter)
   @Render('activePermits')
   async activePermits(
     @GetUser() user: { userId: string; role; company: string },
@@ -227,6 +260,7 @@ export class PermitController {
 
   @UseGuards(JwtGuard)
   @Get('stoppedPermits')
+  @UseFilters(ViewAuthFilter)
   @Render('stoppedPermits')
   async stoppedPermits(
     @GetUser() user: { userId: string; role; company: string },
@@ -243,6 +277,7 @@ export class PermitController {
 
   @UseGuards(JwtGuard)
   @Get('thisPermit/:id')
+  @UseFilters(ViewAuthFilter)
   @Render('thisPermit')
   async thisPermit(
     @Param('id') id: string,
