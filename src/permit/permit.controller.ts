@@ -193,6 +193,27 @@ export class PermitController {
   }
 
   @UseGuards(JwtGuard)
+  @Get('workAtHightPermit')
+  @UseFilters(ViewAuthFilter)
+  @Render('workAtHightPermit')
+  workAtHightPermit() {
+    return;
+  }
+
+  @UseGuards(JwtGuard)
+  @Post('createWorkAtHightPermit')
+  @UseInterceptors(FilesInterceptor('file'))
+  async createWorkAtHightPermit(
+    @Body() dto,
+    @GetUser() user,
+    @UploadedFiles() file,
+    @Res({ passthrough: true }) res: Response,
+  ) {
+    await this.PermitService.createWorkAtHightPermit(dto, user, file);
+    res.redirect('/home');
+  }
+
+  @UseGuards(JwtGuard)
   @Get('myPermits')
   @UseFilters(ViewAuthFilter)
   @Render('myPermits')

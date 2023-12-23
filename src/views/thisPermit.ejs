@@ -311,14 +311,138 @@
                           <div class="row container">
                               <a href="/permit/approve/<%= permit.id %>" type="button" class="btn btn-primary mr-2">approve</a>
                               <a href="/permit/reject/<%= permit.id %>" type="button" class="btn btn-primary mr-2">reject</a>
-                              <a href="/permit/extend" type="button" class="btn btn-primary mr-2">extend</a>                            
-                                  <a href="/permit/renew" type="button" class="btn btn-primary mr-2">renew</a>
+                       
+                              <%if (permit.status === 'expired') { %>
+                                <button type="button" class="btn btn-primary mr-2" data-toggle="modal" data-target="#exampleModal">
+                                    extend
+                                </button>
+                                
+                                <!-- Modal -->
+                                <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                  <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                      <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel">request extention</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                          <span aria-hidden="true">&times;</span>
+                                        </button>
+                                      </div>
+                                      <div class="modal-body">
+                                          <form action="/permit/extend/<%= permit.id %>" method="post">
+                                              <div class="form-group">
+                                                  <label for="exampleInputEmail1">expired At</label>
+                                                  <input class="form-control" type="text" id="extendExpiredAt" aria-describedby="emailHelp" placeholder="expiredAt" name="expiredAt" required>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                    <button type="submit" value="Submit" class="btn btn-primary">request extention</button>
+                                                  </div>
+                                              </form>
+                                      </div>
+                                    
+                                    </div>
+                                  </div>
+                                </div> 
+
+                                <button type="button" class="btn btn-primary mr-2" data-toggle="modal" data-target="#renew">
+                                    renew
+                                </button>
+                                
+                                <!-- Modal -->
+                                <div class="modal fade" id="renew" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                  <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                      <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel">renew</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                          <span aria-hidden="true">&times;</span>
+                                        </button>
+                                      </div>
+                                      <div class="modal-body">
+                                          <form action="/permit/renew/<%= permit.id %>" method="post">
+                                              <div class="form-group">
+                                                  <label for="exampleInputEmail1">end date</label>
+                                                  <input class="form-control" type="text" id="endDate" aria-describedby="emailHelp" placeholder="endDate" name="endDate" required>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                    <button type="submit" value="Submit" class="btn btn-primary">renew</button>
+                                                  </div>
+                                              </form>
+                                      </div>
+                                    
+                                    </div>
+                                  </div>
+                                </div>                           
+                                <% } %>    
                             </div>  
                           <% } %>
                           <%if (user.role === 'ENG' && user.company !== 'ZTPC') { %>
                               <div class="row container">
-                                  <a href="/permit/extend" type="button" class="btn btn-primary mr-2">extend</a>                            
-                                      <a href="/permit/renew" type="button" class="btn btn-primary mr-2">renew</a>
+                                 
+                                <%if (permit.status === 'expired') { %>
+                                  <button type="button" class="btn btn-primary mr-2" data-toggle="modal" data-target="#exampleModal">
+                                      extend
+                                  </button>
+                                  
+                                  <!-- Modal -->
+                                  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog" role="document">
+                                      <div class="modal-content">
+                                        <div class="modal-header">
+                                          <h5 class="modal-title" id="exampleModalLabel">request extention</h5>
+                                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                          </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <form action="/permit/extend/<%= permit.id %>" method="post">
+                                                <div class="form-group">
+                                                    <label for="exampleInputEmail1">expired At</label>
+                                                    <input class="form-control" type="text" id="extendExpiredAt" aria-describedby="emailHelp" placeholder="expiredAt" name="expiredAt" required>
+                                                  </div>
+                                                  <div class="modal-footer">
+                                                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                      <button type="submit" value="Submit" class="btn btn-primary">request extention</button>
+                                                    </div>
+                                                </form>
+                                        </div>
+                                      
+                                      </div>
+                                    </div>
+                                  </div> 
+
+                                  <button type="button" class="btn btn-primary mr-2" data-toggle="modal" data-target="#renew">
+                                      renew
+                                  </button>
+                                  
+                                  <!-- Modal -->
+                                  <div class="modal fade" id="renew" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog" role="document">
+                                      <div class="modal-content">
+                                        <div class="modal-header">
+                                          <h5 class="modal-title" id="exampleModalLabel">renew</h5>
+                                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                          </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <form action="/permit/renew/<%= permit.id %>" method="post">
+                                                <div class="form-group">
+                                                    <label for="exampleInputEmail1">end date</label>
+                                                    <input class="form-control" type="text" id="endDate" aria-describedby="emailHelp" placeholder="endDate" name="endDate" required>
+                                                  </div>
+                                                  <div class="modal-footer">
+                                                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                      <button type="submit" value="Submit" class="btn btn-primary">renew</button>
+                                                    </div>
+                                                </form>
+                                        </div>
+                                      
+                                      </div>
+                                    </div>
+                                  </div>                           
+                                  <% } %>    
                                 </div>  
                               <% } %>
                           <%if (user.role === 'Officer') { %>
@@ -746,14 +870,138 @@
                               <% } %>
                               <%if (user.role === 'ENG' && user.company !== 'ZTPC') { %>
                                   <div class="row container">
-                                      <a href="/permit/extend" type="button" class="btn btn-primary mr-2">extend</a>                            
-                                          <a href="/permit/renew" type="button" class="btn btn-primary mr-2">renew</a>
+                                      
+                                    <%if (permit.status === 'expired') { %>
+                                      <button type="button" class="btn btn-primary mr-2" data-toggle="modal" data-target="#exampleModal">
+                                          extend
+                                      </button>
+                                      
+                                      <!-- Modal -->
+                                      <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog" role="document">
+                                          <div class="modal-content">
+                                            <div class="modal-header">
+                                              <h5 class="modal-title" id="exampleModalLabel">request extention</h5>
+                                              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                              </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <form action="/permit/extend/<%= permit.id %>" method="post">
+                                                    <div class="form-group">
+                                                        <label for="exampleInputEmail1">expired At</label>
+                                                        <input class="form-control" type="text" id="extendExpiredAt" aria-describedby="emailHelp" placeholder="expiredAt" name="expiredAt" required>
+                                                      </div>
+                                                      <div class="modal-footer">
+                                                          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                          <button type="submit" value="Submit" class="btn btn-primary">request extention</button>
+                                                        </div>
+                                                    </form>
+                                            </div>
+                                          
+                                          </div>
+                                        </div>
+                                      </div> 
+
+                                      <button type="button" class="btn btn-primary mr-2" data-toggle="modal" data-target="#renew">
+                                          renew
+                                      </button>
+                                      
+                                      <!-- Modal -->
+                                      <div class="modal fade" id="renew" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog" role="document">
+                                          <div class="modal-content">
+                                            <div class="modal-header">
+                                              <h5 class="modal-title" id="exampleModalLabel">renew</h5>
+                                              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                              </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <form action="/permit/renew/<%= permit.id %>" method="post">
+                                                    <div class="form-group">
+                                                        <label for="exampleInputEmail1">end date</label>
+                                                        <input class="form-control" type="text" id="endDate" aria-describedby="emailHelp" placeholder="endDate" name="endDate" required>
+                                                      </div>
+                                                      <div class="modal-footer">
+                                                          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                          <button type="submit" value="Submit" class="btn btn-primary">renew</button>
+                                                        </div>
+                                                    </form>
+                                            </div>
+                                          
+                                          </div>
+                                        </div>
+                                      </div>                           
+                                      <% } %>    
                                     </div>  
                                   <% } %>
                               <%if (user.role === 'Officer') { %>
                                   <div class="row container">
-                                      <a href="/permit/approve/<%= permit.id %>" type="button" class="btn btn-primary mr-2">approve</a>
-                                      <a href="/permit/reject/<%= permit.id %>" type="button" class="btn btn-primary mr-2">reject</a>
+                                   
+                                    <%if (permit.status === 'expired') { %>
+                                      <button type="button" class="btn btn-primary mr-2" data-toggle="modal" data-target="#exampleModal">
+                                          extend
+                                      </button>
+                                      
+                                      <!-- Modal -->
+                                      <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog" role="document">
+                                          <div class="modal-content">
+                                            <div class="modal-header">
+                                              <h5 class="modal-title" id="exampleModalLabel">request extention</h5>
+                                              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                              </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <form action="/permit/extend/<%= permit.id %>" method="post">
+                                                    <div class="form-group">
+                                                        <label for="exampleInputEmail1">expired At</label>
+                                                        <input class="form-control" type="text" id="extendExpiredAt" aria-describedby="emailHelp" placeholder="expiredAt" name="expiredAt" required>
+                                                      </div>
+                                                      <div class="modal-footer">
+                                                          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                          <button type="submit" value="Submit" class="btn btn-primary">request extention</button>
+                                                        </div>
+                                                    </form>
+                                            </div>
+                                          
+                                          </div>
+                                        </div>
+                                      </div> 
+
+                                      <button type="button" class="btn btn-primary mr-2" data-toggle="modal" data-target="#renew">
+                                          renew
+                                      </button>
+                                      
+                                      <!-- Modal -->
+                                      <div class="modal fade" id="renew" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog" role="document">
+                                          <div class="modal-content">
+                                            <div class="modal-header">
+                                              <h5 class="modal-title" id="exampleModalLabel">renew</h5>
+                                              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                              </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <form action="/permit/renew/<%= permit.id %>" method="post">
+                                                    <div class="form-group">
+                                                        <label for="exampleInputEmail1">end date</label>
+                                                        <input class="form-control" type="text" id="endDate" aria-describedby="emailHelp" placeholder="endDate" name="endDate" required>
+                                                      </div>
+                                                      <div class="modal-footer">
+                                                          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                          <button type="submit" value="Submit" class="btn btn-primary">renew</button>
+                                                        </div>
+                                                    </form>
+                                            </div>
+                                          
+                                          </div>
+                                        </div>
+                                      </div>                           
+                                      <% } %>    
                                       <button type="button" class="btn btn-primary mr-2" data-toggle="modal" data-target="#test">
                                         test
                                     </button>
@@ -1258,14 +1506,138 @@
                                 <div class="row container">
                                     <a href="/permit/approve/<%= permit.id %>" type="button" class="btn btn-primary mr-2">approve</a>
                                     <a href="/permit/reject/<%= permit.id %>" type="button" class="btn btn-primary mr-2">reject</a>
-                                    <a href="/permit/extend" type="button" class="btn btn-primary mr-2">extend</a>                            
-                                        <a href="/permit/renew" type="button" class="btn btn-primary mr-2">renew</a>
+                                 
+                                    <%if (permit.status === 'expired') { %>
+                                      <button type="button" class="btn btn-primary mr-2" data-toggle="modal" data-target="#exampleModal">
+                                          extend
+                                      </button>
+                                      
+                                      <!-- Modal -->
+                                      <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog" role="document">
+                                          <div class="modal-content">
+                                            <div class="modal-header">
+                                              <h5 class="modal-title" id="exampleModalLabel">request extention</h5>
+                                              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                              </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <form action="/permit/extend/<%= permit.id %>" method="post">
+                                                    <div class="form-group">
+                                                        <label for="exampleInputEmail1">expired At</label>
+                                                        <input class="form-control" type="text" id="extendExpiredAt" aria-describedby="emailHelp" placeholder="expiredAt" name="expiredAt" required>
+                                                      </div>
+                                                      <div class="modal-footer">
+                                                          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                          <button type="submit" value="Submit" class="btn btn-primary">request extention</button>
+                                                        </div>
+                                                    </form>
+                                            </div>
+                                          
+                                          </div>
+                                        </div>
+                                      </div> 
+
+                                      <button type="button" class="btn btn-primary mr-2" data-toggle="modal" data-target="#renew">
+                                          renew
+                                      </button>
+                                      
+                                      <!-- Modal -->
+                                      <div class="modal fade" id="renew" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog" role="document">
+                                          <div class="modal-content">
+                                            <div class="modal-header">
+                                              <h5 class="modal-title" id="exampleModalLabel">renew</h5>
+                                              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                              </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <form action="/permit/renew/<%= permit.id %>" method="post">
+                                                    <div class="form-group">
+                                                        <label for="exampleInputEmail1">end date</label>
+                                                        <input class="form-control" type="text" id="endDate" aria-describedby="emailHelp" placeholder="endDate" name="endDate" required>
+                                                      </div>
+                                                      <div class="modal-footer">
+                                                          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                          <button type="submit" value="Submit" class="btn btn-primary">renew</button>
+                                                        </div>
+                                                    </form>
+                                            </div>
+                                          
+                                          </div>
+                                        </div>
+                                      </div>                           
+                                      <% } %>    
                                   </div>  
                                 <% } %>
                                 <%if (user.role === 'ENG' && user.company !== 'ZTPC') { %>
                                     <div class="row container">
-                                        <a href="/permit/extend" type="button" class="btn btn-primary mr-2">extend</a>                            
-                                            <a href="/permit/renew" type="button" class="btn btn-primary mr-2">renew</a>
+                                       
+                                      <%if (permit.status === 'expired') { %>
+                                        <button type="button" class="btn btn-primary mr-2" data-toggle="modal" data-target="#exampleModal">
+                                            extend
+                                        </button>
+                                        
+                                        <!-- Modal -->
+                                        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                          <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                              <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalLabel">request extention</h5>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                  <span aria-hidden="true">&times;</span>
+                                                </button>
+                                              </div>
+                                              <div class="modal-body">
+                                                  <form action="/permit/extend/<%= permit.id %>" method="post">
+                                                      <div class="form-group">
+                                                          <label for="exampleInputEmail1">expired At</label>
+                                                          <input class="form-control" type="text" id="extendExpiredAt" aria-describedby="emailHelp" placeholder="expiredAt" name="expiredAt" required>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                            <button type="submit" value="Submit" class="btn btn-primary">request extention</button>
+                                                          </div>
+                                                      </form>
+                                              </div>
+                                            
+                                            </div>
+                                          </div>
+                                        </div> 
+
+                                        <button type="button" class="btn btn-primary mr-2" data-toggle="modal" data-target="#renew">
+                                            renew
+                                        </button>
+                                        
+                                        <!-- Modal -->
+                                        <div class="modal fade" id="renew" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                          <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                              <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalLabel">renew</h5>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                  <span aria-hidden="true">&times;</span>
+                                                </button>
+                                              </div>
+                                              <div class="modal-body">
+                                                  <form action="/permit/renew/<%= permit.id %>" method="post">
+                                                      <div class="form-group">
+                                                          <label for="exampleInputEmail1">end date</label>
+                                                          <input class="form-control" type="text" id="endDate" aria-describedby="emailHelp" placeholder="endDate" name="endDate" required>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                            <button type="submit" value="Submit" class="btn btn-primary">renew</button>
+                                                          </div>
+                                                      </form>
+                                              </div>
+                                            
+                                            </div>
+                                          </div>
+                                        </div>                           
+                                        <% } %>    
                                       </div>  
                                     <% } %>
                                 <%if (user.role === 'Officer') { %>
@@ -1633,14 +2005,138 @@
                                   <div class="row container">
                                       <a href="/permit/approve/<%= permit.id %>" type="button" class="btn btn-primary mr-2">approve</a>
                                       <a href="/permit/reject/<%= permit.id %>" type="button" class="btn btn-primary mr-2">reject</a>
-                                      <a href="/permit/extend" type="button" class="btn btn-primary mr-2">extend</a>                            
-                                          <a href="/permit/renew" type="button" class="btn btn-primary mr-2">renew</a>
+                                     
+                                      <%if (permit.status === 'expired') { %>
+                                        <button type="button" class="btn btn-primary mr-2" data-toggle="modal" data-target="#exampleModal">
+                                            extend
+                                        </button>
+                                        
+                                        <!-- Modal -->
+                                        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                          <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                              <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalLabel">request extention</h5>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                  <span aria-hidden="true">&times;</span>
+                                                </button>
+                                              </div>
+                                              <div class="modal-body">
+                                                  <form action="/permit/extend/<%= permit.id %>" method="post">
+                                                      <div class="form-group">
+                                                          <label for="exampleInputEmail1">expired At</label>
+                                                          <input class="form-control" type="text" id="extendExpiredAt" aria-describedby="emailHelp" placeholder="expiredAt" name="expiredAt" required>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                            <button type="submit" value="Submit" class="btn btn-primary">request extention</button>
+                                                          </div>
+                                                      </form>
+                                              </div>
+                                            
+                                            </div>
+                                          </div>
+                                        </div> 
+
+                                        <button type="button" class="btn btn-primary mr-2" data-toggle="modal" data-target="#renew">
+                                            renew
+                                        </button>
+                                        
+                                        <!-- Modal -->
+                                        <div class="modal fade" id="renew" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                          <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                              <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalLabel">renew</h5>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                  <span aria-hidden="true">&times;</span>
+                                                </button>
+                                              </div>
+                                              <div class="modal-body">
+                                                  <form action="/permit/renew/<%= permit.id %>" method="post">
+                                                      <div class="form-group">
+                                                          <label for="exampleInputEmail1">end date</label>
+                                                          <input class="form-control" type="text" id="endDate" aria-describedby="emailHelp" placeholder="endDate" name="endDate" required>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                            <button type="submit" value="Submit" class="btn btn-primary">renew</button>
+                                                          </div>
+                                                      </form>
+                                              </div>
+                                            
+                                            </div>
+                                          </div>
+                                        </div>                           
+                                        <% } %>    
                                     </div>  
                                   <% } %>
                                   <%if (user.role === 'ENG' && user.company !== 'ZTPC') { %>
                                       <div class="row container">
-                                          <a href="/permit/extend" type="button" class="btn btn-primary mr-2">extend</a>                            
-                                              <a href="/permit/renew" type="button" class="btn btn-primary mr-2">renew</a>
+                                       
+                                        <%if (permit.status === 'expired') { %>
+                                          <button type="button" class="btn btn-primary mr-2" data-toggle="modal" data-target="#exampleModal">
+                                              extend
+                                          </button>
+                                          
+                                          <!-- Modal -->
+                                          <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog" role="document">
+                                              <div class="modal-content">
+                                                <div class="modal-header">
+                                                  <h5 class="modal-title" id="exampleModalLabel">request extention</h5>
+                                                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                  </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <form action="/permit/extend/<%= permit.id %>" method="post">
+                                                        <div class="form-group">
+                                                            <label for="exampleInputEmail1">expired At</label>
+                                                            <input class="form-control" type="text" id="extendExpiredAt" aria-describedby="emailHelp" placeholder="expiredAt" name="expiredAt" required>
+                                                          </div>
+                                                          <div class="modal-footer">
+                                                              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                              <button type="submit" value="Submit" class="btn btn-primary">request extention</button>
+                                                            </div>
+                                                        </form>
+                                                </div>
+                                              
+                                              </div>
+                                            </div>
+                                          </div> 
+
+                                          <button type="button" class="btn btn-primary mr-2" data-toggle="modal" data-target="#renew">
+                                              renew
+                                          </button>
+                                          
+                                          <!-- Modal -->
+                                          <div class="modal fade" id="renew" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog" role="document">
+                                              <div class="modal-content">
+                                                <div class="modal-header">
+                                                  <h5 class="modal-title" id="exampleModalLabel">renew</h5>
+                                                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                  </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <form action="/permit/renew/<%= permit.id %>" method="post">
+                                                        <div class="form-group">
+                                                            <label for="exampleInputEmail1">end date</label>
+                                                            <input class="form-control" type="text" id="endDate" aria-describedby="emailHelp" placeholder="endDate" name="endDate" required>
+                                                          </div>
+                                                          <div class="modal-footer">
+                                                              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                              <button type="submit" value="Submit" class="btn btn-primary">renew</button>
+                                                            </div>
+                                                        </form>
+                                                </div>
+                                              
+                                              </div>
+                                            </div>
+                                          </div>                           
+                                          <% } %>    
                                         </div>  
                                       <% } %>
                                   <%if (user.role === 'Officer') { %>
@@ -2040,14 +2536,138 @@
                                     <div class="row container">
                                         <a href="/permit/approve/<%= permit.id %>" type="button" class="btn btn-primary mr-2">approve</a>
                                         <a href="/permit/reject/<%= permit.id %>" type="button" class="btn btn-primary mr-2">reject</a>
-                                        <a href="/permit/extend" type="button" class="btn btn-primary mr-2">extend</a>                            
-                                            <a href="/permit/renew" type="button" class="btn btn-primary mr-2">renew</a>
+                                
+                                        <%if (permit.status === 'expired') { %>
+                                          <button type="button" class="btn btn-primary mr-2" data-toggle="modal" data-target="#exampleModal">
+                                              extend
+                                          </button>
+                                          
+                                          <!-- Modal -->
+                                          <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog" role="document">
+                                              <div class="modal-content">
+                                                <div class="modal-header">
+                                                  <h5 class="modal-title" id="exampleModalLabel">request extention</h5>
+                                                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                  </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <form action="/permit/extend/<%= permit.id %>" method="post">
+                                                        <div class="form-group">
+                                                            <label for="exampleInputEmail1">expired At</label>
+                                                            <input class="form-control" type="text" id="extendExpiredAt" aria-describedby="emailHelp" placeholder="expiredAt" name="expiredAt" required>
+                                                          </div>
+                                                          <div class="modal-footer">
+                                                              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                              <button type="submit" value="Submit" class="btn btn-primary">request extention</button>
+                                                            </div>
+                                                        </form>
+                                                </div>
+                                              
+                                              </div>
+                                            </div>
+                                          </div> 
+
+                                          <button type="button" class="btn btn-primary mr-2" data-toggle="modal" data-target="#renew">
+                                              renew
+                                          </button>
+                                          
+                                          <!-- Modal -->
+                                          <div class="modal fade" id="renew" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog" role="document">
+                                              <div class="modal-content">
+                                                <div class="modal-header">
+                                                  <h5 class="modal-title" id="exampleModalLabel">renew</h5>
+                                                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                  </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <form action="/permit/renew/<%= permit.id %>" method="post">
+                                                        <div class="form-group">
+                                                            <label for="exampleInputEmail1">end date</label>
+                                                            <input class="form-control" type="text" id="endDate" aria-describedby="emailHelp" placeholder="endDate" name="endDate" required>
+                                                          </div>
+                                                          <div class="modal-footer">
+                                                              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                              <button type="submit" value="Submit" class="btn btn-primary">renew</button>
+                                                            </div>
+                                                        </form>
+                                                </div>
+                                              
+                                              </div>
+                                            </div>
+                                          </div>                           
+                                          <% } %>    
                                       </div>  
                                     <% } %>
                                     <%if (user.role === 'ENG' && user.company !== 'ZTPC') { %>
                                         <div class="row container">
-                                            <a href="/permit/extend" type="button" class="btn btn-primary mr-2">extend</a>                            
-                                                <a href="/permit/renew" type="button" class="btn btn-primary mr-2">renew</a>
+                                        
+                                          <%if (permit.status === 'expired') { %>
+                                            <button type="button" class="btn btn-primary mr-2" data-toggle="modal" data-target="#exampleModal">
+                                                extend
+                                            </button>
+                                            
+                                            <!-- Modal -->
+                                            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                              <div class="modal-dialog" role="document">
+                                                <div class="modal-content">
+                                                  <div class="modal-header">
+                                                    <h5 class="modal-title" id="exampleModalLabel">request extention</h5>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                      <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                  </div>
+                                                  <div class="modal-body">
+                                                      <form action="/permit/extend/<%= permit.id %>" method="post">
+                                                          <div class="form-group">
+                                                              <label for="exampleInputEmail1">expired At</label>
+                                                              <input class="form-control" type="text" id="extendExpiredAt" aria-describedby="emailHelp" placeholder="expiredAt" name="expiredAt" required>
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                                <button type="submit" value="Submit" class="btn btn-primary">request extention</button>
+                                                              </div>
+                                                          </form>
+                                                  </div>
+                                                
+                                                </div>
+                                              </div>
+                                            </div> 
+  
+                                            <button type="button" class="btn btn-primary mr-2" data-toggle="modal" data-target="#renew">
+                                                renew
+                                            </button>
+                                            
+                                            <!-- Modal -->
+                                            <div class="modal fade" id="renew" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                              <div class="modal-dialog" role="document">
+                                                <div class="modal-content">
+                                                  <div class="modal-header">
+                                                    <h5 class="modal-title" id="exampleModalLabel">renew</h5>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                      <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                  </div>
+                                                  <div class="modal-body">
+                                                      <form action="/permit/renew/<%= permit.id %>" method="post">
+                                                          <div class="form-group">
+                                                              <label for="exampleInputEmail1">end date</label>
+                                                              <input class="form-control" type="text" id="endDate" aria-describedby="emailHelp" placeholder="endDate" name="endDate" required>
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                                <button type="submit" value="Submit" class="btn btn-primary">renew</button>
+                                                              </div>
+                                                          </form>
+                                                  </div>
+                                                
+                                                </div>
+                                              </div>
+                                            </div>                           
+                                            <% } %>    
                                           </div>  
                                         <% } %>
                                     <%if (user.role === 'Officer') { %>
@@ -2173,6 +2793,10 @@
                             <input class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" value="<%= permit.numOfWorkers %>" name="numOfWorkers" required>
                           </div>
                           <div class="form-group">
+                            <label for="exampleInputEmail1">description of work</label>
+                            <textarea class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" required><%= permit.description %></textarea>
+                          </div>
+                          <div class="form-group">
                             <label for="exampleInputEmail1">crane Type</label>
                             <input class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" value="<%= permit.craneType %>" name="numOfWorkers" required>
                           </div>
@@ -2249,33 +2873,41 @@
                   
                   
                                       <div class="form-group mr-5">
-                                          <label for="exampleInputEmail1">has the site been inspected prior to commencing work?</label>
-                                          <textarea class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" required><%= permit.workPlaceInspected %></textarea>
+                                          <label for="exampleInputEmail1">was a pre-lift operation meeting held?</label>
+                                          <textarea class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" required><%= permit.preLift %></textarea>
                                       </div>
                                       <div class="form-group mr-5">
-                                          <label for="exampleInputEmail1">have the equip/tools been checked and in an acceotable condition?</label>
-                                          <textarea class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" required><%= permit.equipmentsInspected %></textarea>
+                                          <label for="exampleInputEmail1">is the yearly crane/hoist inspection current? is it documented?</label>
+                                          <textarea class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" required><%= permit.craneInspection %></textarea>
                                       </div>
                                       <div class="form-group mr-5">
-                                          <label for="exampleInputEmail1">have potential hazard been discussed and assessed?</label>
-                                          <textarea class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" required><%= permit.riskAssessmentDiscussed %></textarea>
+                                          <label for="exampleInputEmail1">has the daily visual inspection been Completed?</label>
+                                          <textarea class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" required><%= permit.dailyVisual %></textarea>
                                       </div>
                                       <div class="form-group mr-5">
-                                          <label for="exampleInputEmail1">is all personal protective equipment (ppe) in place and operable?</label>
-                                          <textarea class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" required><%= permit.PPEGood %></textarea>
+                                          <label for="exampleInputEmail1">are safety devices installed and tested? (overload, limit switch, main wire drum sensor)</label>
+                                          <textarea class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" required><%= permit.safetyDevices %></textarea>
                                       </div>
                                       <div class="form-group mr-5">
-                                          <label for="exampleInputEmail1">approved work method statment provided?</label>
-                                          <textarea class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" required><%= permit.workSteps %></textarea>
+                                          <label for="exampleInputEmail1">is the operational wind speed reading comply with the cran's manual wind speed limit?</label>
+                                          <textarea class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" required><%= permit.windSpeed %></textarea>
                                       </div>
                                       <div class="form-group mr-5">
-                                          <label for="exampleInputEmail1">work area barrcaded?</label>
-                                          <textarea class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" required><%= permit.hardBreakat %></textarea>
+                                          <label for="exampleInputEmail1">have precautions been taken to keep other personal out of the area?</label>
+                                          <textarea class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" required><%= permit.precautionsOut %></textarea>
                                       </div>
                                       <div class="form-group mr-5">
-                                          <label for="exampleInputEmail1">are qualified, trained and authorized people attending the job?</label>
-                                          <textarea class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" required><%= permit.laborsGood %></textarea>
+                                          <label for="exampleInputEmail1">has the rigging tools been inspected?</label>
+                                          <textarea class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" required><%= permit.riggingTools %></textarea>
                                       </div>
+                                      <div class="form-group mr-5">
+                                        <label for="exampleInputEmail1">is the rigging attached to the load at the proper angel?</label>
+                                        <textarea class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" required><%= permit.properAngel %></textarea>
+                                    </div>
+                                    <div class="form-group mr-5">
+                                      <label for="exampleInputEmail1">is the load to be lifted stable?</label>
+                                      <textarea class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" required><%= permit.loadStable %></textarea>
+                                  </div>
                                       <div class="form-group mr-5">
                                           <label for="exampleInputEmail1"> status</label>
                                           <textarea class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" required><%= permit.status %></textarea>
@@ -2416,14 +3048,138 @@
                                       <div class="row container">
                                           <a href="/permit/approve/<%= permit.id %>" type="button" class="btn btn-primary mr-2">approve</a>
                                           <a href="/permit/reject/<%= permit.id %>" type="button" class="btn btn-primary mr-2">reject</a>
-                                          <a href="/permit/extend" type="button" class="btn btn-primary mr-2">extend</a>                            
-                                              <a href="/permit/renew" type="button" class="btn btn-primary mr-2">renew</a>
+                                        
+                                          <%if (permit.status === 'expired') { %>
+                                            <button type="button" class="btn btn-primary mr-2" data-toggle="modal" data-target="#exampleModal">
+                                                extend
+                                            </button>
+                                            
+                                            <!-- Modal -->
+                                            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                              <div class="modal-dialog" role="document">
+                                                <div class="modal-content">
+                                                  <div class="modal-header">
+                                                    <h5 class="modal-title" id="exampleModalLabel">request extention</h5>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                      <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                  </div>
+                                                  <div class="modal-body">
+                                                      <form action="/permit/extend/<%= permit.id %>" method="post">
+                                                          <div class="form-group">
+                                                              <label for="exampleInputEmail1">expired At</label>
+                                                              <input class="form-control" type="text" id="extendExpiredAt" aria-describedby="emailHelp" placeholder="expiredAt" name="expiredAt" required>
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                                <button type="submit" value="Submit" class="btn btn-primary">request extention</button>
+                                                              </div>
+                                                          </form>
+                                                  </div>
+                                                
+                                                </div>
+                                              </div>
+                                            </div> 
+  
+                                            <button type="button" class="btn btn-primary mr-2" data-toggle="modal" data-target="#renew">
+                                                renew
+                                            </button>
+                                            
+                                            <!-- Modal -->
+                                            <div class="modal fade" id="renew" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                              <div class="modal-dialog" role="document">
+                                                <div class="modal-content">
+                                                  <div class="modal-header">
+                                                    <h5 class="modal-title" id="exampleModalLabel">renew</h5>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                      <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                  </div>
+                                                  <div class="modal-body">
+                                                      <form action="/permit/renew/<%= permit.id %>" method="post">
+                                                          <div class="form-group">
+                                                              <label for="exampleInputEmail1">end date</label>
+                                                              <input class="form-control" type="text" id="endDate" aria-describedby="emailHelp" placeholder="endDate" name="endDate" required>
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                                <button type="submit" value="Submit" class="btn btn-primary">renew</button>
+                                                              </div>
+                                                          </form>
+                                                  </div>
+                                                
+                                                </div>
+                                              </div>
+                                            </div>                           
+                                            <% } %>    
                                         </div>  
                                       <% } %>
                                       <%if (user.role === 'ENG' && user.company !== 'ZTPC') { %>
                                           <div class="row container">
-                                              <a href="/permit/extend" type="button" class="btn btn-primary mr-2">extend</a>                            
-                                                  <a href="/permit/renew" type="button" class="btn btn-primary mr-2">renew</a>
+                                            
+                                            <%if (permit.status === 'expired') { %>
+                                              <button type="button" class="btn btn-primary mr-2" data-toggle="modal" data-target="#exampleModal">
+                                                  extend
+                                              </button>
+                                              
+                                              <!-- Modal -->
+                                              <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog" role="document">
+                                                  <div class="modal-content">
+                                                    <div class="modal-header">
+                                                      <h5 class="modal-title" id="exampleModalLabel">request extention</h5>
+                                                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                      </button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <form action="/permit/extend/<%= permit.id %>" method="post">
+                                                            <div class="form-group">
+                                                                <label for="exampleInputEmail1">expired At</label>
+                                                                <input class="form-control" type="text" id="extendExpiredAt" aria-describedby="emailHelp" placeholder="expiredAt" name="expiredAt" required>
+                                                              </div>
+                                                              <div class="modal-footer">
+                                                                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                                  <button type="submit" value="Submit" class="btn btn-primary">request extention</button>
+                                                                </div>
+                                                            </form>
+                                                    </div>
+                                                  
+                                                  </div>
+                                                </div>
+                                              </div> 
+    
+                                              <button type="button" class="btn btn-primary mr-2" data-toggle="modal" data-target="#renew">
+                                                  renew
+                                              </button>
+                                              
+                                              <!-- Modal -->
+                                              <div class="modal fade" id="renew" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog" role="document">
+                                                  <div class="modal-content">
+                                                    <div class="modal-header">
+                                                      <h5 class="modal-title" id="exampleModalLabel">renew</h5>
+                                                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                      </button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <form action="/permit/renew/<%= permit.id %>" method="post">
+                                                            <div class="form-group">
+                                                                <label for="exampleInputEmail1">end date</label>
+                                                                <input class="form-control" type="text" id="endDate" aria-describedby="emailHelp" placeholder="endDate" name="endDate" required>
+                                                              </div>
+                                                              <div class="modal-footer">
+                                                                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                                  <button type="submit" value="Submit" class="btn btn-primary">renew</button>
+                                                                </div>
+                                                            </form>
+                                                    </div>
+                                                  
+                                                  </div>
+                                                </div>
+                                              </div>                           
+                                              <% } %>    
                                             </div>  
                                           <% } %>
                                       <%if (user.role === 'Officer') { %>
