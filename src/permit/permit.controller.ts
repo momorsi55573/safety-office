@@ -172,6 +172,27 @@ export class PermitController {
   }
 
   @UseGuards(JwtGuard)
+  @Get('liftingOperationPermit')
+  @UseFilters(ViewAuthFilter)
+  @Render('liftingOperationPermit')
+  liftingOperationPermit() {
+    return;
+  }
+
+  @UseGuards(JwtGuard)
+  @Post('createLiftingOperationPermit')
+  @UseInterceptors(FilesInterceptor('file'))
+  async createLiftingOperationPermit(
+    @Body() dto,
+    @GetUser() user,
+    @UploadedFiles() file,
+    @Res({ passthrough: true }) res: Response,
+  ) {
+    await this.PermitService.createLiftingOperationPermit(dto, user, file);
+    res.redirect('/home');
+  }
+
+  @UseGuards(JwtGuard)
   @Get('myPermits')
   @UseFilters(ViewAuthFilter)
   @Render('myPermits')

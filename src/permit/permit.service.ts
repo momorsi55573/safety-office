@@ -1,4 +1,4 @@
-import { Injectable, Render } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { UploadApiResponse, UploadApiErrorResponse, v2 } from 'cloudinary';
 import { DbService } from 'src/db/db.service';
 import toStream = require('buffer-to-stream');
@@ -495,7 +495,7 @@ export class PermitService {
 
   async createHotWorkPermit(dto, user, file) {
     let additionalPPE = dto.additionalPPE;
-    let siteCondition = dto.siteCondition;
+    let typeOfWork = dto.typeOfWork;
     let mandatoryPPE = dto.mandatoryPPE;
     let documents = dto.documents;
     let hazardsOfWork = dto.hazardsOfWork;
@@ -509,8 +509,8 @@ export class PermitService {
     if (typeof additionalPPE === 'string') {
       additionalPPE = [additionalPPE];
     }
-    if (typeof siteCondition === 'string') {
-      siteCondition = [siteCondition];
+    if (typeof typeOfWork === 'string') {
+      typeOfWork = [typeOfWork];
     }
     if (typeof mandatoryPPE === 'string') {
       mandatoryPPE = [mandatoryPPE];
@@ -541,7 +541,7 @@ export class PermitService {
             permitType: dto.permitType,
             issuedTo: dto.issuedTo,
             location: dto.location,
-            equipments: dto.equipments,
+            fireWatcher: dto.fireWatcher,
             description: dto.description,
             hazardsOfWork,
             measuresTaken,
@@ -549,18 +549,22 @@ export class PermitService {
             equipmentsInspected: dto.equipmentsInspected,
             riskAssessmentDiscussed: dto.riskAssessmentDiscussed,
             PPEGood: dto.PPEGood,
-            workSteps: dto.workSteps,
             hardBreakat: dto.hardBreakat,
             laborsGood: dto.laborsGood,
             dangerMeeting: dto.dangerMeeting,
-            fireFightersExist: dto.fireFightersExist,
-            noConflict: dto.noConflict,
+            elecIsolated: dto.elecIsolated,
+            hotMV: dto.hotMV,
+            hotEP: dto.hotEP,
+            hotOD: dto.hotOD,
+            hotCP: dto.hotCP,
+            hotFW: dto.hotFW,
+            hotFWM: dto.hotFWM,
             isolated: dto.isolated,
             dealtWithPoisioned: dto.dealtWithPoisioned,
             markers: dto.markers,
             mandatoryPPE,
             additionalPPE,
-            siteCondition,
+            typeOfWork,
             additionalSafty: dto.additionalSafty,
             documents,
             issuedBy: user.userId,
@@ -583,7 +587,7 @@ export class PermitService {
             permitType: dto.permitType,
             issuedTo: dto.issuedTo,
             location: dto.location,
-            equipments: dto.equipments,
+            fireWatcher: dto.fireWatcher,
             description: dto.description,
             hazardsOfWork,
             measuresTaken,
@@ -591,18 +595,135 @@ export class PermitService {
             equipmentsInspected: dto.equipmentsInspected,
             riskAssessmentDiscussed: dto.riskAssessmentDiscussed,
             PPEGood: dto.PPEGood,
-            workSteps: dto.workSteps,
             hardBreakat: dto.hardBreakat,
             laborsGood: dto.laborsGood,
             dangerMeeting: dto.dangerMeeting,
-            fireFightersExist: dto.fireFightersExist,
-            noConflict: dto.noConflict,
+            elecIsolated: dto.elecIsolated,
+            hotMV: dto.hotMV,
+            hotEP: dto.hotEP,
+            hotOD: dto.hotOD,
+            hotCP: dto.hotCP,
+            hotFW: dto.hotFW,
+            hotFWM: dto.hotFWM,
             isolated: dto.isolated,
             dealtWithPoisioned: dto.dealtWithPoisioned,
             markers: dto.markers,
             mandatoryPPE,
             additionalPPE,
-            siteCondition,
+            typeOfWork,
+            additionalSafty: dto.additionalSafty,
+            documents,
+            issuedBy: user.userId,
+            status: 'pending',
+          },
+        });
+        return permit;
+      }
+    } catch (e) {
+      throw e;
+    }
+  }
+
+  async createLiftingOperationPermit(dto, user, file) {
+    let additionalPPE = dto.additionalPPE;
+    let mandatoryPPE = dto.mandatoryPPE;
+    let documents = dto.documents;
+    let hazardsOfWork = dto.hazardsOfWork;
+    let measuresTaken = dto.measuresTaken;
+    if (typeof hazardsOfWork === 'string') {
+      hazardsOfWork = [hazardsOfWork];
+    }
+    if (typeof measuresTaken === 'string') {
+      measuresTaken = [measuresTaken];
+    }
+    if (typeof additionalPPE === 'string') {
+      additionalPPE = [additionalPPE];
+    }
+    if (typeof mandatoryPPE === 'string') {
+      mandatoryPPE = [mandatoryPPE];
+    }
+    if (typeof documents === 'string') {
+      documents = [documents];
+    }
+    try {
+      const image = [];
+      for (const doc of file) {
+        const img = await this.uploadImage(doc).catch((e) => {
+          throw e;
+        });
+        image.push(img);
+      }
+      if (user.company !== 'ZTPC') {
+        const permit = await this.db.permit.create({
+          data: {
+            subConstructionRep: await user.userName,
+            startDate: dto.startDate,
+            endDate: dto.endDate,
+            startAt: dto.startAt,
+            expiredAt: dto.expiredAt,
+            numOfWorkers: +dto.numOfWorkers,
+            ids: image.map((image) => image.public_id),
+            imagpath: image.map((image) => image.secure_url),
+            area: dto.area,
+            permitType: dto.permitType,
+            issuedTo: dto.issuedTo,
+            location: dto.location,
+            description: dto.description,
+            craneType: dto.craneType,
+            craneCapacity: dto.craneCapacity,
+            equipmentNo: dto.equipmentNo,
+            preLift: dto.preLift,
+            craneInspection: dto.craneInspection,
+            dailyVisual: dto.dailyVisual,
+            safetyDevices: dto.safetyDevices,
+            windSpeed: dto.windSpeed,
+            precautionsOut: dto.precautionsOut,
+            riggingTools: dto.riggingTools,
+            properAngel: dto.properAngel,
+            loadStable: dto.loadStable,
+            hazardsOfWork,
+            measuresTaken,
+            mandatoryPPE,
+            additionalPPE,
+            additionalSafty: dto.additionalSafty,
+            documents,
+            issuedBy: user.userId,
+            status: 'pending',
+          },
+        });
+        return permit;
+      } else {
+        const permit = await this.db.permit.create({
+          data: {
+            constructionRep: await user.userName,
+            startDate: dto.startDate,
+            endDate: dto.endDate,
+            startAt: dto.startAt,
+            expiredAt: dto.expiredAt,
+            numOfWorkers: +dto.numOfWorkers,
+            ids: image.map((image) => image.public_id),
+            imagpath: image.map((image) => image.secure_url),
+            area: dto.area,
+            permitType: dto.permitType,
+            issuedTo: dto.issuedTo,
+            location: dto.location,
+            description: dto.description,
+            craneType: dto.craneType,
+            craneCapacity: dto.craneCapacity,
+            equipmentNo: dto.equipmentNo,
+            preLift: dto.preLift,
+            craneInspection: dto.craneInspection,
+            dailyVisual: dto.dailyVisual,
+            safetyDevices: dto.safetyDevices,
+            windSpeed: dto.windSpeed,
+            precautionsOut: dto.precautionsOut,
+            riggingTools: dto.riggingTools,
+            properAngel: dto.properAngel,
+            loadStable: dto.loadStable,
+            hazardsOfWork,
+            measuresTaken,
+            mandatoryPPE,
+            additionalPPE,
             additionalSafty: dto.additionalSafty,
             documents,
             issuedBy: user.userId,
@@ -618,13 +739,13 @@ export class PermitService {
 
   async getAllPermits() {
     return await this.db.permit.findMany({
-      take: 50,
+      take: 200,
     });
   }
 
   async getMyPermits(issuedBy) {
     return await this.db.permit.findMany({
-      take: 50,
+      take: 200,
       where: {
         issuedBy,
       },
@@ -632,7 +753,7 @@ export class PermitService {
   }
   async getCompanyPermits(issuedTo) {
     return await this.db.permit.findMany({
-      take: 50,
+      take: 200,
       where: {
         issuedTo,
       },
@@ -640,7 +761,7 @@ export class PermitService {
   }
   async searchAllPermits(startDate) {
     return await this.db.permit.findMany({
-      take: 50,
+      take: 200,
       where: {
         startDate,
       },
@@ -648,7 +769,7 @@ export class PermitService {
   }
   async searchMyPermits(issuedBy, startDate) {
     return await this.db.permit.findMany({
-      take: 50,
+      take: 200,
       where: {
         startDate,
         issuedBy,
@@ -658,7 +779,7 @@ export class PermitService {
 
   async searchCompanyPermits(issuedTo, startDate) {
     return await this.db.permit.findMany({
-      take: 50,
+      take: 200,
       where: {
         startDate,
         issuedTo,
@@ -668,7 +789,7 @@ export class PermitService {
 
   async pendingAllPermits() {
     return await this.db.permit.findMany({
-      take: 50,
+      take: 200,
       where: {
         status: 'pending',
       },
@@ -676,7 +797,7 @@ export class PermitService {
   }
   async pendingMyPermits(issuedBy) {
     return await this.db.permit.findMany({
-      take: 50,
+      take: 200,
       where: {
         status: 'pending',
         issuedBy,
@@ -686,7 +807,7 @@ export class PermitService {
 
   async pendingCompanyPermits(issuedTo) {
     return await this.db.permit.findMany({
-      take: 50,
+      take: 200,
       where: {
         status: 'pending',
         issuedTo,
@@ -696,7 +817,7 @@ export class PermitService {
 
   async activeAllPermits() {
     return await this.db.permit.findMany({
-      take: 50,
+      take: 200,
       where: {
         status: 'active',
       },
@@ -704,7 +825,7 @@ export class PermitService {
   }
   async activeMyPermits(issuedBy) {
     return await this.db.permit.findMany({
-      take: 50,
+      take: 200,
       where: {
         status: 'active',
         issuedBy,
@@ -714,7 +835,7 @@ export class PermitService {
 
   async activeCompanyPermits(issuedTo) {
     return await this.db.permit.findMany({
-      take: 50,
+      take: 200,
       where: {
         status: 'active',
         issuedTo,
@@ -724,7 +845,7 @@ export class PermitService {
 
   async stoppedAllPermits() {
     return await this.db.permit.findMany({
-      take: 50,
+      take: 200,
       where: {
         status: 'stopped',
       },
@@ -732,7 +853,7 @@ export class PermitService {
   }
   async stoppedMyPermits(issuedBy) {
     return await this.db.permit.findMany({
-      take: 50,
+      take: 200,
       where: {
         status: 'stopped',
         issuedBy,
@@ -742,7 +863,7 @@ export class PermitService {
 
   async stoppedCompanyPermits(issuedTo) {
     return await this.db.permit.findMany({
-      take: 50,
+      take: 200,
       where: {
         status: 'stopped',
         issuedTo,
@@ -752,7 +873,7 @@ export class PermitService {
 
   async expiredAllPermits() {
     return await this.db.permit.findMany({
-      take: 50,
+      take: 200,
       where: {
         status: 'expired',
       },
@@ -760,7 +881,7 @@ export class PermitService {
   }
   async expiredMyPermits(issuedBy) {
     return await this.db.permit.findMany({
-      take: 50,
+      take: 200,
       where: {
         status: 'expired',
         issuedBy,
@@ -770,7 +891,7 @@ export class PermitService {
 
   async expiredCompanyPermits(issuedTo) {
     return await this.db.permit.findMany({
-      take: 50,
+      take: 200,
       where: {
         status: 'expired',
         issuedTo,
@@ -856,7 +977,7 @@ export class PermitService {
 
   async getTest(id) {
     return await this.db.test.findMany({
-      take: 50,
+      take: 200,
       where: {
         per: id,
       },

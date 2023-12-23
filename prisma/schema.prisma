@@ -89,6 +89,27 @@ model Permit {
   exJHA String?
   exBarricaded String?
   exLicense String?  
+  fireWatcher String?
+  typeOfWork String[]
+  elecIsolated String?
+  hotMV String?
+  hotEP String?
+  hotOD String?
+  hotCP String?
+  hotFW String?
+  hotFWM String?
+  craneType String?
+  craneCapacity String?
+  equipmentNo String?
+  preLift String?
+  craneInspection String?
+  dailyVisual String?
+  safetyDevices String?
+  windSpeed String?
+  precautionsOut String?
+  riggingTools String?
+  properAngel String?
+  loadStable String?
   constructionRep String?
   subConstructionRep String?
   HSERep String?

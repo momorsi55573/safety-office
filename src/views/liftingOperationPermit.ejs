@@ -10,11 +10,11 @@
   <link rel="stylesheet" href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
   <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-  <title>create hot work permit</title>
+  <title>lifting operation permit</title>
 </head>
 <body>
   <div class="container">
-    <form action="/permit/createHotWorkPermit" enctype="multipart/form-data" method="post">
+    <form action="/permit/createColdWorkPermit" enctype="multipart/form-data" method="post">
       <div class="form-group">
         <label for="exampleInputEmail1">Start Date</label>
         <input class="form-control" type="text" id="startDate" aria-describedby="emailHelp" placeholder="start Date" name="startDate" required>
@@ -35,30 +35,42 @@
         <label for="exampleInputEmail1">area</label>
         <input class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter area" name="area" required>
       </div>
+
       <div class="form-group">
         <label for="exampleInputEmail1">location</label>
         <input class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter location" name="location" required>
       </div>
-          <div class="form-group">
-        <label for="exampleInputEmail1">fire watcher name</label>
-        <input class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter fire watcher name" name="fireWatcher" required>
-      </div>
-  
      
       <div class="form-group">
         <label for="exampleInputEmail1">numbers of workers involved</label>
         <input class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter numbers of workers involved" name="numOfWorkers" required>
       </div>
 
-
-      <div class="form-group">
-        <label for="exampleInputEmail1">additional Safty</label>
-        <textarea class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter additional Safty" name="additionalSafty"></textarea>
-      </div>
       <div class="form-group">
         <label for="exampleInputEmail1">description of work</label>
         <textarea class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter description of work" name="description" required></textarea>
       </div>
+
+      <div class="form-group">
+        <label for="exampleInputEmail1">crane type</label>
+        <input class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter crane type" name="craneType" required>
+      </div>
+
+      <div class="form-group">
+        <label for="exampleInputEmail1">crane Capacity</label>
+        <input class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter crane Capacity" name="craneCapacity" required>
+      </div>
+
+      <div class="form-group">
+        <label for="exampleInputEmail1">equipment No</label>
+        <input class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter equipment No" name="equipmentNo" required>
+      </div>
+     
+      <div class="form-group">
+        <label for="exampleInputEmail1">additional Safty</label>
+        <textarea class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter additional Safty" name="additionalSafty"></textarea>
+      </div>
+   
      
       <div class="pt-2">
         <label for="exampleInputEmail1">mandatory PPE</label>
@@ -85,19 +97,7 @@
     </select></div>
     
     
-    <div class="pt-2">
-        <label for="exampleInputEmail1">type of work</label>
-
-        <select class="js-example-basic-multiple" id="category2" aria-placeholder="type of work" multiple="multiple" name="typeOfWork" style="width: 100%" required="">
-            
-            <option value="cutting">cutting</option>
-            <option value="grinding">grinding</option>
-            <option value="welding">welding</option>
-            <option value="heat treatment">heat treatment</option>
-            <option value="using flame or electrical equipment">using flame or electrical equipment</option>
-            <option value="mechanical blasting">mechanical blasting</option>
-            
-        </select></div>
+    
 
         <div class="pt-2">
             <label for="exampleInputEmail1">documents</label>
@@ -108,29 +108,28 @@
                 <option value="Risk Assessment"> Risk Assessment </option>
                 <option value="TBT">TBT</option>
                 <option value="Layout">Layout</option>
+                <option value="lifting plan">lifting plan</option>
+                <option value="rigging sketch">rigging sketch</option>
             </select></div>
             <div class="pt-2">
               <label for="exampleInputEmail1">type of hazards and risks associated with cold work activity</label>
       
               <select class="js-example-basic-multiple" id="category4" aria-placeholder="documents" multiple="multiple" name="hazardsOfWork" style="width: 100%" required="">
                   
-                  <option value="work in excavation"> work in excavation </option>
-                  <option value="work in confined space">work in confined space</option>
-                  <option value="fall from hight">fall from hight</option>
-                  <option value="fumes / emissions">fumes / emissions</option>
-                  <option value="health hazards">health hazards</option>
-                  <option value="electrical hazards">electrical hazards</option>
-                  <option value="fire hazards">fire hazards</option>
-                  <option value="protruding parts">protruding parts</option>
-                  <option value="falling Objects">falling Objects</option>
-                  <option value="noise">noise</option>
-                  <option value="fire hazard">fire hazard</option>
-                  <option value="heat">heat</option>
-                  <option value="vibration">vibration</option>
-                  <option value="advers Weather">advers Weather</option>
-                  <option value="flying particles">flying particles</option>
-                  <option value="tripping / slipping">tripping / slipping</option>
-                  <option value="moving Vehicle">moving Vehicle</option>
+                <option value="toppling / turn over">toppling / turn over</option>
+                <option value="susbend load">susbend load</option>
+                <option value="high wind">high wind</option>
+                <option value="moving Vehicle / equipment">moving Vehicle / equipment</option>
+                <option value="falling Objects">falling Objects</option>
+                <option value="over load">over load</option>
+                <option value="tripping/slipping">tripping/slipping</option>
+                <option value="noise">noise</option>
+                <option value="heat">heat</option>
+                <option value="advers Weather conditions">advers Weather conditions</option>
+                <option value="collapse">collapse</option>
+                <option value="traffic">traffic</option>
+                <option value="crushing">crushing</option>
+
               </select>
             </div>
               <div class="pt-2">
@@ -142,8 +141,6 @@
                   <option value="tool box talk">tool box talk</option>
                   <option value="lock out tag out">lock out tag out</option>
                   <option value="gas testing">gas testing</option>
-                  <option value="supervision">supervision</option>
-                  <option value="fire blanket">fire blanket</option>
                 </select>
               </div>
 
@@ -162,125 +159,74 @@
         <option value="Complete">Complete</option>
     </select>
 </div>
-<input type="hidden" value="hot work permit" name="permitType">
+<input type="hidden" value="lifting operation permit" name="permitType">
 
 <div class="pt-2 mr-5">
-<label for="exampleInputEmail1">has the site been inspected prior to commencing work?</label>
-  <select name="workPlaceInspected" required>
-    <option value=true> yes </option>
-    <option value=false> no </option>
-</select>
-</div>
-<div class="pt-2 mr-5">
-<label for="exampleInputEmail1">have the equip/tools been checked and in an acceotable condition?</label>
-  <select name="equipmentsInspected" required>
-    <option value=true> yes </option>
-    <option value=false> no </option>
-</select>
-</div>
-<div class="pt-2 mr-5">
-<label for="exampleInputEmail1">have potential hazard been discussed and assessed?</label>
-  <select name="riskAssessmentDiscussed" required>
-    <option value=true> yes </option>
-    <option value=false> no </option>
-</select>
-</div>
-<div class="pt-2 mr-5">
-<label for="exampleInputEmail1">is all personal protective equipment (ppe) in place and operable?</label>
-  <select name="PPEGood" required>
-    <option value=true> yes </option>
-    <option value=false> no </option>
-</select>
-</div>
-
-<div class="pt-2 mr-5">
-<label for="exampleInputEmail1">work area barrcaded?</label>
-  <select name="hardBreakat" required>
-    <option value=true> yes </option>
-    <option value=false> no </option>
-</select>
-</div>
-<div class="pt-2 mr-5">
-<label for="exampleInputEmail1">are qualified, trained and authorized people attending the job?</label>
-  <select name="laborsGood" required>
-    <option value=true> yes </option>
-    <option value=false> no </option>
-</select>
-</div>
-<div class="pt-2 mr-5">
-<label for="exampleInputEmail1">workers instructed in thier work / tasks (talk box meeting)?</label>
-  <select name="dangerMeeting" required>
-    <option value=true> yes </option>
-    <option value=false> no </option>
-</select>
-</div>
-
-
-<div class="pt-2 mr-5">
-<label for="exampleInputEmail1">process equipment depressured / drained / isolated and tagged (attach isolation list)</label>
-  <select name="isolated" required>
-    <option value=true> yes </option>
-    <option value=false> no </option>
-</select>
-</div>
-
-<div class="pt-2 mr-5">
-    <label for="exampleInputEmail1">electrical isolation certification required?</label>
-      <select name="elecIsolated" required>
+    <label for="exampleInputEmail1">was a pre-lift operation meeting held?</label>
+      <select name="preLift" required>
         <option value=true> yes </option>
         <option value=false> no </option>
     </select>
     </div>
-
     <div class="pt-2 mr-5">
-        <label for="exampleInputEmail1">mechanical ventilation provided?</label>
-          <select name="hotMV" required>
+        <label for="exampleInputEmail1">is the yearly crane/hoist inspection current? is it documented?</label>
+          <select name="craneInspection" required>
             <option value=true> yes </option>
             <option value=false> no </option>
         </select>
         </div>
-
         <div class="pt-2 mr-5">
-            <label for="exampleInputEmail1">explosion proof electrical equipment used?</label>
-              <select name="hotEP" required>
+            <label for="exampleInputEmail1">has the daily visual inspection been Completed?</label>
+              <select name="dailyVisual" required>
                 <option value=true> yes </option>
                 <option value=false> no </option>
             </select>
             </div>
-
             <div class="pt-2 mr-5">
-                <label for="exampleInputEmail1">all openings drains / sewers covered within 15 m?</label>
-                  <select name="hotOD" required>
+                <label for="exampleInputEmail1">are safety devices installed and tested? (overload, limit switch, main wire drum sensor)</label>
+                  <select name="safetyDevices" required>
                     <option value=true> yes </option>
                     <option value=false> no </option>
                 </select>
                 </div>
-
                 <div class="pt-2 mr-5">
-                    <label for="exampleInputEmail1">cylinder provided with cap, trolley and chain and appropiate relieve valve?</label>
-                      <select name="hotCP" required>
+                    <label for="exampleInputEmail1">is the operational wind speed reading comply with the cran's manual wind speed limit?</label>
+                      <select name="windSpeed" required>
                         <option value=true> yes </option>
                         <option value=false> no </option>
                     </select>
                     </div>
-
                     <div class="pt-2 mr-5">
-                        <label for="exampleInputEmail1">no flammable/combustible items within 10m</label>
-                          <select name="hotFW" required>
+                        <label for="exampleInputEmail1">have precautions been taken to keep other personal out of the area?</label>
+                          <select name="precautionsOut" required>
                             <option value=true> yes </option>
                             <option value=false> no </option>
                         </select>
                         </div>
-
                         <div class="pt-2 mr-5">
-                            <label for="exampleInputEmail1">fire watch for at least 30 min after work?</label>
-                              <select name="hotFWM" required>
+                            <label for="exampleInputEmail1">has the rigging tools been inspected?</label>
+                              <select name="riggingTools" required>
                                 <option value=true> yes </option>
                                 <option value=false> no </option>
                             </select>
                             </div>
+                            <div class="pt-2 mr-5">
+                                <label for="exampleInputEmail1">is the rigging attached to the load at the proper angel?</label>
+                                  <select name="properAngel" required>
+                                    <option value=true> yes </option>
+                                    <option value=false> no </option>
+                                </select>
+                                </div>
+                                <div class="pt-2 mr-5">
+                                    <label for="exampleInputEmail1">is the load to be lifted stable?</label>
+                                      <select name="loadStable" required>
+                                        <option value=true> yes </option>
+                                        <option value=false> no </option>
+                                    </select>
+                                    </div>
+                                 
+                                                                                                                                                                                                                            
 
-</div>
         
       <div class="form-group form-check">
         
