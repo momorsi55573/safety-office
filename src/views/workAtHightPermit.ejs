@@ -10,7 +10,7 @@
   <link rel="stylesheet" href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
   <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-  <title>create cold work permit</title>
+  <title>work at hight permit</title>
 </head>
 <body>
   <div class="container">
@@ -44,11 +44,6 @@
       <div class="form-group">
         <label for="exampleInputEmail1">numbers of workers involved</label>
         <input class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter numbers of workers involved" name="numOfWorkers" required>
-      </div>
-
-      <div class="form-group">
-        <label for="exampleInputEmail1">equipments</label>
-        <textarea class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter equipments" name="equipments" required></textarea>
       </div>
       <div class="form-group">
         <label for="exampleInputEmail1">additional Safty</label>
@@ -99,22 +94,18 @@
       
               <select class="js-example-basic-multiple" id="category4" aria-placeholder="documents" multiple="multiple" name="hazardsOfWork" style="width: 100%" required="">
                   
-                  <option value="work in excavation"> work in excavation </option>
-                  <option value="work in confined space">work in confined space</option>
-                  <option value="fall from hight">fall from hight</option>
-                  <option value="fumes / emissions">fumes / emissions</option>
-                  <option value="health hazards">health hazards</option>
-                  <option value="electrical hazards">electrical hazards</option>
-                  <option value="fire hazards">fire hazards</option>
-                  <option value="protruding parts">protruding parts</option>
-                  <option value="falling Objects">falling Objects</option>
-                  <option value="noise">noise</option>
-                  <option value="heat">heat</option>
-                  <option value="vibration">vibration</option>
-                  <option value="advers Weather">advers Weather</option>
-                  <option value="flying particles">flying particles</option>
-                  <option value="tripping / slipping">tripping / slipping</option>
-                  <option value="moving Vehicle">moving Vehicle</option>
+                <option value="personnel falling">personnel falling</option>
+                <option value="advers Weather">advers Weather</option>
+                <option value="moving Vehicle / equipment">moving Vehicle / equipment</option>
+                <option value="protruding Objects">protruding Objects</option>
+                <option value="work near to OHL">work near to OHL</option>
+                <option value="faulty equipment / material">faulty equipment / material</option>
+                <option value="falling Objects / equipments">falling Objects / equipments</option>
+                <option value="flying particles">flying particles</option>
+                <option value="tripping / slipping">tripping / slipping</option>
+                <option value="fragile surface / roof">fragile surface / roof</option>
+                <option value="work near to enerrgized equipment">work near to enerrgized equipment</option>
+
               </select>
             </div>
               <div class="pt-2">
@@ -126,6 +117,14 @@
                   <option value="tool box talk">tool box talk</option>
                   <option value="lock out tag out">lock out tag out</option>
                   <option value="gas testing">gas testing</option>
+                  <option value="full supervision">full supervision</option>
+                  <option value="access">access</option>
+                  <option value="fire extinguisher">fire extinguisher</option>
+                  <option value="guard rail system">guard rail system</option>
+                  <option value="safe net">safe net</option>
+                  <option value="life line">life line</option>
+                  <option value="fall arrestors">fall arrestors</option>
+                  <option value="access">access</option>
                 </select>
               </div>
 
@@ -144,7 +143,7 @@
         <option value="Complete">Complete</option>
     </select>
 </div>
-<input type="hidden" value="cold work permit" name="permitType">
+<input type="hidden" value="work at hight permit" name="permitType">
 
 <div class="pt-2 mr-5">
 <label for="exampleInputEmail1">has the site been inspected prior to commencing work?</label>
@@ -154,93 +153,118 @@
 </select>
 </div>
 <div class="pt-2 mr-5">
-<label for="exampleInputEmail1">have the equip/tools been checked and in an acceotable condition?</label>
-  <select name="equipmentsInspected" required>
-    <option value=true> yes </option>
-    <option value=false> no </option>
-</select>
-</div>
-<div class="pt-2 mr-5">
-<label for="exampleInputEmail1">have potential hazard been discussed and assessed?</label>
-  <select name="riskAssessmentDiscussed" required>
-    <option value=true> yes </option>
-    <option value=false> no </option>
-</select>
-</div>
-<div class="pt-2 mr-5">
-<label for="exampleInputEmail1">is all personal protective equipment (ppe) in place and operable?</label>
-  <select name="PPEGood" required>
-    <option value=true> yes </option>
-    <option value=false> no </option>
-</select>
-</div>
-<div class="pt-2 mr-5">
-<label for="exampleInputEmail1">approved work method statment provided?</label>
-  <select name="workSteps" required>
-    <option value=true> yes </option>
-    <option value=false> no </option>
-</select>
-</div>
-<div class="pt-2 mr-5">
-<label for="exampleInputEmail1">work area barrcaded?</label>
-  <select name="hardBreakat" required>
-    <option value=true> yes </option>
-    <option value=false> no </option>
-</select>
-</div>
-<div class="pt-2 mr-5">
-<label for="exampleInputEmail1">are qualified, trained and authorized people attending the job?</label>
-  <select name="laborsGood" required>
-    <option value=true> yes </option>
-    <option value=false> no </option>
-</select>
-</div>
-<div class="pt-2 mr-5">
-<label for="exampleInputEmail1">workers instructed in thier work / tasks (talk box meeting)?</label>
-  <select name="dangerMeeting" required>
-    <option value=true> yes </option>
-    <option value=false> no </option>
-</select>
-</div>
-<div class="pt-2 mr-5">
-<label for="exampleInputEmail1">are fire extinguishersbin place?</label>
-  <select name="fireFightersExist" required>
-    <option value=true> yes </option>
-    <option value=false> no </option>
-</select>
-</div>
+    <label for="exampleInputEmail1">has the site been inspected prior to commencing work?</label>
+      <select name="workPlaceInspected" required>
+        <option value=true> yes </option>
+        <option value=false> no </option>
+    </select>
+    </div>
+    <div class="pt-2 mr-5">
+        <label for="exampleInputEmail1">has the site been inspected prior to commencing work?</label>
+          <select name="workPlaceInspected" required>
+            <option value=true> yes </option>
+            <option value=false> no </option>
+        </select>
+        </div>
+        <div class="pt-2 mr-5">
+            <label for="exampleInputEmail1">has the site been inspected prior to commencing work?</label>
+              <select name="workPlaceInspected" required>
+                <option value=true> yes </option>
+                <option value=false> no </option>
+            </select>
+            </div>
+            <div class="pt-2 mr-5">
+                <label for="exampleInputEmail1">has the site been inspected prior to commencing work?</label>
+                  <select name="workPlaceInspected" required>
+                    <option value=true> yes </option>
+                    <option value=false> no </option>
+                </select>
+                </div>
+                <div class="pt-2 mr-5">
+                    <label for="exampleInputEmail1">has the site been inspected prior to commencing work?</label>
+                      <select name="workPlaceInspected" required>
+                        <option value=true> yes </option>
+                        <option value=false> no </option>
+                    </select>
+                    </div>
+                    <div class="pt-2 mr-5">
+                        <label for="exampleInputEmail1">has the site been inspected prior to commencing work?</label>
+                          <select name="workPlaceInspected" required>
+                            <option value=true> yes </option>
+                            <option value=false> no </option>
+                        </select>
+                        </div>
+                        <div class="pt-2 mr-5">
+                            <label for="exampleInputEmail1">has the site been inspected prior to commencing work?</label>
+                              <select name="workPlaceInspected" required>
+                                <option value=true> yes </option>
+                                <option value=false> no </option>
+                            </select>
+                            </div>
+                            <div class="pt-2 mr-5">
+                                <label for="exampleInputEmail1">has the site been inspected prior to commencing work?</label>
+                                  <select name="workPlaceInspected" required>
+                                    <option value=true> yes </option>
+                                    <option value=false> no </option>
+                                </select>
+                                </div>
+                                <div class="pt-2 mr-5">
+                                    <label for="exampleInputEmail1">has the site been inspected prior to commencing work?</label>
+                                      <select name="workPlaceInspected" required>
+                                        <option value=true> yes </option>
+                                        <option value=false> no </option>
+                                    </select>
+                                    </div>
+                                    <div class="pt-2 mr-5">
+                                        <label for="exampleInputEmail1">has the site been inspected prior to commencing work?</label>
+                                          <select name="workPlaceInspected" required>
+                                            <option value=true> yes </option>
+                                            <option value=false> no </option>
+                                        </select>
+                                        </div>
+                                        <div class="pt-2 mr-5">
+                                            <label for="exampleInputEmail1">has the site been inspected prior to commencing work?</label>
+                                              <select name="workPlaceInspected" required>
+                                                <option value=true> yes </option>
+                                                <option value=false> no </option>
+                                            </select>
+                                            </div>
+                                            <div class="pt-2 mr-5">
+                                                <label for="exampleInputEmail1">has the site been inspected prior to commencing work?</label>
+                                                  <select name="workPlaceInspected" required>
+                                                    <option value=true> yes </option>
+                                                    <option value=false> no </option>
+                                                </select>
+                                                </div>
+                                                <div class="pt-2 mr-5">
+                                                    <label for="exampleInputEmail1">has the site been inspected prior to commencing work?</label>
+                                                      <select name="workPlaceInspected" required>
+                                                        <option value=true> yes </option>
+                                                        <option value=false> no </option>
+                                                    </select>
+                                                    </div>
+                                                    <div class="pt-2 mr-5">
+                                                        <label for="exampleInputEmail1">has the site been inspected prior to commencing work?</label>
+                                                          <select name="workPlaceInspected" required>
+                                                            <option value=true> yes </option>
+                                                            <option value=false> no </option>
+                                                        </select>
+                                                        </div>
+                                                        <div class="pt-2 mr-5">
+                                                            <label for="exampleInputEmail1">has the site been inspected prior to commencing work?</label>
+                                                              <select name="workPlaceInspected" required>
+                                                                <option value=true> yes </option>
+                                                                <option value=false> no </option>
+                                                            </select>
+                                                            </div>
+                                                            <div class="pt-2 mr-5">
+                                                                <label for="exampleInputEmail1">has the site been inspected prior to commencing work?</label>
+                                                                  <select name="workPlaceInspected" required>
+                                                                    <option value=true> yes </option>
+                                                                    <option value=false> no </option>
+                                                                </select>
+                                                                </div>
 
-<div class="pt-2 mr-5">
-<label for="exampleInputEmail1">process equipment depressured / drained / isolated and tagged (attach isolation list)</label>
-  <select name="isolated" required>
-    <option value=true> yes </option>
-    <option value=false> no </option>
-</select>
-</div>
-
-<div class="pt-2 mr-5">
-<label for="exampleInputEmail1">there are no conflicts with any other work activities?</label>
-  <select name="noConflict" required>
-    <option value=true> yes </option>
-    <option value=false> no </option>
-</select>
-</div>
-
-<div class="pt-2 mr-5">
-<label for="exampleInputEmail1">precautions in place for exposure to hazardous / toxic materials?</label>
-  <select name="dealtWithPoisioned" required>
-    <option value=true> yes </option>
-    <option value=false> no </option>
-</select>
-</div>
-
-<div class="pt-2 mr-5">
-<label for="exampleInputEmail1">warning signs provided?</label>
-  <select name="markers" required>
-    <option value=true> yes </option>
-    <option value=false> no </option>
-</select>
-</div>
 </div>
         
       <div class="form-group form-check">

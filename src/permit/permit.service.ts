@@ -781,7 +781,7 @@ export class PermitService {
             permitType: dto.permitType,
             issuedTo: dto.issuedTo,
             location: dto.location,
-            equipments: dto.equipments,
+            
             description: dto.description,
             hazardsOfWork,
             measuresTaken,
@@ -822,7 +822,7 @@ export class PermitService {
             permitType: dto.permitType,
             issuedTo: dto.issuedTo,
             location: dto.location,
-            equipments: dto.equipments,
+            
             description: dto.description,
             hazardsOfWork,
             measuresTaken,
