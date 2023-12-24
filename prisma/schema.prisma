@@ -42,7 +42,7 @@ model Permit {
   mandatoryPPE String[]
   additionalPPE String[] 
   siteCondition String[] 
-  additionalSafty String?
+  additionalSafety String?
   workPlaceInspected String?
   equipmentsInspected String?
   riskAssessmentDiscussed String?
@@ -110,6 +110,22 @@ model Permit {
   riggingTools String?
   properAngel String?
   loadStable String?
+  alternativeWork String?
+  personsCompetent String?
+  jsa String?
+  areaSuitable String?
+  slippery String?
+  handrails String?
+  temporaryHandrails String?
+  tbt String?
+  fallArrest String?
+  harness String?
+  rescue String?
+  weather String?
+  means String?
+  ducts String?
+  barrcaded String?
+  energySources String?
   constructionRep String?
   subConstructionRep String?
   HSERep String?

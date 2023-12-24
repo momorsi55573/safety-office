@@ -50,8 +50,8 @@
               <textarea class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"><%= permit.equipments %></textarea>
             </div>
             <div class="form-group">
-              <label for="exampleInputEmail1">additional Safty</label>
-              <textarea class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"><%= permit.additionalSafty %></textarea>
+              <label for="exampleInputEmail1">additional safety</label>
+              <textarea class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"><%= permit.additionalsafety %></textarea>
             </div>
             <div class="form-group">
               <label for="exampleInputEmail1">description of work</label>
@@ -582,8 +582,8 @@
                     <textarea class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter description of confined space" name="desOfConfinedSpace" required><%= permit.desOfConfinedSpace %></textarea>
                   </div>
                 <div class="form-group">
-                  <label for="exampleInputEmail1">additional Safty</label>
-                  <textarea class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"><%= permit.additionalSafty %></textarea>
+                  <label for="exampleInputEmail1">additional safety</label>
+                  <textarea class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"><%= permit.additionalsafety %></textarea>
                 </div>
                 <div class="form-group">
                   <label for="exampleInputEmail1">description of work</label>
@@ -1236,8 +1236,8 @@
                     <textarea class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"><%= permit.equipments %></textarea>
                   </div>
                   <div class="form-group">
-                    <label for="exampleInputEmail1">additional Safty</label>
-                    <textarea class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"><%= permit.additionalSafty %></textarea>
+                    <label for="exampleInputEmail1">additional safety</label>
+                    <textarea class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"><%= permit.additionalsafety %></textarea>
                   </div>
                   <div class="form-group">
                     <label for="exampleInputEmail1">description of work</label>
@@ -1767,8 +1767,8 @@
                       <textarea class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"><%= permit.equipments %></textarea>
                     </div>
                     <div class="form-group">
-                      <label for="exampleInputEmail1">additional Safty</label>
-                      <textarea class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"><%= permit.additionalSafty %></textarea>
+                      <label for="exampleInputEmail1">additional safety</label>
+                      <textarea class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"><%= permit.additionalsafety %></textarea>
                     </div>
                     <div class="form-group">
                       <label for="exampleInputEmail1">description of work</label>
@@ -2266,8 +2266,8 @@
                         <textarea class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"><%= permit.fireWatcher %></textarea>
                       </div>
                       <div class="form-group">
-                        <label for="exampleInputEmail1">additional Safty</label>
-                        <textarea class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"><%= permit.additionalSafty %></textarea>
+                        <label for="exampleInputEmail1">additional safety</label>
+                        <textarea class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"><%= permit.additionalsafety %></textarea>
                       </div>
                       <div class="form-group">
                         <label for="exampleInputEmail1">description of work</label>
@@ -2809,8 +2809,8 @@
                             <input class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" value="<%= permit.equipmentNo %>" name="numOfWorkers" required>
                           </div>
                         <div class="form-group">
-                          <label for="exampleInputEmail1">additional Safty</label>
-                          <textarea class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"><%= permit.additionalSafty %></textarea>
+                          <label for="exampleInputEmail1">additional safety</label>
+                          <textarea class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"><%= permit.additionalsafety %></textarea>
                         </div>
               
                       
@@ -3306,8 +3306,8 @@
                             </div>
                    
                           <div class="form-group">
-                            <label for="exampleInputEmail1">additional Safty</label>
-                            <textarea class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"><%= permit.additionalSafty %></textarea>
+                            <label for="exampleInputEmail1">additional safety</label>
+                            <textarea class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"><%= permit.additionalsafety %></textarea>
                           </div>
                           <div class="form-group">
                             <label for="exampleInputEmail1">description of work</label>
@@ -3371,57 +3371,69 @@
                     
                     
                                         <div class="form-group mr-5">
-                                            <label for="exampleInputEmail1">has the site been inspected prior to commencing work?</label>
-                                            <textarea class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" required><%= permit.workPlaceInspected %></textarea>
+                                            <label for="exampleInputEmail1">the task has been reviewed and there is no alternative to working at hight? is it possible to bring the job to the ground?</label>
+                                            <textarea class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" required><%= permit.alternativeWork %></textarea>
                                         </div>
                                         <div class="form-group mr-5">
-                                            <label for="exampleInputEmail1">have the equip/tools been checked and in an acceotable condition?</label>
-                                            <textarea class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" required><%= permit.equipmentsInspected %></textarea>
+                                            <label for="exampleInputEmail1">persons to working at hight have been trained and are competent to do so?</label>
+                                            <textarea class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" required><%= permit.personsCompetent %></textarea>
                                         </div>
                                         <div class="form-group mr-5">
-                                            <label for="exampleInputEmail1">have potential hazard been discussed and assessed?</label>
-                                            <textarea class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" required><%= permit.riskAssessmentDiscussed %></textarea>
+                                            <label for="exampleInputEmail1">all energy sources have been isolated and locked out?</label>
+                                            <textarea class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" required><%= permit.energySources %></textarea>
                                         </div>
                                         <div class="form-group mr-5">
-                                            <label for="exampleInputEmail1">is all personal protective equipment (ppe) in place and operable?</label>
-                                            <textarea class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" required><%= permit.PPEGood %></textarea>
+                                            <label for="exampleInputEmail1">a jsa has been prepared for the task and hazard controls implemented and a work permit issued if needed?</label>
+                                            <textarea class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" required><%= permit.jsa %></textarea>
                                         </div>
                                         <div class="form-group mr-5">
-                                            <label for="exampleInputEmail1">approved work method statment provided?</label>
-                                            <textarea class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" required><%= permit.workSteps %></textarea>
+                                            <label for="exampleInputEmail1">the area suitable to work on , no fragile areas?</label>
+                                            <textarea class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" required><%= permit.areaSuitable %></textarea>
                                         </div>
                                         <div class="form-group mr-5">
-                                            <label for="exampleInputEmail1">work area barrcaded?</label>
-                                            <textarea class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" required><%= permit.hardBreakat %></textarea>
+                                            <label for="exampleInputEmail1">the surface is not too steep or slippery?</label>
+                                            <textarea class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" required><%= permit.slippery %></textarea>
                                         </div>
                                         <div class="form-group mr-5">
-                                            <label for="exampleInputEmail1">are qualified, trained and authorized people attending the job?</label>
-                                            <textarea class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" required><%= permit.laborsGood %></textarea>
+                                            <label for="exampleInputEmail1">fixed handrails are in place</label>
+                                            <textarea class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" required><%= permit.handrails %></textarea>
                                         </div>
                                         <div class="form-group mr-5">
-                                            <label for="exampleInputEmail1">workers instructed in thier work / tasks (talk box meeting)?</label>
-                                            <textarea class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" required><%= permit.dangerMeeting %></textarea>
+                                            <label for="exampleInputEmail1">temporary handrails are installed?</label>
+                                            <textarea class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" required><%= permit.temporaryHandrails %></textarea>
                                         </div>
                                         <div class="form-group mr-5">
-                                            <label for="exampleInputEmail1">are fire extinguishersbin place?</label>
-                                            <textarea class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" required><%= permit.fireFightersExist %></textarea>
+                                            <label for="exampleInputEmail1">workers instructed in their work / tasks (talk box meeting)?</label>
+                                            <textarea class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" required><%= permit.tbt %></textarea>
                                         </div>
                                         <div class="form-group mr-5">
-                                            <label for="exampleInputEmail1">process equipment depressured / drained / isolated and tagged (attach isolation list)</label>
-                                            <textarea class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" required><%= permit.isolated %></textarea>
+                                            <label for="exampleInputEmail1">fall-arrest device available?</label>
+                                            <textarea class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" required><%= permit.fallArrest %></textarea>
                                         </div>
                                         <div class="form-group mr-5">
-                                            <label for="exampleInputEmail1">there are no conflicts with any other work activities?</label>
-                                            <textarea class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" required><%= permit.noConflict %></textarea>
+                                            <label for="exampleInputEmail1">full body harness available?</label>
+                                            <textarea class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" required><%= permit.harness %></textarea>
                                         </div>
                                         <div class="form-group mr-5">
-                                            <label for="exampleInputEmail1">precautions in place for exposure to hazardous / toxic materials?</label>
-                                            <textarea class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" required><%= permit.dealtWithPoisioned %></textarea>
+                                            <label for="exampleInputEmail1">written rescue plan available?</label>
+                                            <textarea class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" required><%= permit.rescue %></textarea>
                                         </div>
                                         <div class="form-group mr-5">
-                                            <label for="exampleInputEmail1">warning signs provided?</label>
-                                            <textarea class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" required><%= permit.markers %></textarea>
+                                            <label for="exampleInputEmail1">weather conditions acceptable?</label>
+                                            <textarea class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" required><%= permit.weather %></textarea>
                                         </div>
+                                        <div class="form-group mr-5">
+                                          <label for="exampleInputEmail1">is there a safe means of entry and exit?</label>
+                                          <textarea class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" required><%= permit.means %></textarea>
+                                      </div>
+                                      <div class="form-group mr-5">
+                                        <label for="exampleInputEmail1">is area barrcaded?</label>
+                                        <textarea class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" required><%= permit.barrcaded %></textarea>
+                                    </div>
+                                    <div class="form-group mr-5">
+                                      <label for="exampleInputEmail1">ducts or outlets on roof safe?</label>
+                                      <textarea class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" required><%= permit.ducts %></textarea>
+                                  </div>
                                         <div class="form-group mr-5">
                                             <label for="exampleInputEmail1"> status</label>
                                             <textarea class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" required><%= permit.status %></textarea>
